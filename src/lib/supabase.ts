@@ -453,7 +453,7 @@ class QueryBuilder<T = any> implements PromiseLike<ArrayResult> {
 
 function storageBase(): string {
   try {
-    return window.location.origin
+    return API_BASE.replace(/\/api\/?$/, '') || window.location.origin
   } catch {
     return API_BASE
   }
@@ -559,12 +559,14 @@ class RealtimeChannelImpl implements RealtimeChannel {
   subscribe() {
     this.status = 'SUBSCRIBED'
     try {
-      const proto = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-      const eventId = this.handlers
-        .map((h) => String(h.config?.filter ?? '').match(/event_id=eq\.([0-9a-f-]+)/i))
-        .flatMap((m) => (m ? [m[1]] : []))[0]
-      if (eventId) {
-        this.ws = new WebSocket(`${proto}//${window.location.host}/ws/attendance/${eventId}`)
+        const wsBase = API_BASE.replace(/\/api\/?$/, '') || window.location.origin
+        const proto = wsBase.startsWith('https') ? 'wss:' : wsBase.startsWith('http') ? 'ws:' : window.location.protocol === 'https:' ? 'wss:' : 'ws:'
+        const wsHost = wsBase.replace(/^https?:\/\//, '')
+        const eventId = this.handlers
+          .map((h) => String(h.config?.filter ?? '').match(/event_id=eq\.([0-9a-f-]+)/i))
+          .flatMap((m) => (m ? [m[1]] : []))[0]
+        if (eventId) {
+          this.ws = new WebSocket(`${proto}//${wsHost}/ws/attendance/${eventId}`)
         this.ws.onmessage = (ev) => {
           try {
             const msg = JSON.parse(String(ev.data))
