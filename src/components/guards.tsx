@@ -7,9 +7,9 @@ import { PageLoader } from '@/components/ui'
 
 /**
  * Returns the MFA route a super admin must visit before the Admin Console,
- * or null when they are clear to proceed. Only super_admin and main_admin
- * roles are MFA-gated; every other admin role signs in with just email +
- * password.
+ * or null when they are clear to proceed. MFA is only enforced for super
+ * admin accounts that actually have MFA configured (mfa_enabled or a
+ * verified factor); accounts without MFA sign in with just email + password.
  *
  * A super admin must re-verify MFA each time they enter the Admin Console
  * (`adminMfaVerified` is reset when they navigate away), not just once
@@ -18,6 +18,8 @@ import { PageLoader } from '@/components/ui'
 export function useMfaRedirect(): string | null {
   const { profile, mfa, adminMfaVerified } = useAuth()
   if (!profile || profile.role !== 'super_admin') return null
+  const mfaConfigured = profile.mfa_enabled || !!mfa?.hasVerifiedFactor
+  if (!mfaConfigured) return null
   if (profile.mfa_setup_required && !mfa?.hasVerifiedFactor) return '/auth/mfa-setup'
   if (!mfa) return null
   if (!mfa.hasVerifiedFactor) return '/auth/mfa-setup'

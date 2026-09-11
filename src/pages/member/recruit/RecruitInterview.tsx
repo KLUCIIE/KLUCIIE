@@ -9,7 +9,7 @@ import { errorMessage } from '@/lib/utils'
 import { ApplicantInfo, ResponsesView, StageBadge } from './RecruitBits'
 
 export default function RecruitInterview() {
-  const { rows, error: liveError } = useRecruitLive()
+  const { rows, error: liveError, refresh } = useRecruitLive()
 
   const [active, setActive] = useState<RecruitApplicationRow | null>(null)
   const [template, setTemplate] = useState<RecruitFormTemplate | null>(null)
@@ -73,6 +73,7 @@ export default function RecruitInterview() {
       setError(errorMessage(err))
       return
     }
+    void refresh()
     setActive(null)
   }
 
@@ -88,6 +89,7 @@ export default function RecruitInterview() {
       p_application_id: row.application_id,
     })
     if (err) setError(errorMessage(err))
+    else void refresh()
   }
 
   const opinionCount = (row: RecruitApplicationRow) => (row.interview_evaluations ?? []).length

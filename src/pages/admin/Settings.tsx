@@ -1,26 +1,31 @@
-import { useEffect, useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { ArrowDown, ArrowUp, Plus, Save, Trash2 } from 'lucide-react'
 import { Button, Field, PageHeader, TextInput, Toggle } from '@/components/ui'
 import { FieldListEditor } from '@/components/FieldListEditor'
 import { useAuth } from '@/hooks/useAuth'
-import { useSettings } from '@/hooks/useSettings'
+import { useRefreshSettings, useSettings } from '@/hooks/useSettings'
 import { supabase } from '@/lib/supabase'
-import type { AmtpsWing, CustomFieldDef } from '@/lib/types'
+import type { AmtpsWing, CustomFieldDef, PlatformSettings } from '@/lib/types'
 import { errorMessage } from '@/lib/utils'
 
-export default function Settings() {
-  const { isSuperAdmin } = useAuth()
-  const current = useSettings()
-  const [busy, setBusy] = useState(false)
-  const [error, setError] = useState('')
-  const [saved, setSaved] = useState(false)
-  const [form, setForm] = useState({
+const STORAGE_KEY = 'kl_ciie_admin_settings_draft'
+
+function toLocalInput(iso: string): string {
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return ''
+  const pad = (n: number) => String(n).padStart(2, '0')
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`
+}
+
+function emptyForm() {
+  return {
     allow_public_signup: true,
     signup_domain_restriction: true,
     signup_email_otp: true,
     allow_password_reset: true,
     stop_dynamic_qr: false,
     use_attendance_realtime: true,
+    signup_deadline: '',
     domains: 'kluniversity.in',
     interview_day_1: '',
     interview_day_2: '',
@@ -35,32 +40,73 @@ export default function Settings() {
     register_fields: [] as CustomFieldDef[],
     signup_fields: [] as CustomFieldDef[],
     amtps_wings: [] as AmtpsWing[],
-  })
+  }
+}
+
+type SettingsForm = ReturnType<typeof emptyForm>
+
+function formFrom(current: PlatformSettings): SettingsForm {
+  return {
+    allow_public_signup: current.allow_public_signup,
+    signup_domain_restriction: current.signup_domain_restriction,
+    signup_email_otp: current.signup_email_otp,
+    allow_password_reset: current.allow_password_reset,
+    stop_dynamic_qr: current.stop_dynamic_qr,
+    use_attendance_realtime: current.use_attendance_realtime,
+    signup_deadline: current.signup_deadline ? toLocalInput(current.signup_deadline) : '',
+    domains: (current.signup_allowed_domains ?? []).join(', '),
+    interview_day_1: current.interview_day_1 ? String(current.interview_day_1).slice(0, 10) : '',
+    interview_day_2: current.interview_day_2 ? String(current.interview_day_2).slice(0, 10) : '',
+    facebook_url: current.facebook_url ?? '',
+    instagram_url: current.instagram_url ?? '',
+    linkedin_url: current.linkedin_url ?? '',
+    twitter_url: current.twitter_url ?? '',
+    youtube_url: current.youtube_url ?? '',
+    contact_email: current.contact_email ?? '',
+    contact_phone: current.contact_phone ?? '',
+    office_address: current.office_address ?? '',
+    register_fields: (current.register_fields ?? []) as CustomFieldDef[],
+    signup_fields: (current.signup_fields ?? []) as CustomFieldDef[],
+    amtps_wings: (current.amtps_wings ?? []) as AmtpsWing[],
+  }
+}
+
+function readDraft(): SettingsForm | null {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (!raw) return null
+    const parsed = JSON.parse(raw)
+    return { ...emptyForm(), ...parsed }
+  } catch {
+    return null
+  }
+}
+
+export default function Settings() {
+  const { isSuperAdmin } = useAuth()
+  const current = useSettings()
+  const refresh = useRefreshSettings()
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState('')
+  const [saved, setSaved] = useState(false)
+  const savedDraft = useRef<SettingsForm | null>(readDraft())
+  const [form, setForm] = useState<SettingsForm>(() => savedDraft.current ?? emptyForm())
 
   useEffect(() => {
-    setForm({
-      allow_public_signup: current.allow_public_signup,
-      signup_domain_restriction: current.signup_domain_restriction,
-      signup_email_otp: current.signup_email_otp,
-      allow_password_reset: current.allow_password_reset,
-      stop_dynamic_qr: current.stop_dynamic_qr,
-      use_attendance_realtime: current.use_attendance_realtime,
-      domains: (current.signup_allowed_domains ?? []).join(', '),
-      interview_day_1: current.interview_day_1 ? String(current.interview_day_1).slice(0, 10) : '',
-      interview_day_2: current.interview_day_2 ? String(current.interview_day_2).slice(0, 10) : '',
-      facebook_url: current.facebook_url ?? '',
-      instagram_url: current.instagram_url ?? '',
-      linkedin_url: current.linkedin_url ?? '',
-      twitter_url: current.twitter_url ?? '',
-      youtube_url: current.youtube_url ?? '',
-      contact_email: current.contact_email ?? '',
-      contact_phone: current.contact_phone ?? '',
-      office_address: current.office_address ?? '',
-      register_fields: (current.register_fields ?? []) as CustomFieldDef[],
-      signup_fields: (current.signup_fields ?? []) as CustomFieldDef[],
-      amtps_wings: (current.amtps_wings ?? []) as AmtpsWing[],
-    })
+    void refresh()
+  }, [])
+
+  useEffect(() => {
+    if (savedDraft.current) return
+    setForm(formFrom(current))
   }, [current])
+
+  useEffect(() => {
+    if (!savedDraft.current) return
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(form))
+    } catch {}
+  }, [form])
 
   const submit = async (e: FormEvent) => {
     e.preventDefault()
@@ -75,6 +121,7 @@ export default function Settings() {
       allow_password_reset: form.allow_password_reset,
       stop_dynamic_qr: form.stop_dynamic_qr,
       use_attendance_realtime: form.use_attendance_realtime,
+      signup_deadline: form.signup_deadline || null,
       signup_allowed_domains: form.domains
         .split(',')
         .map((d) => d.trim().replace(/^@/, '').toLowerCase())
@@ -105,6 +152,11 @@ export default function Settings() {
       p_entity_id: '1',
       p_details: payload,
     })
+    try {
+      localStorage.removeItem(STORAGE_KEY)
+    } catch {}
+    savedDraft.current = null
+    await refresh()
     setSaved(true)
   }
 
@@ -161,6 +213,12 @@ export default function Settings() {
           </p>
           <Field label="Allowed email domains" hint="Comma separated — e.g. kluniversity.in">
             <TextInput value={form.domains} onChange={(e) => setForm({ ...form, domains: e.target.value })} />
+          </Field>
+          <Field
+            label="Registration deadline"
+            hint="Leave empty for no deadline. Once this date & time passes, all registration pages show a “Registrations are closed” popup and new applications are blocked."
+          >
+            <TextInput type="datetime-local" value={form.signup_deadline} onChange={(e) => setForm({ ...form, signup_deadline: e.target.value })} />
           </Field>
         </section>
 

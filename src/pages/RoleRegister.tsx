@@ -4,7 +4,8 @@ import { KeyRound, MailCheck, RefreshCw, ShieldCheck, Timer } from 'lucide-react
 import { Button, Field, PageLoader, Spinner, TextInput } from '@/components/ui'
 import { CustomFieldInputs, missingFields } from '@/components/RegistrationFormFields'
 import { useAuth } from '@/hooks/useAuth'
-import { useSettings } from '@/hooks/useSettings'
+import { useSettings, signupDeadlinePassed } from '@/hooks/useSettings'
+import RegistrationsClosed from '@/components/RegistrationsClosed'
 import { formatWait, useEmailCooldown, type EmailSendStatus } from '@/hooks/useEmailCooldown'
 import { supabase } from '@/lib/supabase'
 import type { CustomFieldDef } from '@/lib/types'
@@ -84,6 +85,25 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
           View registration options
         </Link>
       </div>
+    )
+  }
+
+  if (signupDeadlinePassed(settings)) {
+    return (
+      <>
+        <div className="container-page max-w-3xl py-12">
+          <div className="card p-8 text-center">
+            <h1 className="text-xl font-extrabold text-slate-900 dark:text-slate-100">Registrations are closed</h1>
+            <p className="mx-auto mt-2 max-w-md text-sm text-slate-500 dark:text-slate-400">
+              Account registration is closed — the registration deadline has passed.
+            </p>
+            <Link to="/login" className="btn-primary mt-6 inline-block">
+              Log in instead
+            </Link>
+          </div>
+        </div>
+        <RegistrationsClosed onClose={() => navigate('/')} />
+      </>
     )
   }
 

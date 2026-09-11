@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { ImagePlus, Trash2, Upload } from 'lucide-react'
+import { CalendarDays, ImagePlus, Trash2, Upload } from 'lucide-react'
 import { EmptyState, Field, PageHeader, PageLoader, SelectInput, TextInput } from '@/components/ui'
 import { useAuth } from '@/hooks/useAuth'
 import { supabase } from '@/lib/supabase'
 import type { Event, GalleryItem } from '@/lib/types'
-import { errorMessage, formatDate, getEmbedInfo } from '@/lib/utils'
+import { errorMessage, getEmbedInfo } from '@/lib/utils'
 
 export default function Gallery() {
   const { user } = useAuth()
@@ -12,6 +12,7 @@ export default function Gallery() {
   const [events, setEvents] = useState<Event[]>([])
   const [eventId, setEventId] = useState('')
   const [title, setTitle] = useState('')
+  const [photoDate, setPhotoDate] = useState('')
   const [uploading, setUploading] = useState(false)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
@@ -50,6 +51,7 @@ export default function Gallery() {
     const { error } = await supabase.from('gallery_items').insert({
       event_id: eventId || null,
       title: title || null,
+      photo_date: photoDate || null,
       media_url: pub.publicUrl,
       media_type: type,
       uploaded_by: user?.id ?? null,
@@ -60,6 +62,7 @@ export default function Gallery() {
       return
     }
     setTitle('')
+    setPhotoDate('')
     setEventId('')
     load()
   }
@@ -91,6 +94,9 @@ export default function Gallery() {
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="Title (optional)">
             <TextInput value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Inauguration photos" />
+          </Field>
+          <Field label="Date shown on gallery (optional)" hint="Leave empty to hide the date on the public gallery.">
+            <TextInput type="date" value={photoDate} onChange={(e) => setPhotoDate(e.target.value)} />
           </Field>
           <Field label="Linked event (optional)">
             <SelectInput value={eventId} onChange={(e) => setEventId(e.target.value)}>
@@ -132,9 +138,22 @@ export default function Gallery() {
                 <video src={item.media_url} className="h-44 w-full bg-slate-900 object-cover" controls />
               )}
               <div className="flex items-center justify-between gap-2 p-3">
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold text-slate-800">{item.title ?? 'Untitled'}</p>
-                  <p className="text-xs text-slate-400">{formatDate(item.created_at)}</p>
+                  <label className="mt-1 flex items-center gap-1.5 text-xs text-slate-400">
+                    <CalendarDays size={12} className="shrink-0" />
+                    <input
+                      type="date"
+                      value={item.photo_date ? String(item.photo_date).slice(0, 10) : ''}
+                      title="Date shown on the public gallery (optional)"
+                      onChange={async (e) => {
+                        const val = e.target.value || null
+                        await supabase.from('gallery_items').update({ photo_date: val }).eq('id', item.id)
+                        load()
+                      }}
+                      className="rounded border border-slate-200 bg-transparent px-1 text-xs text-slate-500"
+                    />
+                  </label>
                 </div>
                 <button
                   className="rounded-lg p-2 text-slate-400 transition hover:bg-red-50 hover:text-red-600"

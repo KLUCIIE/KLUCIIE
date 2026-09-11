@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 import { Badge, Button, Modal, PageHeader } from '@/components/ui'
 import { supabase } from '@/lib/supabase'
+import { fetchAllProfiles } from '@/lib/queries'
 import { downloadExcel } from '@/lib/excel'
 import { cn, errorMessage } from '@/lib/utils'
 
@@ -21,6 +22,7 @@ type Phase = 'upload' | 'preview' | 'working' | 'done'
 interface ParsedRow {
   index: number
   email: string
+  found: boolean
   error: string | null
 }
 
@@ -58,10 +60,11 @@ export default function BulkDeleteMembers() {
 
   const validRows = useMemo(() => rows.filter((r) => !r.error), [rows])
   const invalidCount = rows.length - validRows.length
+  const notFoundCount = rows.filter((r) => r.error === 'No account found with this email.').length
 
   const deletedCount = results.filter((r) => r.status === 'deleted').length
   const failedCount = results.filter((r) => r.status === 'failed').length
-  const notFoundCount = results.filter((r) => r.status === 'not_found').length
+  const doneNotFoundCount = results.filter((r) => r.status === 'not_found').length
 
   const parseFile = useCallback(async (file: File) => {
     setParseError('')
@@ -94,8 +97,20 @@ export default function BulkDeleteMembers() {
         else if (!EMAIL_RE.test(email)) error = 'Email is invalid.'
         else if (emailsInFile.has(email)) error = 'Duplicate email in this file.'
         emailsInFile.add(email)
-        return { index: i + 1, email, error }
+        return { index: i + 1, email, found: false, error }
       })
+
+      const existing = await fetchAllProfiles<{ email: string | null }>('email')
+      const dbEmails = new Set(existing.map((p) => String(p.email ?? '').trim().toLowerCase()))
+      for (const row of parsed) {
+        if (row.error) continue
+        if (!dbEmails.has(row.email)) {
+          row.found = false
+          row.error = 'No account found with this email.'
+        } else {
+          row.found = true
+        }
+      }
 
       setRows(parsed)
       setPhase('preview')
@@ -253,7 +268,8 @@ export default function BulkDeleteMembers() {
             <div>
               <p className="font-semibold">Warning — this is permanent</p>
               <ol className="mt-1 list-decimal space-y-0.5 pl-4 text-red-700/90">
-                <li>You review every email before anything is deleted.</li>
+                <li>You review every email before anything is deleted — each row shows whether an account exists.</li>
+                <li>Only emails with a matching account are deleted; "no account" rows are skipped automatically.</li>
                 <li>Each matching account is permanently deleted (auth account + profile).</li>
                 <li>Super admin and main admin accounts are protected and will not be deleted.</li>
                 <li>This action cannot be undone.</li>
@@ -267,8 +283,11 @@ export default function BulkDeleteMembers() {
         <div className="card p-6">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-base font-bold text-slate-900">
-              Review before deleting — {validRows.length} valid
-              {invalidCount > 0 && <span className="text-red-600"> · {invalidCount} will be skipped</span>}
+              Review before deleting — {validRows.length} will be deleted
+              {notFoundCount > 0 && <span className="text-amber-600"> · {notFoundCount} no account — skipped</span>}
+              {invalidCount - notFoundCount > 0 && (
+                <span className="text-red-600"> · {invalidCount - notFoundCount} skipped</span>
+              )}
             </h2>
             <Button
               variant="secondary"
@@ -284,27 +303,45 @@ export default function BulkDeleteMembers() {
           </div>
 
           <div className="max-h-[28rem] overflow-auto rounded-xl border border-slate-200">
-            <table className="w-full text-left text-sm">
+            <table className="w-full min-w-[40rem] text-left text-sm">
               <thead className="sticky top-0 bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
                 <tr>
                   <th className="px-3 py-2">#</th>
                   <th className="px-3 py-2">Email</th>
+                  <th className="px-3 py-2">Account</th>
                   <th className="px-3 py-2">Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {rows.map((r) => (
-                  <tr key={r.index} className={cn(r.error && 'bg-red-50/70')}>
+                  <tr key={r.index} className={cn((r.error || !r.found) && 'bg-red-50/70')}>
                     <td className="px-3 py-2 text-slate-400">{r.index}</td>
                     <td className="px-3 py-2 text-slate-600">{r.email || '—'}</td>
+                    <td className="px-3 py-2">
+                      {r.error ? (
+                        <span className="text-xs text-slate-400">—</span>
+                      ) : r.found ? (
+                        <span className="inline-flex items-center gap-1 text-xs font-semibold text-green-600">
+                          <CheckCircle2 size={13} /> Account exists
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-600">
+                          <AlertTriangle size={13} /> No account
+                        </span>
+                      )}
+                    </td>
                     <td className="px-3 py-2">
                       {r.error ? (
                         <span className="inline-flex items-center gap-1 text-xs font-semibold text-red-600">
                           <XCircle size={13} /> {r.error}
                         </span>
-                      ) : (
+                      ) : r.found ? (
                         <span className="inline-flex items-center gap-1 text-xs font-semibold text-green-600">
                           <CheckCircle2 size={13} /> Ready to delete
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-600">
+                          <AlertTriangle size={13} /> Cannot delete
                         </span>
                       )}
                     </td>
@@ -346,7 +383,7 @@ export default function BulkDeleteMembers() {
           <div className="grid gap-4 sm:grid-cols-3">
             <StatCard label="Deleted" value={deletedCount} tone="green" />
             <StatCard label="Failed" value={failedCount} tone={failedCount > 0 ? 'red' : 'slate'} />
-            <StatCard label="Not found" value={notFoundCount} tone={notFoundCount > 0 ? 'amber' : 'slate'} />
+            <StatCard label="Not found" value={doneNotFoundCount} tone={doneNotFoundCount > 0 ? 'amber' : 'slate'} />
           </div>
 
           <div className="card p-6">

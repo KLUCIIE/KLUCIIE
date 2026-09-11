@@ -1,9 +1,33 @@
-import { Link, Navigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { ArrowRight, KeyRound, Ticket, UserPlus } from 'lucide-react'
-import { useSettings } from '@/hooks/useSettings'
+import { useSettings, signupDeadlinePassed } from '@/hooks/useSettings'
+import RegistrationsClosed from '@/components/RegistrationsClosed'
 
 export default function Register() {
   const settings = useSettings()
+  const navigate = useNavigate()
+
+  if (signupDeadlinePassed(settings)) {
+    return (
+      <>
+        <div className="container-page max-w-3xl py-12">
+          <div className="card p-8 text-center">
+            <span className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-100 text-amber-600">
+              <UserPlus size={26} />
+            </span>
+            <h1 className="text-xl font-extrabold text-slate-900 dark:text-slate-100">Registrations are closed</h1>
+            <p className="mx-auto mt-2 max-w-md text-sm text-slate-500 dark:text-slate-400">
+              Account registration and Join CIIE applications are closed — the registration deadline has passed.
+            </p>
+            <Link to="/login" className="btn-primary mt-6 inline-block">
+              Log in instead
+            </Link>
+          </div>
+        </div>
+        <RegistrationsClosed onClose={() => navigate('/')} />
+      </>
+    )
+  }
 
   if (!settings.allow_public_signup) {
     return <Navigate to="/register/user" replace />

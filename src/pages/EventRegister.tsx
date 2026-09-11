@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Ticket } from 'lucide-react'
-import { Button, Field, PageLoader, SelectInput, Spinner, TextInput, TextArea } from '@/components/ui'
+import { Button, Field, Modal, PageLoader, SelectInput, Spinner, TextInput, TextArea } from '@/components/ui'
+import { CircleSlash } from 'lucide-react'
 import PhoneInput, { parsePhone } from '@/components/PhoneInput'
 import { useAuth } from '@/hooks/useAuth'
 import { fetchEvent } from '@/lib/queries'
@@ -62,6 +63,41 @@ export default function EventRegister() {
   }
 
   const fields = (event.form_fields as unknown as FormField[]) ?? []
+
+  const deadlinePassed =
+    !!event.registration_deadline && new Date(event.registration_deadline).getTime() <= Date.now()
+  if (deadlinePassed) {
+    return (
+      <div className="container-page max-w-2xl py-10">
+        <div className="card p-8 text-center">
+          <span className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-100 text-amber-600">
+            <CircleSlash size={26} />
+          </span>
+          <h1 className="text-xl font-extrabold text-slate-900 dark:text-slate-100">Registrations are closed</h1>
+          <p className="mx-auto mt-2 max-w-md text-sm text-slate-500 dark:text-slate-400">
+            The registration deadline for this event has passed, so new registrations are no longer accepted.
+          </p>
+          <Link to="/events" className="btn-primary mt-6 inline-block">
+            Browse events
+          </Link>
+        </div>
+        <Modal open onClose={() => navigate('/events')} title="Registrations are closed">
+          <div className="flex items-start gap-4">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-amber-100 text-amber-600">
+              <CircleSlash size={22} />
+            </span>
+            <div>
+              <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">Registration deadline has passed</p>
+              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                Registrations for <strong>{event.title}</strong> are closed — the registration deadline has passed.
+              </p>
+            </div>
+          </div>
+        </Modal>
+      </div>
+    )
+  }
+
   const submit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!name.trim() || !email.trim() || !department.trim() || !college.trim()) {

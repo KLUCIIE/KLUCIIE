@@ -22,6 +22,7 @@ export default function GalleryLinks() {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [title, setTitle] = useState('')
+  const [linkDate, setLinkDate] = useState('')
   const [url, setUrl] = useState('')
   const [type, setType] = useState<LinkType>('youtube')
 
@@ -59,6 +60,7 @@ export default function GalleryLinks() {
     const { error: insertError } = await supabase.from('gallery_items').insert({
       event_id: null,
       title: title.trim() || null,
+      photo_date: linkDate || null,
       media_url: url.trim(),
       media_type: type === 'image' ? 'image' : 'video',
       uploaded_by: user?.id ?? null,
@@ -69,6 +71,7 @@ export default function GalleryLinks() {
       return
     }
     setTitle('')
+    setLinkDate('')
     setUrl('')
     load()
   }
@@ -117,9 +120,12 @@ export default function GalleryLinks() {
         </div>
         <p className="text-xs text-slate-400">{linkTypes.find((t) => t.key === type)?.hint}</p>
 
-        <div className="grid gap-4 sm:grid-cols-[1fr_1.5fr_auto]">
+        <div className="grid gap-4 sm:grid-cols-[1fr_1fr_1.5fr_auto]">
           <Field label="Title (optional)">
             <TextInput value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Hackathon highlight" />
+          </Field>
+          <Field label="Date shown on gallery (optional)" hint="Leave empty to hide the date.">
+            <TextInput type="date" value={linkDate} onChange={(e) => setLinkDate(e.target.value)} />
           </Field>
           <Field label="URL">
             <TextInput
@@ -174,7 +180,8 @@ export default function GalleryLinks() {
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold text-slate-800">{item.title ?? 'Untitled'}</p>
                     <p className="truncate text-xs text-slate-400">
-                      {formatDate(item.created_at)} · {embed?.kind === 'youtube' ? 'YouTube' : embed?.kind === 'vimeo' ? 'Vimeo' : item.media_type === 'image' ? 'Image link' : 'Video link'}
+                      {item.photo_date ? `${formatDate(item.photo_date)} · ` : ''}
+                      {embed?.kind === 'youtube' ? 'YouTube' : embed?.kind === 'vimeo' ? 'Vimeo' : item.media_type === 'image' ? 'Image link' : 'Video link'}
                     </p>
                   </div>
                   <button

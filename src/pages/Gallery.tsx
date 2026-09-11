@@ -157,54 +157,48 @@ export default function Gallery() {
             </div>
           </Reveal>
         ) : (
-          <div className="columns-1 gap-4 sm:columns-2 lg:columns-3 [column-fill:balance]">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((item, i) => {
               const embed = getEmbedInfo(item.media_url)
               return (
-                <Reveal key={item.id} delay={(i % 6) * 70} variant="zoom" className="mb-4 break-inside-avoid">
+                <Reveal key={item.id} delay={(i % 6) * 70} variant="zoom" className="aspect-square">
                   <button
                     onClick={() => setActiveIndex(i)}
-                    className="group relative block w-full overflow-hidden rounded-2xl bg-slate-900 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+                    className="group relative block h-full w-full overflow-hidden rounded-2xl bg-slate-900 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
                   >
                     {item.media_type === 'image' ? (
                       <img
                         src={item.media_url}
                         alt={item.title ?? 'CIIE gallery photo'}
                         loading="lazy"
-                        className="w-full object-cover transition duration-500 group-hover:scale-105"
+                        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                       />
                     ) : embed && embed.kind !== 'direct' ? (
-                      <div className="relative aspect-video w-full bg-slate-900">
-                        <iframe
-                          src={embed.embedSrc}
-                          title={item.title ?? 'CIIE gallery video'}
-                          className="h-full w-full"
-                          loading="lazy"
-                          allow="autoplay; fullscreen; picture-in-picture"
-                          allowFullScreen
-                        />
-                        <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/20 backdrop-blur transition group-hover:scale-110">
-                            <Play size={22} className="ml-0.5 text-white" />
-                          </span>
-                        </span>
-                      </div>
+                      <iframe
+                        src={embed.embedSrc}
+                        title={item.title ?? 'CIIE gallery video'}
+                        className="h-full w-full"
+                        loading="lazy"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowFullScreen
+                      />
                     ) : (
-                      <div className="relative aspect-video w-full bg-slate-900">
-                        <video
-                          src={item.media_url}
-                          muted
-                          playsInline
-                          preload="metadata"
-                          className="h-full w-full object-cover"
-                        />
-                        <span className="absolute inset-0 flex items-center justify-center">
-                          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/20 backdrop-blur transition group-hover:scale-110">
-                            <Play size={22} className="ml-0.5 text-white" />
-                          </span>
-                        </span>
-                      </div>
+                      <video
+                        src={item.media_url}
+                        muted
+                        playsInline
+                        preload="metadata"
+                        className="h-full w-full object-cover"
+                      />
                     )}
+
+                    <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                      {item.media_type !== 'image' && (
+                        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/20 backdrop-blur transition group-hover:scale-110">
+                          <Play size={22} className="ml-0.5 text-white" />
+                        </span>
+                      )}
+                    </span>
 
                     <span className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
 
@@ -213,7 +207,7 @@ export default function Gallery() {
                         {item.title && (
                           <span className="block truncate text-sm font-semibold text-white">{item.title}</span>
                         )}
-                        <span className="block text-xs text-white/70">{formatDate(item.created_at)}</span>
+                        {item.photo_date && <span className="block text-xs text-white/70">{formatDate(item.photo_date)}</span>}
                       </span>
                       <Expand size={16} className="shrink-0 text-white/80" />
                     </span>
@@ -233,7 +227,8 @@ export default function Gallery() {
         >
           <div className="flex items-center justify-between p-4">
             <p className="truncate px-2 text-sm font-semibold text-white">
-              {active.title ?? 'CIIE gallery'} · {formatDate(active.created_at)}
+              {active.title ?? 'CIIE gallery'}
+              {active.photo_date ? ` · ${formatDate(active.photo_date)}` : ''}
             </p>
             <button
               className="rounded-lg p-2 text-white/70 transition hover:bg-white/10 hover:text-white"
@@ -245,56 +240,64 @@ export default function Gallery() {
           </div>
 
           <div
-            className="relative flex flex-1 items-center justify-center px-4 pb-4"
+            className="relative min-h-0 flex-1 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {(() => {
-              const embed = getEmbedInfo(active.media_url)
-              if (active.media_type === 'image') {
-                return (
-                  <img
-                    src={active.media_url}
-                    alt={active.title ?? 'CIIE gallery photo'}
-                    className="max-h-full max-w-full rounded-xl object-contain shadow-2xl"
-                  />
-                )
-              }
-              if (embed && embed.kind !== 'direct') {
-                return (
-                  <div className="w-full max-w-4xl">
-                    <div className="aspect-video w-full overflow-hidden rounded-xl bg-slate-900 shadow-2xl">
-                      <iframe
-                        src={embed.embedSrc}
-                        title={active.title ?? 'CIIE gallery video'}
-                        className="h-full w-full"
-                        allow="autoplay; fullscreen; picture-in-picture"
-                        allowFullScreen
+            <span className="absolute left-1/2 top-3 z-30 w-max -translate-x-1/2 rounded-full bg-black/55 px-3 py-1 text-xs font-bold tracking-widest text-white backdrop-blur sm:left-6 sm:translate-x-0">
+              {index + 1} / {filtered.length}
+            </span>
+
+            <div className="absolute inset-0 overflow-auto">
+              <div className="flex min-h-full w-full flex-col items-center justify-center gap-4 p-4 sm:p-6">
+                {(() => {
+                  const embed = getEmbedInfo(active.media_url)
+                  if (active.media_type === 'image') {
+                    return (
+                      <img
+                        src={active.media_url}
+                        alt={active.title ?? 'CIIE gallery photo'}
+                        className="max-h-[calc(100vh-10rem)] max-w-full rounded-xl object-contain shadow-2xl"
                       />
-                    </div>
-                  </div>
-                )
-              }
-              return (
-                <video
-                  src={active.media_url}
-                  controls
-                  autoPlay
-                  className="max-h-full max-w-full rounded-xl shadow-2xl"
-                />
-              )
-            })()}
+                    )
+                  }
+                  if (embed && embed.kind !== 'direct') {
+                    return (
+                      <div className="w-full max-w-4xl">
+                        <div className="aspect-video w-full overflow-hidden rounded-xl bg-slate-900 shadow-2xl">
+                          <iframe
+                            src={embed.embedSrc}
+                            title={active.title ?? 'CIIE gallery video'}
+                            className="h-full w-full"
+                            allow="autoplay; fullscreen; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                      </div>
+                    )
+                  }
+                  return (
+                    <video
+                      src={active.media_url}
+                      controls
+                      autoPlay
+                      className="max-h-[calc(100vh-10rem)] max-w-full rounded-xl object-contain shadow-2xl"
+                    />
+                  )
+                })()}
+              </div>
+            </div>
 
             {filtered.length > 1 && (
               <>
                 <button
-                  className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white backdrop-blur transition hover:bg-white/20 sm:left-6"
+                  className="absolute left-2 top-1/2 z-30 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white backdrop-blur transition hover:bg-white/20 sm:left-6"
                   onClick={() => setActiveIndex((index - 1 + filtered.length) % filtered.length)}
                   aria-label="Previous"
                 >
                   <ChevronLeft size={22} />
                 </button>
                 <button
-                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white backdrop-blur transition hover:bg-white/20 sm:right-6"
+                  className="absolute right-2 top-1/2 z-30 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white backdrop-blur transition hover:bg-white/20 sm:right-6"
                   onClick={() => setActiveIndex((index + 1) % filtered.length)}
                   aria-label="Next"
                 >
@@ -305,7 +308,7 @@ export default function Gallery() {
           </div>
 
           <p className="pb-4 text-center text-xs font-medium tracking-widest text-white/50">
-            {index + 1} / {filtered.length} · Use arrow keys to navigate
+            Use arrow keys to navigate
           </p>
         </div>
       )}

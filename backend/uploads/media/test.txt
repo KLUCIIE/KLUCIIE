@@ -1,0 +1,9 @@
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/kl_ciie
+REDIS_URL=redis://localhost:6379
+JWT_SECRET=kl-ciie-dev-secret-key-2026-change-in-production
+JWT_ACCESS_EXPIRY=15m
+JWT_REFRESH_EXPIRY=7d
+PORT=3001
+HOST=0.0.0.0
+NODE_ENV=development
+CORS_ORIGIN=http://localhost:5173

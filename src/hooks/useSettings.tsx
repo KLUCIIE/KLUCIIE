@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { supabase } from '@/lib/supabase'
 import type { PlatformSettings } from '@/lib/types'
 
@@ -23,12 +23,26 @@ const DEFAULT_SETTINGS: PlatformSettings = {
   allow_password_reset: true,
   stop_dynamic_qr: false,
   use_attendance_realtime: true,
+  signup_deadline: null,
   amtps_mode: true,
   amtps_wings: [],
   updated_by: null,
 }
 
-const SettingsContext = createContext<PlatformSettings>(DEFAULT_SETTINGS)
+type SettingsContextValue = {
+  settings: PlatformSettings
+  refresh: () => Promise<void>
+}
+
+const SettingsContext = createContext<SettingsContextValue>({
+  settings: DEFAULT_SETTINGS,
+  refresh: async () => {},
+})
+
+async function fetchSettings(): Promise<PlatformSettings | null> {
+  const { data } = await supabase.from('platform_settings').select('*').eq('id', 1).maybeSingle()
+  return (data as PlatformSettings | null) ?? null
+}
 
 export function SettingsProvider({ children }: { children: ReactNode }) {
   const [settings, setSettings] = useState<PlatformSettings>(DEFAULT_SETTINGS)
@@ -36,10 +50,8 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let active = true
     const load = async () => {
-      const { data } = await supabase.from('platform_settings').select('*').eq('id', 1).maybeSingle()
-      if (active && data) {
-        setSettings(data as PlatformSettings)
-      }
+      const data = await fetchSettings()
+      if (active && data) setSettings(data)
     }
     load()
     return () => {
@@ -47,15 +59,34 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  return <SettingsContext.Provider value={settings}>{children}</SettingsContext.Provider>
+  const refresh = useCallback(async () => {
+    const data = await fetchSettings()
+    if (data) setSettings(data)
+  }, [])
+
+  const value = useMemo<SettingsContextValue>(() => ({ settings, refresh }), [settings, refresh])
+
+  return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>
 }
 
 export function useSettings(): PlatformSettings {
-  return useContext(SettingsContext)
+  return useContext(SettingsContext).settings
+}
+
+/** Re-fetch platform settings and push the fresh row into context (e.g. after saving). */
+export function useRefreshSettings(): () => Promise<void> {
+  return useContext(SettingsContext).refresh
 }
 
 /** Assigned GD/Interview date for a given batch, or null when not set yet. */
 export function interviewDateFor(settings: PlatformSettings, batch: 1 | 2 | null | undefined): string | null {
   if (!batch) return null
   return batch === 1 ? settings.interview_day_1 : settings.interview_day_2
+}
+
+/** True once the configured signup deadline has passed (registrations closed). */
+export function signupDeadlinePassed(settings: PlatformSettings): boolean {
+  if (!settings.signup_deadline) return false
+  const d = new Date(settings.signup_deadline).getTime()
+  return Number.isFinite(d) && d < Date.now()
 }

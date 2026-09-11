@@ -4,6 +4,7 @@ import {
   Building2,
   CalendarDays,
   CheckCircle2,
+  CircleSlash,
   Clock,
   Image as ImageIcon,
   MapPin,
@@ -47,6 +48,7 @@ export default function EventDetail() {
   const [myRegId, setMyRegId] = useState<string | null>(null)
   const [registrations, setRegistrations] = useState(0)
   const [loading, setLoading] = useState(true)
+  const [closedDismissed, setClosedDismissed] = useState(false)
 
   useEffect(() => {
     let active = true
@@ -124,6 +126,9 @@ export default function EventDetail() {
     event.registration_enabled &&
     seatsLeft > 0 &&
     (!event.registration_deadline || new Date(event.registration_deadline) > new Date())
+
+  const registrationClosed =
+    !!event.registration_deadline && new Date(event.registration_deadline).getTime() <= Date.now()
 
   // group team by role name
   const grouped = new Map<string, TeamRow[]>()
@@ -359,6 +364,28 @@ export default function EventDetail() {
             >
               <CalendarDays size={15} /> iCal (.ics)
             </button>
+          </div>
+        </Modal>
+      )}
+
+      {/* REGISTRATION CLOSED POPUP */}
+      {registrationClosed && !registered && !closedDismissed && (
+        <Modal open onClose={() => setClosedDismissed(true)} title="Registrations are closed">
+          <div className="flex items-start gap-4">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-amber-100 text-amber-600">
+              <CircleSlash size={22} />
+            </span>
+            <div>
+              <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">Registration deadline has passed</p>
+              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                Registrations for <strong>{event.title}</strong> are closed — the registration deadline has passed.
+              </p>
+              <div className="mt-5 flex flex-wrap justify-end gap-2">
+                <Link to="/events" className="btn-primary">
+                  Browse events
+                </Link>
+              </div>
+            </div>
           </div>
         </Modal>
       )}

@@ -10,7 +10,6 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.45.4",
     "html5-qrcode": "^2.3.8",
     "lucide-react": "^0.441.0",
     "qrcode": "^1.5.4",

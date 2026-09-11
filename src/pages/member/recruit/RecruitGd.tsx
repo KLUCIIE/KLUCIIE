@@ -9,7 +9,7 @@ import { errorMessage } from '@/lib/utils'
 import { ApplicantInfo, StageBadge } from './RecruitBits'
 
 export default function RecruitGd() {
-  const { rows, error: liveError } = useRecruitLive()
+  const { rows, error: liveError, refresh } = useRecruitLive()
 
   const [active, setActive] = useState<RecruitApplicationRow | null>(null)
   const [template, setTemplate] = useState<RecruitFormTemplate | null>(null)
@@ -71,6 +71,7 @@ export default function RecruitGd() {
       setError(errorMessage(err))
       return
     }
+    void refresh()
     setActive(null)
   }
 

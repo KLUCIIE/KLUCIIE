@@ -1,12 +1,14 @@
 # KL CIIE Platform V2
 
 KL CIIE member portal + admin console (Super Admin MFA-protected).
-Built with Vite + React 18 + TypeScript + Tailwind CSS v4, backed by Supabase (Postgres + Auth + RLS).
+Built with Vite + React 18 + TypeScript + Tailwind CSS v4, backed by a self-hosted
+Fastify API (`backend/`) that exposes the Supabase-compatible surface the app was
+built against (db, auth, storage, functions, realtime).
 
 ## Prerequisites
 
 - Node.js 18+
-- A Supabase project (cloud or local `supabase start`)
+- The Fastify backend running with its own PostgreSQL database (see `backend/.env`)
 
 ## Setup
 
@@ -15,17 +17,16 @@ npm install
 cp .env.example .env
 ```
 
-Set the two values in `.env`:
-
-```
-VITE_SUPABASE_URL=https://<project-ref>.supabase.co
-VITE_SUPABASE_ANON_KEY=<your anon key>
-```
+Development uses Vite's proxy (`/api`, `/storage`, `/ws` → localhost:3001), so
+`.env` only needs `VITE_API_URL=/api`. Point it at your deployed backend if the
+frontend is hosted separately.
 
 ## Database Setup
 
-Apply the migrations in order against your Supabase project (SQL Editor, or
-`supabase db push` with the CLI). Order matters:
+Schema lives under `supabase/migrations/` (the original Supabase-era SQL) and
+`backend/init.sql`. The backend does **not** apply migrations at startup — apply
+them once against your PostgreSQL database (`backend/.env` → `DATABASE_URL`),
+then keep only schema changes you make after that in `backend/migrations/`.
 
 | File | Purpose |
 | --- | --- |

@@ -1,0 +1,76 @@
+
+> kl-ciie-platform@2.0.0 dev
+> vite
+
+Re-optimizing dependencies because lockfile has changed
+
+  [32m[1mVITE[22m v5.4.21[39m  [2mready in [0m[1m676[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
+[2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
+[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+[2m8:41:28 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/db/schema.ts[22m
+[2m8:41:44 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:51:41 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
+[2m8:51:54 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
+[2m8:52:05 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
+[2m8:52:21 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
+[2m9:04:39 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/db/schema.ts[22m
+[2m9:05:11 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m9:05:22 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m9:05:38 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m9:05:49 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/db.routes.ts[22m
+[2m9:05:56 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/db.routes.ts[22m
+[2m9:06:14 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/db.routes.ts[22m
+[2m9:12:05 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/scripts/check-regroles.ts[22m
+[2m9:35:56 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
+[2m9:36:06 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
+[2m9:36:53 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/db/schema.ts[22m
+[2m9:38:23 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m9:41:52 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
+[2m9:42:26 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
+[2m9:42:46 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/scripts/_verify_fixes.ts[22m
+[2m9:51:16 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/scripts/_verify_fixes.ts[22m
+[2m9:52:09 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/scripts/_tmp_cols.ts[22m
+[2m9:54:41 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/db/schema.ts[22m
+[2m10:03:18 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
+[2m10:03:27 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
+[2m10:03:35 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
+[2m10:03:43 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
+[2m10:05:08 pm[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/scripts/_tmp_meta.ts[22m
+[2m7:51:57 am[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/hooks/useSettings.tsx, /src/index.css[22m
+[2m7:52:03 am[22m [36m[1m[vite][22m[39m [33mhmr invalidate [39m[2m/src/hooks/useSettings.tsx[22m Could not Fast Refresh (new export)
+[2m7:52:03 am[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /@fs/E:\KL_CIIE\src\components\Footer.tsx, /@fs/E:\KL_CIIE\src\components\Navbar.tsx, /src/pages/Home.tsx, /src/pages/Login.tsx, /src/pages/member/Dashboard.tsx, /src/pages/member/MemberQr.tsx, /src/pages/RoleRegister.tsx, /src/pages/Register.tsx, /src/pages/Signup.tsx, /src/pages/admin/Settings.tsx, /src/pages/admin/Recruits.tsx, /src/pages/admin/AmtpsAdmin.tsx, /@fs/E:\KL_CIIE\src\components\amtps\AmtpsMemberForm.tsx[22m
+[2m7:52:23 am[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/admin/Settings.tsx, /src/index.css[22m
+[2m7:52:33 am[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/admin/Settings.tsx, /src/index.css[22m
+[2m7:52:57 am[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/admin/Settings.tsx, /src/index.css[22m
+[2m7:53:04 am[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/admin/Settings.tsx, /src/index.css[22m
+[2m7:53:11 am[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/admin/Settings.tsx, /src/index.css[22m
+[2m7:53:19 am[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/admin/Settings.tsx, /src/index.css[22m
+[2m8:06:55 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:07:03 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:07:11 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:07:19 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:07:29 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:07:55 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/attendance.service.ts[22m
+[2m8:08:11 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:08:19 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:08:25 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:08:59 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:09:11 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:09:19 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:10:29 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/scripts/_tmp_ticket.ts[22m
+[2m8:10:46 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/scripts/_tmp_ticket.ts[22m
+[2m8:13:20 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:14:34 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/scripts/_tmp_ticket.ts[22m
+[2m8:14:51 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/scripts/_tmp_ticket.ts[22m
+[2m8:15:40 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/scripts/_tmp_ticket.ts[22m
+[2m8:16:04 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/scripts/_tmp_ticket.ts[22m
+[2m8:16:23 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/scripts/_tmp_ticket.ts[22m
+[2m8:16:58 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/scripts/_tmp_ticket.ts[22m
+[2m8:17:10 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/scripts/_tmp_ticket.ts[22m
+[2m8:22:59 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:23:08 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:23:22 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:23:46 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
+[2m8:23:58 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m

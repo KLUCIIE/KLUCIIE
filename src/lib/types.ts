@@ -166,6 +166,7 @@ export interface PlatformSettings {
   allow_password_reset: boolean
   stop_dynamic_qr: boolean
   use_attendance_realtime: boolean
+  signup_deadline: string | null
   amtps_mode: boolean
   amtps_wings: AmtpsWing[]
   updated_by: string | null
@@ -358,6 +359,7 @@ export interface GalleryItem {
   id: string
   event_id: string | null
   title: string | null
+  photo_date: string | null
   media_url: string
   media_type: 'image' | 'video'
   uploaded_by: string | null

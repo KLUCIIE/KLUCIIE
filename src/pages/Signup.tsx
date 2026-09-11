@@ -2,8 +2,9 @@ import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { CalendarCheck, CircleSlash, MailCheck, UserPlus } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
-import { useSettings } from '@/hooks/useSettings'
+import { useSettings, signupDeadlinePassed } from '@/hooks/useSettings'
 import { Button, Field, Spinner, TextInput } from '@/components/ui'
+import RegistrationsClosed from '@/components/RegistrationsClosed'
 import { CustomFieldInputs, missingFields } from '@/components/RegistrationFormFields'
 import type { CustomFieldDef } from '@/lib/types'
 import { emailInvokeMessage, errorMessage, isValidTenDigit } from '@/lib/utils'
@@ -25,6 +26,9 @@ export default function Signup() {
   const [notice, setNotice] = useState('')
   const [busy, setBusy] = useState(false)
   const [submitted, setSubmitted] = useState<{ fullName: string; batch: 1 | 2 | null } | null>(null)
+  const [closedOpen, setClosedOpen] = useState(false)
+
+  const deadlinePassed = signupDeadlinePassed(settings)
 
   const fields = settings.signup_fields && settings.signup_fields.length > 0 ? settings.signup_fields : DEFAULT_FIELDS
 
@@ -72,10 +76,24 @@ export default function Signup() {
       setError(errorMessage(err))
       return
     }
-    const info = (data ?? {}) as { application_id?: string | null; to_email?: string; full_name?: string }
+    const info = (data ?? {}) as { application_id?: string | null; to_email?: string; full_name?: string; duplicate?: boolean; reason?: string; stage?: string }
     if (!info.application_id) {
       setBusy(false)
-      setError('Could not create your application. Please try again.')
+      if (info.reason === 'closed') {
+        setClosedOpen(true)
+        return
+      }
+      if (info.reason === 'in-review') {
+        setError(
+          info.stage === 'final'
+            ? 'You already have an application in Final Selection — the team will get back to you.'
+            : `You already have an application under review in the ${info.stage === 'interview' ? 'Interview' : 'GD'} round — we will get back to you.`
+        )
+      } else if (info.reason === 'member') {
+        setError('This email is already registered. Please log in instead.')
+      } else {
+        setError('Could not create your application. Please try again.')
+      }
       return
     }
 
@@ -121,6 +139,27 @@ export default function Signup() {
     nav()
   }
 
+  if (deadlinePassed) {
+    return (
+      <>
+        <div className="card p-8">
+          <div className="rounded-xl border border-amber-200 bg-amber-50 px-5 py-6 text-center">
+            <CircleSlash size={36} className="mx-auto mb-3 text-amber-500" />
+            <h1 className="text-lg font-extrabold text-amber-900">Registrations are closed</h1>
+            <p className="mt-1 text-sm font-medium text-amber-700">The Join CIIE application deadline has passed.</p>
+          </div>
+          <p className="mt-6 text-center text-sm text-slate-500">
+            Already have an account?{' '}
+            <Link to="/login" className="font-semibold text-primary-600 hover:underline">
+              Log in
+            </Link>
+          </p>
+        </div>
+        <RegistrationsClosed onClose={() => navigate('/')} />
+      </>
+    )
+  }
+
   if (!settings.allow_public_signup) {
     return (
       <div className="card p-8">
@@ -163,7 +202,8 @@ export default function Signup() {
   }
 
   return (
-    <div className="card p-8">
+    <>
+      <div className="card p-8">
       <div className="mb-6 text-center">
         <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-100 text-primary-600">
           <UserPlus size={24} />
@@ -224,5 +264,14 @@ export default function Signup() {
         </Link>
       </p>
     </div>
+      {closedOpen && (
+        <RegistrationsClosed
+          onClose={() => {
+            setClosedOpen(false)
+            navigate('/')
+          }}
+        />
+      )}
+    </>
   )
 }

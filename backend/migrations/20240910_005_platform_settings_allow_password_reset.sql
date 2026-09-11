@@ -1,0 +1,2 @@
+-- Add allow_password_reset to platform_settings (from migration 0061, never applied locally).
+ALTER TABLE platform_settings ADD COLUMN IF NOT EXISTS allow_password_reset boolean NOT NULL DEFAULT true;

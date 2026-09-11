@@ -8,8 +8,7 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import type { Factor, User } from '@supabase/supabase-js'
-import { supabase } from '@/lib/supabase'
+import { supabase, type Factor, type User } from '@/lib/supabase'
 import type { Profile, Role } from '@/lib/types'
 import { isAdminRole } from '@/lib/types'
 import { errorMessage } from '@/lib/utils'
@@ -236,10 +235,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return { ...base, allowed: true, isAdmin: admin, role: prof?.role ?? null }
       }
       if (superAdmin) {
-        if (prof!.mfa_setup_required || !mfaState.hasVerifiedFactor) {
+        const mfaConfigured = prof!.mfa_enabled || mfaState.hasVerifiedFactor
+        if (mfaConfigured && (prof!.mfa_setup_required || !mfaState.hasVerifiedFactor)) {
           return { ...base, mfaSetupRequired: true, isAdmin: true }
         }
-        if (mfaState.aal !== 'aal2') {
+        if (mfaConfigured && mfaState.aal !== 'aal2') {
           return { ...base, mfaVerifyRequired: true, isAdmin: true }
         }
       }

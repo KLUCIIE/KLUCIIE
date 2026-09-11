@@ -2,10 +2,12 @@ import { useCallback, useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
 import type { RecruitApplicationRow } from '@/lib/types'
 
+const POLL_MS = 20000
+
 /**
- * Live recruitment pipeline rows (RLS-protected RPC + realtime refresh).
- * Refetches whenever an application or evaluation changes so the GD /
- * Interview / Final Selection pages update as CIIE members work.
+ * Recruitment pipeline rows for the GD / Interview / Final Selection pages.
+ * The local supabase shim has no realtime push, so we poll get_recruit_applications
+ * every POLL_MS and also expose refresh() for immediate refetch after actions.
  */
 export function useRecruitLive() {
   const [rows, setRows] = useState<RecruitApplicationRow[] | null>(null)
@@ -22,6 +24,12 @@ export function useRecruitLive() {
 
   useEffect(() => {
     void refresh()
+    const id = window.setInterval(() => void refresh(), POLL_MS)
+    window.addEventListener('focus', refresh)
+    return () => {
+      window.clearInterval(id)
+      window.removeEventListener('focus', refresh)
+    }
   }, [refresh])
 
   return { rows, error, refresh }

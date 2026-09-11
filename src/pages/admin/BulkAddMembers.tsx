@@ -142,6 +142,7 @@ export default function BulkAddMembers() {
 
   const validRows = useMemo(() => resumed ? [] : rows.filter((r) => !r.error), [rows, resumed])
   const invalidCount = rows.length - validRows.length
+  const dupCount = rows.filter((r) => r.error?.includes('already exists')).length
 
   const created = useMemo(() => results.filter((r) => r.status === 'created'), [results])
   const mailSent = created.filter((r) => r.mailStatus === 'sent').length
@@ -395,9 +396,13 @@ export default function BulkAddMembers() {
       '<p style="margin:0">Please keep this email safe and do not share your password.<br/><strong>KL CIIE</strong></p>' +
       '</div></div>'
     try {
+      const controller = new AbortController()
+      const timer = window.setTimeout(() => controller.abort(), 12000)
       const { data, error } = await supabase.functions.invoke('send-recruit-email', {
         body: { to_email: r.email, subject: 'Your KL CIIE account', text, html },
+        signal: controller.signal,
       })
+      window.clearTimeout(timer)
       if (error) {
         const msg = await emailInvokeMessage(error)
         return { account: null, error: msg }
@@ -568,7 +573,10 @@ export default function BulkAddMembers() {
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-base font-bold text-slate-900">
               Review before creating — {validRows.length} ready
-              {invalidCount > 0 && <span className="text-red-600"> · {invalidCount} will be skipped</span>}
+              {dupCount > 0 && <span className="text-amber-600"> · {dupCount} already exist — skipped</span>}
+              {invalidCount - dupCount > 0 && (
+                <span className="text-red-600"> · {invalidCount - dupCount} skipped</span>
+              )}
               <span className="ml-2 text-sm font-medium text-slate-500">· role: {ROLE_LABELS[importRole]}</span>
             </h2>
             <Button onClick={() => setConfirmOpen(true)} disabled={validRows.length === 0}>

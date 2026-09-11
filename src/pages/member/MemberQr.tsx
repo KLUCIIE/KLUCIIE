@@ -456,7 +456,7 @@ export default function MemberQrPage() {
         )}
       </div>
 
-      {profile.role !== 'user' && (
+      {profile.role !== 'user' && profile.role !== 'member_ciie' && (
         <>
           <h2 className="mt-8 flex items-center gap-2 text-base font-bold text-slate-900">
             <QrIcon size={16} className="text-primary-600" /> My member QR

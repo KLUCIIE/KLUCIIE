@@ -12,12 +12,26 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
+      '/storage': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
+      '/ws': {
+        target: 'ws://localhost:3001',
+        ws: true,
+      },
+    },
   },
   build: {
     rollupOptions: {
       output: {
         manualChunks: {
-          'vendor-supabase': ['@supabase/supabase-js'],
+          'vendor-qr': ['qrcode', 'html5-qrcode'],
         },
       },
     },
