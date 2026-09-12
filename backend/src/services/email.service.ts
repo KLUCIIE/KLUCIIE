@@ -8,23 +8,27 @@ import { config } from '../config/index.js'
 let cachedTransporter: Transporter | null = null
 let currentIndex = 0
 
-// Circuit breaker: hosts that recently failed with network-ish errors are
+// Circuit breaker: accounts that recently failed with network-ish errors are
 // skipped for a short window so batches fail fast instead of 2-3 timeouts each.
-const blockedHosts = new Map<string, number>()
-const hostReasons = new Map<string, string>()
+const blockedKeys = new Map<string, number>()
+const keyReasons = new Map<string, string>()
 const BLOCK_TTL = 10 * 60 * 1000
 const UNREACHABLE_RE = /timeout|timed out|ETIMEDOUT|ECONNREFUSED|ECONNRESET|ENOTFOUND|EAI_AGAIN|socket hang up|getaddrinfo|connect/i
 
-function isHostBlocked(host: string): boolean {
-  const until = blockedHosts.get(host)
+function accountKey(account: { email: string; host: string; port: number }): string {
+  return `${account.email}@${account.host}:${account.port}`
+}
+
+function isAccountBlocked(key: string): boolean {
+  const until = blockedKeys.get(key)
   if (until && until > Date.now()) return true
-  if (until) blockedHosts.delete(host)
+  if (until) blockedKeys.delete(key)
   return false
 }
 
-function blockHost(host: string, reason: string) {
-  blockedHosts.set(host, Date.now() + BLOCK_TTL)
-  hostReasons.set(host, reason)
+function blockAccount(key: string, reason: string) {
+  blockedKeys.set(key, Date.now() + BLOCK_TTL)
+  keyReasons.set(key, reason)
 }
 
 function isUnreachableError(err: any): boolean {
@@ -58,9 +62,13 @@ async function createTransporter(account: typeof smtpSettings.$inferSelect): Pro
 
 async function getRotatedTransporter(): Promise<{ transporter: Transporter; account: typeof smtpSettings.$inferSelect }> {
   const accounts = await getAccounts()
-  const healthy = accounts.filter((a) => !isHostBlocked(a.host))
+  const healthy = accounts.filter((a) => !isAccountBlocked(accountKey(a)))
 
-  if (healthy.length === 0 && config.SMTP_USER && config.SMTP_PASS && !isHostBlocked(config.SMTP_HOST || 'smtp.gmail.com')) {
+  const fallbackKey = config.SMTP_USER
+    ? accountKey({ email: config.SMTP_USER, host: config.SMTP_HOST || 'smtp.gmail.com', port: config.SMTP_PORT || 465 })
+    : ''
+
+  if (healthy.length === 0 && fallbackKey && config.SMTP_USER && config.SMTP_PASS && !isAccountBlocked(fallbackKey)) {
     const fallbackTransporter = nodemailer.createTransport({
       host: config.SMTP_HOST || 'smtp.gmail.com',
       port: config.SMTP_PORT || 465,
@@ -92,12 +100,11 @@ async function getRotatedTransporter(): Promise<{ transporter: Transporter; acco
 
   if (healthy.length === 0) {
     if (accounts.length === 0) throw new Error('No SMTP accounts configured')
-    const firstBlocked = [...blockedHosts.entries()].find(([h]) => !isHostBlocked(h) || blockedHosts.get(h))?.[0]
-    const blockedHost = [...blockedHosts.keys()].find((h) => isHostBlocked(h)) ?? firstBlocked
-    const reason = blockedHost ? hostReasons.get(blockedHost) : undefined
+    const blockedKey = [...blockedKeys.keys()].find((k) => isAccountBlocked(k))
+    const reason = blockedKey ? keyReasons.get(blockedKey) : undefined
     throw new Error(
       reason
-        ? `All SMTP accounts are currently unreachable (${blockedHost}: ${reason})`
+        ? `All SMTP accounts are currently unreachable (${blockedKey}: ${reason})`
         : 'All SMTP accounts are currently unreachable',
     )
   }
@@ -128,10 +135,10 @@ export async function sendEmail(params: {
   let lastError: Error | null = null
 
   for (let attempt = 0; attempt < 2; attempt++) {
-    let accountHost: string | null = null
+    let blockedKey: string | null = null
     try {
       const { transporter, account } = await getRotatedTransporter()
-      accountHost = account.host
+      blockedKey = accountKey(account)
       const fromAddress = `"${account.fromName}" <${account.email}>`
 
       await transporter.sendMail({
@@ -155,7 +162,7 @@ export async function sendEmail(params: {
     } catch (err: any) {
       lastError = err
       console.error(`[Email] Send attempt ${attempt + 1} failed:`, err.message)
-      if (isUnreachableError(err) && accountHost) blockHost(accountHost, err.message)
+      if (isUnreachableError(err) && blockedKey) blockAccount(blockedKey, err.message)
     }
   }
 
