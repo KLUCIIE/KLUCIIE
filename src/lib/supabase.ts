@@ -18,7 +18,11 @@ import QRCode from 'qrcode'
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-const API_BASE = import.meta.env.VITE_API_URL || '/api'
+const API_BASE = (() => {
+  const raw = import.meta.env.VITE_API_URL || '/api'
+  const trimmed = String(raw).replace(/\/+$/, '')
+  return /\/api$/i.test(trimmed) ? trimmed : trimmed + '/api'
+})()
 
 const SESSION_KEY = 'supabase.auth.token'
 
