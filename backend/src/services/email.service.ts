@@ -125,6 +125,13 @@ export async function sendEmail(params: {
   applicationId?: string
   sentBy?: string
 }): Promise<{ ok: boolean; sender?: string; error?: string }> {
+  // HTTPS-only transports come first — they work even where SMTP ports are
+  // blocked (e.g. Render free tier, Railway egress). Gmail API takes priority,
+  // then Brevo, then the Gmail SMTP pool as the last resort.
+  if (config.GMAIL_CLIENT_ID && config.GMAIL_CLIENT_SECRET && config.GMAIL_REFRESH_TOKEN) {
+    return sendViaGmailApi(params)
+  }
+
   // Brevo HTTP API is the preferred transport when configured — it only needs
   // HTTPS (443), which works everywhere SMTP ports are blocked. When no Brevo
   // key is set we fall back to the Gmail SMTP pool.
@@ -239,6 +246,130 @@ async function sendViaBrevo(params: {
     }).catch(() => {})
 
     return { ok: true, sender: sender.email }
+  } catch (err: any) {
+    const message = err?.message ?? String(err)
+    await db.insert(recruitEmails).values({
+      applicationId: params.applicationId || null,
+      toEmail: params.to,
+      subject: params.subject,
+      body: params.html || params.text || '',
+      status: 'failed',
+      error: message,
+      sentBy: params.sentBy || null,
+    }).catch(() => {})
+    return { ok: false, error: message }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Gmail API (OAuth2, HTTPS-only)
+// ---------------------------------------------------------------------------
+
+let gmailAccessToken: { access: string; expiresAt: number } | null = null
+
+async function getGmailAccessToken(force = false): Promise<string> {
+  if (!force && gmailAccessToken && Date.now() < gmailAccessToken.expiresAt - 60_000) {
+    return gmailAccessToken.access
+  }
+  const res = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      client_id: config.GMAIL_CLIENT_ID!,
+      client_secret: config.GMAIL_CLIENT_SECRET!,
+      refresh_token: config.GMAIL_REFRESH_TOKEN!,
+      grant_type: 'refresh_token',
+    }),
+  })
+  if (!res.ok) {
+    let detail = ''
+    try {
+      const b = (await res.json()) as { error_description?: string; error?: string }
+      detail = b.error_description || b.error || JSON.stringify(b)
+    } catch {
+      detail = `HTTP ${res.status}`
+    }
+    throw new Error(`Gmail OAuth token refresh failed (${res.status}): ${detail}`)
+  }
+  const body = (await res.json()) as { access_token: string; expires_in?: number }
+  gmailAccessToken = { access: body.access_token, expiresAt: Date.now() + (body.expires_in ?? 3600) * 1000 }
+  return body.access_token
+}
+
+async function gmailSender(): Promise<string> {
+  if (config.GMAIL_SENDER) return config.GMAIL_SENDER
+  if (config.SMTP_USER) return config.SMTP_USER
+  const account = (await getAccounts())[0]
+  if (account) return account.email
+  throw new Error('No Gmail sender configured — set GMAIL_SENDER (or SMTP_USER, or an SMTP account email)')
+}
+
+async function gmailHttpSend(token: string, from: string, params: {
+  to: string
+  subject: string
+  text?: string
+  html?: string
+}): Promise<void> {
+  const builder = nodemailer.createTransport({ streamTransport: true, newline: 'unix' } as any)
+  const info = await builder.sendMail({
+    from: `"${config.GMAIL_FROM_NAME || 'KL CIIE'}" <${from}>`,
+    to: params.to,
+    subject: params.subject,
+    text: params.text,
+    html: params.html,
+  })
+  const raw = (info as unknown as { message: Buffer }).message.toString('base64url')
+  const res = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send?userId=me', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ raw }),
+  })
+  if (!res.ok) {
+    let detail = ''
+    try {
+      const b = (await res.json()) as { error?: { message?: string } }
+      detail = b?.error?.message ?? JSON.stringify(b)
+    } catch {
+      detail = `HTTP ${res.status}`
+    }
+    throw new Error(`Gmail API rejected the email (${res.status}): ${detail}`)
+  }
+}
+
+async function sendViaGmailApi(params: {
+  to: string
+  subject: string
+  text?: string
+  html?: string
+  applicationId?: string
+  sentBy?: string
+}): Promise<{ ok: boolean; sender?: string; error?: string }> {
+  try {
+    const from = await gmailSender()
+    try {
+      const token = await getGmailAccessToken()
+      await gmailHttpSend(token, from, params)
+    } catch (err: any) {
+      // Retry once with a freshly-minted token on auth failures (expired/invalid).
+      if (/401|invalid_grant|403|token/i.test(err?.message ?? '')) {
+        const token = await getGmailAccessToken(true)
+        await gmailHttpSend(token, from, params)
+      } else {
+        throw err
+      }
+    }
+    await db.insert(recruitEmails).values({
+      applicationId: params.applicationId || null,
+      toEmail: params.to,
+      subject: params.subject,
+      body: params.html || params.text || '',
+      status: 'sent',
+      sentBy: params.sentBy || null,
+    }).catch(() => {})
+    return { ok: true, sender: from }
   } catch (err: any) {
     const message = err?.message ?? String(err)
     await db.insert(recruitEmails).values({

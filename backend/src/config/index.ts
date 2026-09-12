@@ -23,6 +23,14 @@ const envSchema = z.object({
   BREVO_API_KEY: z.string().optional(),
   BREVO_SENDER_EMAIL: z.string().optional(),
   BREVO_SENDER_NAME: z.string().optional(),
+  // Gmail API via OAuth (HTTPS-only, works everywhere SMTP ports are blocked).
+  // When GMAIL_CLIENT_ID/SECRET + GMAIL_REFRESH_TOKEN are set, ALL mail goes
+  // through the Gmail API instead of SMTP (takes precedence over SMTP pool).
+  GMAIL_CLIENT_ID: z.string().optional(),
+  GMAIL_CLIENT_SECRET: z.string().optional(),
+  GMAIL_REFRESH_TOKEN: z.string().optional(),
+  GMAIL_SENDER: z.string().optional(),
+  GMAIL_FROM_NAME: z.string().default('KL CIIE'),
   STORAGE_ROOT: z.string().optional(),
   STORAGE_PUBLIC_URL: z.string().optional(),
 })
