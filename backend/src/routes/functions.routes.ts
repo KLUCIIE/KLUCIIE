@@ -143,13 +143,13 @@ export default async function functionsRoutes(app: FastifyInstance) {
       const safe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)
       if (!safe) throw new BadRequestError('Invalid to_email')
       const fullName = body.full_name || 'there'
-      const { ok, sender } = await sendEmail({
+      const { ok, sender, error } = await sendEmail({
         to,
         subject: otpPurpose === 'password_reset' ? 'Your CIIE password reset code' : `Your CIIE ${purpose} verification code`,
         text: `Hi ${fullName},\n\nYour CIIE verification code is ${code}.\nIt expires in 15 minutes.\n\nRegards,\nKL CIIE`,
         html: `<div style="font-family:Arial,sans-serif;padding:24px;color:#0f172a"><h3>Hey ${fullName}</h3><p>Your CIIE verification code is:</p><p style="font-size:28px;font-weight:800;letter-spacing:6px">${code}</p><p>It expires in 15 minutes.</p><p>Regards,<br/><strong>KL CIIE</strong></p></div>`,
       })
-      if (!ok) throw new BadRequestError('Email could not be sent — no SMTP account is configured, or all accounts failed.')
+      if (!ok) throw new BadRequestError(`Email could not be sent: ${error ?? 'unknown error'}`)
       return reply.send({ ok: true, wait_seconds: 60, account: sender })
     }
 
@@ -173,7 +173,7 @@ export default async function functionsRoutes(app: FastifyInstance) {
           email, purpose: 'join_verification', codeHash: sha256Hash(code), expiresAt: new Date(Date.now() + 10 * 60 * 1000),
         })
       }
-      const { ok, sender } = await sendEmail({
+      const { ok, sender, error } = await sendEmail({
         to: email,
         subject: 'Your CIIE verification code',
         text: code.startsWith('(') ? code : `Your CIIE verification code is ${code}. It expires in 10 minutes.`,
@@ -181,7 +181,7 @@ export default async function functionsRoutes(app: FastifyInstance) {
       if (!ok && !code.startsWith('(')) {
         return reply.send({ ok: true, debugCode: code })
       }
-      if (!ok) throw new BadRequestError('Email could not be sent')
+      if (!ok) throw new BadRequestError(`Email could not be sent: ${error ?? 'unknown error'}`)
       return reply.send({ ok: true, account: sender })
     }
 
@@ -192,14 +192,14 @@ export default async function functionsRoutes(app: FastifyInstance) {
     if (!to || !subject) throw new BadRequestError('to_email and subject are required')
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) throw new BadRequestError('Invalid to_email')
 
-    const { ok, sender } = await sendEmail({
+    const { ok, sender, error } = await sendEmail({
       to,
       subject,
       text,
       html,
       applicationId: body.application_id ?? null,
     })
-    if (!ok) throw new BadRequestError('Email could not be sent — no SMTP account is configured, or all accounts failed.')
+    if (!ok) throw new BadRequestError(`Email could not be sent: ${error ?? 'unknown error'}`)
     return reply.send({ ok: true, account: sender })
   })
 }

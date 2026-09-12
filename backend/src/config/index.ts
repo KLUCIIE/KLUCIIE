@@ -18,6 +18,11 @@ const envSchema = z.object({
   SMTP_USER: z.string().optional(),
   SMTP_PASS: z.string().optional(),
   SMTP_FROM: z.string().optional(),
+  // Brevo HTTP API (works on platforms that block SMTP ports, e.g. Render free
+  // tier). When BREVO_API_KEY is set, ALL mail goes through Brevo instead of SMTP.
+  BREVO_API_KEY: z.string().optional(),
+  BREVO_SENDER_EMAIL: z.string().optional(),
+  BREVO_SENDER_NAME: z.string().optional(),
   STORAGE_ROOT: z.string().optional(),
   STORAGE_PUBLIC_URL: z.string().optional(),
 })

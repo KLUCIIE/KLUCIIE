@@ -1,4 +1,4 @@
-import { pgTable, text, integer, boolean, uuid, jsonb, timestamp, smallint, bigint, numeric, unique, check, pgEnum } from 'drizzle-orm/pg-core'
+import { pgTable, text, integer, boolean, uuid, jsonb, timestamp, smallint, bigint, numeric, unique, check, pgEnum, customType, uniqueIndex } from 'drizzle-orm/pg-core'
 import { sql } from 'drizzle-orm'
 
 // ─── ENUMS ───
@@ -586,3 +586,22 @@ export const smtpRotationState = pgTable('smtp_rotation_state', {
   id: integer('id').primaryKey().default(1),
   nextIndex: integer('next_index').notNull().default(0),
 })
+
+// ─── STORED FILES (Postgres-backed uploads) ───
+// Uploaded media (banners, avatars, gallery images, branding) is persisted here
+// so files survive ephemeral disk resets (e.g. Render free tiers). The on-disk
+// copy under STORAGE_ROOT is only a cache.
+const pgBytea = customType<{ data: Buffer; driverData: Buffer }>({ dataType: () => 'bytea' })
+
+export const storedFiles = pgTable(
+  'stored_files',
+  {
+    bucket: text('bucket').notNull(),
+    name: text('name').notNull(),
+    data: pgBytea('data').notNull(),
+    contentType: text('content_type').notNull().default('application/octet-stream'),
+    size: bigint('size', { mode: 'number' }).notNull().default(0),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [uniqueIndex('stored_files_bucket_name_key').on(t.bucket, t.name)],
+)

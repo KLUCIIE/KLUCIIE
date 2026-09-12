@@ -394,24 +394,24 @@ handlers['get_my_ticket'] = async ({ user, body }) => {
 
 handlers['admin_get_event_stats'] = async ({ user, body }) => {
   requireAdmin(user)
-  const eventId = body.p_event_id ?? body.event_id
-  const filterSql = eventId ? 'WHERE e.id = $1' : ''
-  const params = eventId ? [eventId] : []
+  const eventId = body.p_event_id ?? body.event_id ?? null
+  const whereSql = eventId ? 'e.id = $1' : 'TRUE'
+  const params = eventId ? [eventId] : ([] as unknown[])
   const rows = await pgClient.unsafe(
     `SELECT
        e.id AS event_id, e.title, e.status, e.start_date::date AS start_date,
        e.attendance_rounds,
-       COALESCE((SELECT COUNT(*) FROM event_registrations r WHERE r.event_id = e.id), 0)::bigint AS registrations,
-       (SELECT COUNT(*) FROM (SELECT 1 FROM attendance a WHERE a.event_id = e.id AND a.status = 'present' GROUP BY a.member_id) p)::bigint AS present,
-       GREATEST(
-         COALESCE((SELECT COUNT(*) FROM event_registrations r WHERE r.event_id = e.id), 0)
-         - (SELECT COUNT(*) FROM (SELECT 1 FROM attendance a WHERE a.event_id = e.id AND a.status = 'present' GROUP BY a.member_id) p),
-         0
-       )::bigint AS absent,
-       (SELECT COUNT(*) FROM event_team_members t WHERE t.event_id = e.id)::bigint AS team_size,
-       (SELECT COUNT(*) FROM certificates c WHERE c.event_id = e.id)::bigint AS certificates
+       COALESCE(r.registrations, 0)::bigint AS registrations,
+       COALESCE(a.present, 0)::bigint AS present,
+       GREATEST(COALESCE(r.registrations, 0) - COALESCE(a.present, 0), 0)::bigint AS absent,
+       COALESCE(t.team_size, 0)::bigint AS team_size,
+       COALESCE(c.certificates, 0)::bigint AS certificates
      FROM events e
-     ${filterSql}
+     LEFT JOIN (SELECT event_id, COUNT(*)::bigint AS registrations FROM event_registrations GROUP BY event_id) r ON r.event_id = e.id
+     LEFT JOIN (SELECT event_id, COUNT(DISTINCT member_id)::bigint AS present FROM attendance WHERE status = 'present' GROUP BY event_id) a ON a.event_id = e.id
+     LEFT JOIN (SELECT event_id, COUNT(*)::bigint AS team_size FROM event_team_members GROUP BY event_id) t ON t.event_id = e.id
+     LEFT JOIN (SELECT event_id, COUNT(*)::bigint AS certificates FROM certificates GROUP BY event_id) c ON c.event_id = e.id
+     WHERE ${whereSql}
      ORDER BY e.start_date DESC`,
     params as any[],
   )

@@ -50,7 +50,12 @@ export function installDevtoolsGuard() {
   window.addEventListener(
     'keydown',
     (e) => {
-      const key = e.key.toUpperCase()
+      // Some keydown events (IME composition, media keys, synthetic events)
+      // arrive without a `key` — guard before uppercasing.
+      const rawKey = e.key
+      if (rawKey === null || rawKey === undefined) return
+      const key = String(rawKey).toUpperCase()
+      if (!key) return
       if (key === 'F12') {
         e.preventDefault()
         e.stopPropagation()

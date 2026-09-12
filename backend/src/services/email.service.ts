@@ -109,6 +109,13 @@ export async function sendEmail(params: {
   applicationId?: string
   sentBy?: string
 }): Promise<{ ok: boolean; sender?: string; error?: string }> {
+  // Brevo HTTP API is the preferred transport when configured — it only needs
+  // HTTPS (443), which works everywhere SMTP ports are blocked. When no Brevo
+  // key is set we fall back to the Gmail SMTP pool.
+  if (config.BREVO_API_KEY) {
+    return sendViaBrevo(params)
+  }
+
   let lastError: Error | null = null
 
   for (let attempt = 0; attempt < 2; attempt++) {
@@ -156,4 +163,77 @@ export async function sendEmail(params: {
   }
 
   return { ok: false, error: lastError?.message }
+}
+
+async function brevoSender(): Promise<{ name: string; email: string }> {
+  if (config.BREVO_SENDER_EMAIL) {
+    return { name: config.BREVO_SENDER_NAME || 'KL CIIE', email: config.BREVO_SENDER_EMAIL }
+  }
+  if (config.SMTP_USER) {
+    return { name: config.BREVO_SENDER_NAME || 'KL CIIE', email: config.SMTP_USER }
+  }
+  const account = (await getAccounts())[0]
+  if (account) return { name: account.fromName || 'KL CIIE', email: account.email }
+  throw new Error('No Brevo sender configured — set BREVO_SENDER_EMAIL (or an SMTP account email)')
+}
+
+async function sendViaBrevo(params: {
+  to: string
+  subject: string
+  text?: string
+  html?: string
+  applicationId?: string
+  sentBy?: string
+}): Promise<{ ok: boolean; sender?: string; error?: string }> {
+  try {
+    const sender = await brevoSender()
+    const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'api-key': config.BREVO_API_KEY!,
+      },
+      body: JSON.stringify({
+        sender,
+        to: [{ email: params.to }],
+        subject: params.subject,
+        ...(params.html ? { htmlContent: params.html } : params.text ? { textContent: params.text } : {}),
+      }),
+    })
+
+    if (!res.ok) {
+      let detail = ''
+      try {
+        const body = (await res.json()) as Record<string, unknown>
+        detail = typeof body?.message === 'string' ? body.message : JSON.stringify(body)
+      } catch {
+        detail = `HTTP ${res.status}`
+      }
+      throw new Error(`Brevo rejected the email (${res.status}): ${detail || 'unknown error'}`)
+    }
+
+    await db.insert(recruitEmails).values({
+      applicationId: params.applicationId || null,
+      toEmail: params.to,
+      subject: params.subject,
+      body: params.html || params.text || '',
+      status: 'sent',
+      sentBy: params.sentBy || null,
+    }).catch(() => {})
+
+    return { ok: true, sender: sender.email }
+  } catch (err: any) {
+    const message = err?.message ?? String(err)
+    await db.insert(recruitEmails).values({
+      applicationId: params.applicationId || null,
+      toEmail: params.to,
+      subject: params.subject,
+      body: params.html || params.text || '',
+      status: 'failed',
+      error: message,
+      sentBy: params.sentBy || null,
+    }).catch(() => {})
+    return { ok: false, error: message }
+  }
 }
