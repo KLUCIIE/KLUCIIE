@@ -11,6 +11,7 @@ let currentIndex = 0
 // Circuit breaker: hosts that recently failed with network-ish errors are
 // skipped for a short window so batches fail fast instead of 2-3 timeouts each.
 const blockedHosts = new Map<string, number>()
+const hostReasons = new Map<string, string>()
 const BLOCK_TTL = 10 * 60 * 1000
 const UNREACHABLE_RE = /timeout|timed out|ETIMEDOUT|ECONNREFUSED|ECONNRESET|ENOTFOUND|EAI_AGAIN|socket hang up|getaddrinfo|connect/i
 
@@ -21,8 +22,9 @@ function isHostBlocked(host: string): boolean {
   return false
 }
 
-function blockHost(host: string) {
+function blockHost(host: string, reason: string) {
   blockedHosts.set(host, Date.now() + BLOCK_TTL)
+  hostReasons.set(host, reason)
 }
 
 function isUnreachableError(err: any): boolean {
@@ -90,7 +92,14 @@ async function getRotatedTransporter(): Promise<{ transporter: Transporter; acco
 
   if (healthy.length === 0) {
     if (accounts.length === 0) throw new Error('No SMTP accounts configured')
-    throw new Error('All SMTP accounts are currently unreachable')
+    const firstBlocked = [...blockedHosts.entries()].find(([h]) => !isHostBlocked(h) || blockedHosts.get(h))?.[0]
+    const blockedHost = [...blockedHosts.keys()].find((h) => isHostBlocked(h)) ?? firstBlocked
+    const reason = blockedHost ? hostReasons.get(blockedHost) : undefined
+    throw new Error(
+      reason
+        ? `All SMTP accounts are currently unreachable (${blockedHost}: ${reason})`
+        : 'All SMTP accounts are currently unreachable',
+    )
   }
 
   const idx = currentIndex % healthy.length
@@ -146,7 +155,7 @@ export async function sendEmail(params: {
     } catch (err: any) {
       lastError = err
       console.error(`[Email] Send attempt ${attempt + 1} failed:`, err.message)
-      if (isUnreachableError(err) && accountHost) blockHost(accountHost)
+      if (isUnreachableError(err) && accountHost) blockHost(accountHost, err.message)
     }
   }
 

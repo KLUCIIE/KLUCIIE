@@ -133,7 +133,9 @@ export default function Signup() {
     })
     setBusy(false)
     if (mailErr) {
-      setError(`We couldn't email the verification code. ${await emailInvokeMessage(mailErr)}`)
+      const msg = `We couldn't email the verification code. ${await emailInvokeMessage(mailErr)}`
+      setError(msg)
+      alert(msg)
       return
     }
     nav()

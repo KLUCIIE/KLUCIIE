@@ -122,7 +122,9 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
       body: { kind: 'registration-otp', purpose, to_email: toEmail, full_name: fullName.trim() },
     })
     if (mailErr) {
-      setOtpError(`We couldn't email the verification code. ${await emailInvokeMessage(mailErr)}`)
+      const msg = `We couldn't email the verification code. ${await emailInvokeMessage(mailErr)}`
+      setOtpError(msg)
+      alert(msg)
       return false
     }
     setOtpError('')
