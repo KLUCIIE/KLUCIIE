@@ -33,10 +33,22 @@ await app.register(cors, {
   credentials: true,
 })
 
+// Redis-backed rate limiting when Redis is up; otherwise fall back to the
+// plugin's in-memory store so the API still works without Redis locally.
+let redisReady = false
+try {
+  await Promise.race([
+    redis.ping(),
+    new Promise((_, reject) => setTimeout(() => reject(new Error('Redis ping timeout')), 1500)),
+  ])
+  redisReady = true
+} catch {
+  redisReady = false
+}
 await app.register(rateLimit, {
   max: 200,
   timeWindow: '1 minute',
-  redis,
+  ...(redisReady ? { redis } : {}),
 })
 
 await app.register(jwt, {
