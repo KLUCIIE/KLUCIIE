@@ -49,10 +49,10 @@ async function createTransporter(account: typeof smtpSettings.$inferSelect): Pro
     },
     pool: true,
     maxConnections: 5,
-    maxMessages: 100,
-    connectionTimeout: 5000,
-    greetingTimeout: 5000,
-    socketTimeout: 15000,
+    maxMessages: 500,
+    connectionTimeout: 15000,
+    greetingTimeout: 15000,
+    socketTimeout: 30000,
   })
 }
 
@@ -69,9 +69,9 @@ async function getRotatedTransporter(): Promise<{ transporter: Transporter; acco
         user: config.SMTP_USER,
         pass: config.SMTP_PASS,
       },
-      connectionTimeout: 5000,
-      greetingTimeout: 5000,
-      socketTimeout: 15000,
+      connectionTimeout: 15000,
+      greetingTimeout: 15000,
+      socketTimeout: 30000,
     })
     return {
       transporter: fallbackTransporter,
