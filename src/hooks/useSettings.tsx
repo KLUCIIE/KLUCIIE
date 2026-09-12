@@ -41,7 +41,11 @@ const SettingsContext = createContext<SettingsContextValue>({
 
 async function fetchSettings(): Promise<PlatformSettings | null> {
   const { data } = await supabase.from('platform_settings').select('*').eq('id', 1).maybeSingle()
-  return (data as PlatformSettings | null) ?? null
+  if (data) return data as PlatformSettings
+  // Robust fallback: the singleton row may not exist yet (or may have a
+  // different id) — fall back to any single row so settings still load.
+  const { data: anyRow } = await supabase.from('platform_settings').select('*').limit(1).maybeSingle()
+  return (anyRow as PlatformSettings | null) ?? null
 }
 
 export function SettingsProvider({ children }: { children: ReactNode }) {

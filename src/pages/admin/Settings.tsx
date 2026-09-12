@@ -140,7 +140,9 @@ export default function Settings() {
       signup_fields: form.signup_fields,
       amtps_wings: form.amtps_wings,
     }
-    const { error: upErr } = await supabase.from('platform_settings').update(payload).eq('id', 1)
+    const { error: upErr } = await supabase
+      .from('platform_settings')
+      .upsert({ id: 1, ...payload }, { onConflict: 'id' })
     setBusy(false)
     if (upErr) {
       setError(errorMessage(upErr))
