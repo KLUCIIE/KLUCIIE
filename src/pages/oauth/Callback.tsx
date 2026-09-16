@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { AlertTriangle, UserPlus } from 'lucide-react'
+import { AlertTriangle, ShieldX, UserPlus } from 'lucide-react'
 import { Button, Modal, Spinner } from '@/components/ui'
 import { useAuth } from '@/hooks/useAuth'
 import { apiOrigin, supabase } from '@/lib/supabase'
@@ -23,6 +23,23 @@ function oauthErrorMessage(reason: string): string {
   return OAUTH_ERRORS[reason] ?? `External sign-in failed (${reason}).`
 }
 
+function normalizeDomain(d: string): string {
+  return d.trim().toLowerCase().replace(/^@/, '')
+}
+
+/** Same rule as the backend: a domain is allowed if it equals an allowed
+ *  domain or is a subdomain of it. */
+function emailDomainAllowed(email: string, allowedDomains: string[]): boolean {
+  const domain = email.split('@').pop()?.toLowerCase() ?? ''
+  if (!domain) return false
+  const allowed = allowedDomains.map(normalizeDomain).filter(Boolean)
+  return allowed.length === 0 || allowed.some((d) => domain === d || domain.endsWith('.' + d))
+}
+
+function emailLabel(email: string): string {
+  return `@${email.split('@').pop() ?? email}`
+}
+
 export default function OAuthCallback() {
   const navigate = useNavigate()
   const location = useLocation()
@@ -30,6 +47,8 @@ export default function OAuthCallback() {
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(true)
   const [signupTarget, setSignupTarget] = useState<string | null>(null)
+  const [domainBlock, setDomainBlock] = useState<{ email: string; allowed: string[] } | null>(null)
+  const [provider, setProvider] = useState<'github' | 'microsoft'>('microsoft')
   const handled = useRef(false)
 
   useEffect(() => {
@@ -40,7 +59,7 @@ export default function OAuthCallback() {
     const token = qs.get('token')
     const err = qs.get('error')
     const from = qs.get('from') === 'register' ? 'register' : 'login'
-    const provider = (qs.get('provider') ?? '').toLowerCase() === 'github' ? 'github' : 'microsoft'
+    setProvider((qs.get('provider') ?? '').toLowerCase() === 'github' ? 'github' : 'microsoft')
 
     if (err) {
       setError(oauthErrorMessage(err))
@@ -85,6 +104,30 @@ export default function OAuthCallback() {
         }
 
         if (data?.action === 'signup') {
+          // Enforce the allowed-domains rule up front so unknown-domain signups
+          // never reach the registration form (and can't silently proceed).
+          if (data.email) {
+            let allowed: string[] = []
+            let restricted = false
+            try {
+              const { data: ps } = await supabase
+                .from('platform_settings')
+                .select('signup_domain_restriction, signup_allowed_domains')
+                .eq('id', 1)
+                .maybeSingle()
+              const row = ps as { signup_domain_restriction?: boolean; signup_allowed_domains?: string[] | null } | null
+              restricted = !!row?.signup_domain_restriction
+              allowed = (row?.signup_allowed_domains ?? []).map(normalizeDomain)
+            } catch {
+              /* default to no restriction on fetch failure */
+            }
+            if (restricted && allowed.length > 0 && !emailDomainAllowed(data.email, allowed)) {
+              setDomainBlock({ email: data.email, allowed: allowed.map((d) => `@${d}`) })
+              setBusy(false)
+              return
+            }
+          }
+
           const params = new URLSearchParams({ [`${provider}_token`]: token })
           if (data.email) params.set(`${provider}_email`, data.email)
           if (data.fullName) params.set(`${provider}_name`, data.fullName)
@@ -181,6 +224,45 @@ export default function OAuthCallback() {
           This email isn't registered yet. To get started, first create your account from the user
           registration page — your details from Step 1 will be carried over.
         </p>
+      </Modal>
+
+      <Modal
+        open={domainBlock !== null}
+        onClose={() => navigate('/login', { replace: true })}
+        title="Email domain not allowed"
+        footer={
+          <Button onClick={() => navigate('/login', { replace: true })}>Back to login</Button>
+        }
+      >
+        <div className="flex items-start gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-600">
+            <ShieldX size={20} />
+          </div>
+          <div className="text-sm text-slate-600 dark:text-slate-300">
+            <p>We only allow sign-in with an email from these domains:</p>
+            {domainBlock && domainBlock.allowed.length > 0 && (
+              <div className="mt-3 flex flex-wrap gap-2">
+                {domainBlock.allowed.map((d) => (
+                  <span
+                    key={d}
+                    className="rounded-lg bg-primary-50 px-3 py-1 text-sm font-semibold text-primary-700 dark:bg-primary-900/30 dark:text-primary-300"
+                  >
+                    {d}
+                  </span>
+                ))}
+              </div>
+            )}
+            <p className="mt-3">
+              The email on the {provider === 'github' ? 'GitHub' : 'Microsoft'} account you signed
+              in with uses <span className="font-semibold">{emailLabel(domainBlock?.email ?? '')}</span>,
+              which isn't on the list. So that account isn't authorized to sign in here.
+            </p>
+            <p className="mt-3 font-medium text-slate-700 dark:text-slate-200">
+              Please try again with a {provider === 'github' ? 'GitHub' : 'Microsoft'} account that
+              uses an email from one of the allowed domains above.
+            </p>
+          </div>
+        </div>
       </Modal>
     </div>
   )

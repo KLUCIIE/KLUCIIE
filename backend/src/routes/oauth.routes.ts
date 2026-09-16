@@ -307,7 +307,7 @@ export default async function oauthRoutes(app: FastifyInstance) {
       ? { purpose: 'oauth-exchange', type: 'login', sub: profile.id, aal: profile.mfaEnabled ? 'aal1' : 'aal2' }
       : { purpose: 'oauth-exchange', type: 'signup', email, fullName, provider }
     const token = app.jwt.sign(exchange, { expiresIn: '10m' })
-    return reply.redirect(`${fe}/oauth/callback?token=${encodeURIComponent(token)}&from=${from}`)
+    return reply.redirect(`${fe}/oauth/callback?token=${encodeURIComponent(token)}&from=${from}&provider=${provider}`)
   }
 
   app.get('/microsoft/callback', async (request, reply) => handleCallback('microsoft', request as any, reply as any))
