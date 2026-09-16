@@ -2,7 +2,6 @@ import { useEffect, useState, type FormEvent } from 'react'
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { KeyRound, MailCheck, RefreshCw, ShieldCheck, Timer } from 'lucide-react'
 import { Button, Field, PageLoader, Spinner, TextInput } from '@/components/ui'
-import { OAuthDomainNotice } from '@/components/OAuthDomainNotice'
 import { CustomFieldInputs, missingFields } from '@/components/RegistrationFormFields'
 import { useAuth } from '@/hooks/useAuth'
 import { useOAuth } from '@/hooks/useOAuth'
@@ -61,7 +60,6 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
   const [otpBusy, setOtpBusy] = useState(false)
   const [resendBusy, setResendBusy] = useState(false)
   const [oauthStarting, setOauthStarting] = useState<'microsoft' | 'github' | null>(null)
-  const [domainNotice, setDomainNotice] = useState<'microsoft' | 'github' | null>(null)
 
   useEffect(() => {
     const onShow = () => setOauthStarting(null)
@@ -151,18 +149,10 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
   const isMsSignup = msEnabled && !!msToken
   const isGhSignup = ghEnabled && !!ghToken
   const startMicrosoft = () => {
-    if (settings.signup_domain_restriction && !!settings.signup_allowed_domains?.length) {
-      setDomainNotice('microsoft')
-      return
-    }
     setOauthStarting('microsoft')
     window.location.href = `${apiOrigin}/api/oauth/microsoft/authorize?from=register`
   }
   const startGitHub = () => {
-    if (settings.signup_domain_restriction && !!settings.signup_allowed_domains?.length) {
-      setDomainNotice('github')
-      return
-    }
     setOauthStarting('github')
     window.location.href = `${apiOrigin}/api/oauth/github/authorize?from=register`
   }
@@ -668,19 +658,6 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
           </div>
         )}
       </div>
-
-      <OAuthDomainNotice
-        open={domainNotice !== null}
-        provider={domainNotice ?? 'github'}
-        settings={settings}
-        onClose={() => setDomainNotice(null)}
-        onConfirm={() => {
-          const provider = domainNotice
-          setDomainNotice(null)
-          setOauthStarting(provider)
-          window.location.href = `${apiOrigin}/api/oauth/${provider}/authorize?from=register`
-        }}
-      />
     </div>
   )
 }

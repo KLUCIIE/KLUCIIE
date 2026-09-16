@@ -47,7 +47,7 @@ export default function OAuthCallback() {
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(true)
   const [signupTarget, setSignupTarget] = useState<string | null>(null)
-  const [domainBlock, setDomainBlock] = useState<{ email: string; allowed: string[] } | null>(null)
+  const [domainBlock, setDomainBlock] = useState<{ email?: string; allowed: string[] } | null>(null)
   const [provider, setProvider] = useState<'github' | 'microsoft'>('microsoft')
   const handled = useRef(false)
 
@@ -62,6 +62,24 @@ export default function OAuthCallback() {
     setProvider((qs.get('provider') ?? '').toLowerCase() === 'github' ? 'github' : 'microsoft')
 
     if (err) {
+      if (err === 'domain_not_allowed') {
+        void (async () => {
+          let allowed: string[] = []
+          try {
+            const { data: ps } = await supabase
+              .from('platform_settings')
+              .select('signup_allowed_domains')
+              .eq('id', 1)
+              .maybeSingle()
+            allowed = ((ps as { signup_allowed_domains?: string[] | null } | null)?.signup_allowed_domains ?? []).map(
+              normalizeDomain,
+            )
+          } catch { /* ignore */ }
+          setDomainBlock({ email: '', allowed: allowed.map((d) => `@${d}`) })
+          setBusy(false)
+        })()
+        return
+      }
       setError(oauthErrorMessage(err))
       setBusy(false)
       return
@@ -239,7 +257,7 @@ export default function OAuthCallback() {
             <ShieldX size={20} />
           </div>
           <div className="text-sm text-slate-600 dark:text-slate-300">
-            <p>We only allow sign-in with an email from these domains:</p>
+            <p>This domain is not allowed. Only sign-in with an email from the following domains is permitted:</p>
             {domainBlock && domainBlock.allowed.length > 0 && (
               <div className="mt-3 flex flex-wrap gap-2">
                 {domainBlock.allowed.map((d) => (
@@ -252,15 +270,19 @@ export default function OAuthCallback() {
                 ))}
               </div>
             )}
-            <p className="mt-3">
-              The email on the {provider === 'github' ? 'GitHub' : 'Microsoft'} account you signed
-              in with uses <span className="font-semibold">{emailLabel(domainBlock?.email ?? '')}</span>,
-              which isn't on the list. So that account isn't authorized to sign in here.
-            </p>
-            <p className="mt-3 font-medium text-slate-700 dark:text-slate-200">
-              Please try again with a {provider === 'github' ? 'GitHub' : 'Microsoft'} account that
-              uses an email from one of the allowed domains above.
-            </p>
+            {domainBlock?.email ? (
+              <p className="mt-3">
+                The email on the {provider === 'github' ? 'GitHub' : 'Microsoft'} account you signed
+                in with uses <span className="font-semibold">{emailLabel(domainBlock.email)}</span>,
+                which isn't on the allowed list. Please try again with an account that uses an
+                email from one of the allowed domains above.
+              </p>
+            ) : (
+              <p className="mt-3">
+                Please try again with a {provider === 'github' ? 'GitHub' : 'Microsoft'} account that
+                uses an email from one of the allowed domains above.
+              </p>
+            )}
           </div>
         </div>
       </Modal>

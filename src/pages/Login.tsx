@@ -5,14 +5,13 @@ import { useAuth } from '@/hooks/useAuth'
 import { useOAuth } from '@/hooks/useOAuth'
 import { useSettings } from '@/hooks/useSettings'
 import { Button, Field, Spinner, TextInput } from '@/components/ui'
-import { OAuthDomainNotice } from '@/components/OAuthDomainNotice'
 import { apiOrigin } from '@/lib/supabase'
 import { errorMessage } from '@/lib/utils'
 
 export default function Login() {
   const { signIn } = useAuth()
   const settings = useSettings()
-  const { allow_password_reset: allowReset, signup_domain_restriction: domainRestriction, signup_allowed_domains: allowedDomains } = settings
+  const { allow_password_reset: allowReset } = settings
   const oauth = useOAuth()
   const navigate = useNavigate()
   const location = useLocation()
@@ -22,7 +21,6 @@ export default function Login() {
   const [success, setSuccess] = useState('')
   const [busy, setBusy] = useState(false)
   const [oauthStarting, setOauthStarting] = useState<'microsoft' | 'github' | null>(null)
-  const [domainNotice, setDomainNotice] = useState<'microsoft' | 'github' | null>(null)
 
   useEffect(() => {
     const onShow = () => setOauthStarting(null)
@@ -43,18 +41,10 @@ export default function Login() {
   }, [location.state])
 
   const startMicrosoft = () => {
-    if (domainRestriction && !!allowedDomains?.length) {
-      setDomainNotice('microsoft')
-      return
-    }
     setOauthStarting('microsoft')
     window.location.href = `${apiOrigin}/api/oauth/microsoft/authorize?from=login`
   }
   const startGitHub = () => {
-    if (domainRestriction && !!allowedDomains?.length) {
-      setDomainNotice('github')
-      return
-    }
     setOauthStarting('github')
     window.location.href = `${apiOrigin}/api/oauth/github/authorize?from=login`
   }
@@ -213,19 +203,6 @@ export default function Login() {
           Register / Sign up
         </Link>
       </p>
-
-      <OAuthDomainNotice
-        open={domainNotice !== null}
-        provider={domainNotice ?? 'github'}
-        settings={settings}
-        onClose={() => setDomainNotice(null)}
-        onConfirm={() => {
-          const provider = domainNotice
-          setDomainNotice(null)
-          setOauthStarting(provider)
-          window.location.href = `${apiOrigin}/api/oauth/${provider}/authorize?from=login`
-        }}
-      />
     </div>
   )
 }
