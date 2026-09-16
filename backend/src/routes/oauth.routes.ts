@@ -30,11 +30,17 @@ function frontendUrl(): string {
   return config.FRONTEND_URL.replace(/\/+$/, '')
 }
 
+/** Public base URL this backend is reachable at (for OAuth callbacks). */
+function backendUrl(): string {
+  const base = config.OAUTH_CALLBACK_BASE_URL ?? config.FRONTEND_URL
+  return base.replace(/\/+$/, '')
+}
+
 function providerRedirectUri(provider: OAuthProvider): string {
   if (provider === 'github') {
-    return config.OAUTH_REDIRECT_URI ? `${frontendUrl()}/api/oauth/github/callback` : `${frontendUrl()}/api/oauth/github/callback`
+    return `${backendUrl()}/api/oauth/github/callback`
   }
-  return config.OAUTH_REDIRECT_URI || `${frontendUrl()}/api/oauth/microsoft/callback`
+  return config.OAUTH_REDIRECT_URI || `${backendUrl()}/api/oauth/microsoft/callback`
 }
 
 /** The OAuth sign-in is only honoured for email domains a Super Admin has

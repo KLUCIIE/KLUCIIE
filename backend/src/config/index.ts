@@ -33,10 +33,14 @@ const envSchema = z.object({
   GMAIL_FROM_NAME: z.string().default('KL CIIE'),
   STORAGE_ROOT: z.string().optional(),
   STORAGE_PUBLIC_URL: z.string().optional(),
-  // Microsoft OAuth redirect targets. FRONTEND_URL is where the SPA lives and
-  // where the browser is sent after the MS callback. OAUTH_REDIRECT_URI is the
-  // exact URL Microsoft must call back on — default derives from FRONTEND_URL.
+  // OAuth redirect targets. FRONTEND_URL is where the SPA lives and where the
+  // browser is sent after the provider callback. OAUTH_CALLBACK_BASE_URL is the
+  // public base URL of THIS backend, used to build the callback URLs GitHub /
+  // Azure must call back on — default derives from FRONTEND_URL for the classic
+  // setup where the frontend proxies /api to the backend (e.g. Vite dev).
+  // OAUTH_REDIRECT_URI is an exact Microsoft redirect target override.
   FRONTEND_URL: z.string().default('http://localhost:5173'),
+  OAUTH_CALLBACK_BASE_URL: z.string().optional(),
   OAUTH_REDIRECT_URI: z.string().optional(),
 })
 
