@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { AlertTriangle } from 'lucide-react'
-import { Spinner } from '@/components/ui'
+import { AlertTriangle, UserPlus } from 'lucide-react'
+import { Button, Modal, Spinner } from '@/components/ui'
 import { useAuth } from '@/hooks/useAuth'
 import { apiOrigin, supabase } from '@/lib/supabase'
 import { errorMessage } from '@/lib/utils'
@@ -29,6 +29,7 @@ export default function OAuthCallback() {
   const { refreshProfile } = useAuth()
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(true)
+  const [signupTarget, setSignupTarget] = useState<string | null>(null)
   const handled = useRef(false)
 
   useEffect(() => {
@@ -86,7 +87,8 @@ export default function OAuthCallback() {
           const params = new URLSearchParams({ [`${provider}_token`]: token })
           if (data.email) params.set(`${provider}_email`, data.email)
           if (data.fullName) params.set(`${provider}_name`, data.fullName)
-          navigate(`/register/user?${params.toString()}`, { replace: true })
+          setBusy(false)
+          setSignupTarget(`/register/user?${params.toString()}`)
           return
         }
 
@@ -153,6 +155,28 @@ export default function OAuthCallback() {
           </>
         )}
       </div>
+
+      <Modal
+        open={signupTarget !== null}
+        onClose={() => navigate('/login', { replace: true })}
+        title="No account found"
+        footer={
+          <>
+            <Button variant="secondary" onClick={() => navigate('/login', { replace: true })}>
+              Back to login
+            </Button>
+            <Button onClick={() => signupTarget && navigate(signupTarget, { replace: true })}>
+              <UserPlus className="mr-2 h-4 w-4" />
+              Go to user registration page
+            </Button>
+          </>
+        }
+      >
+        <p className="text-sm text-slate-600 dark:text-slate-300">
+          This email isn't registered yet. To get started, first create your account from the user
+          registration page — your details from Step 1 will be carried over.
+        </p>
+      </Modal>
     </div>
   )
 }
