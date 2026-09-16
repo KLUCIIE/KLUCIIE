@@ -176,7 +176,9 @@ export default async function oauthRoutes(app: FastifyInstance) {
       return reply.redirect(`${fe}/oauth/callback?error=${reason}`)
     }
 
-    const state = app.jwt.sign({ purpose: 'oauth-state', nonce: randomUUID() }, { expiresIn: '10m' })
+    const q = request.query as Record<string, string | undefined>
+    const origin = q.from === 'register' ? 'register' : 'login'
+    const state = app.jwt.sign({ purpose: 'oauth-state', nonce: randomUUID(), from: origin }, { expiresIn: '10m' })
     let url: URL
     if (provider === 'github') {
       url = new URL('https://github.com/login/oauth/authorize')
@@ -205,8 +207,11 @@ export default async function oauthRoutes(app: FastifyInstance) {
   async function handleCallback(provider: OAuthProvider, request: FastifyRequest, reply: FastifyReply) {
     const q = request.query as Record<string, string | undefined>
     const fe = frontendUrl()
-    const fail = (reason: string) =>
-      reply.redirect(`${fe}/oauth/callback?error=${encodeURIComponent(reason)}`)
+    const fail = (reason: string) => {
+      const stateFrom = typeof statePayload?.from === 'string' ? statePayload.from : ''
+      const fromParam = stateFrom ? `&from=${stateFrom}` : ''
+      return reply.redirect(`${fe}/oauth/callback?error=${encodeURIComponent(reason)}${fromParam}`)
+    }
 
     if (q.error) return fail(q.error)
     if (!q.code || !q.state) return fail('missing_code')
@@ -297,11 +302,12 @@ export default async function oauthRoutes(app: FastifyInstance) {
     if (!(await isDomainAllowed(email))) return fail('domain_not_allowed')
 
     const profile = await getProfileByEmail(email)
+    const from = statePayload.from === 'register' ? 'register' : 'login'
     const exchange = profile
       ? { purpose: 'oauth-exchange', type: 'login', sub: profile.id, aal: profile.mfaEnabled ? 'aal1' : 'aal2' }
       : { purpose: 'oauth-exchange', type: 'signup', email, fullName, provider }
     const token = app.jwt.sign(exchange, { expiresIn: '10m' })
-    return reply.redirect(`${fe}/oauth/callback?token=${encodeURIComponent(token)}`)
+    return reply.redirect(`${fe}/oauth/callback?token=${encodeURIComponent(token)}&from=${from}`)
   }
 
   app.get('/microsoft/callback', async (request, reply) => handleCallback('microsoft', request as any, reply as any))

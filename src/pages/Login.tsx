@@ -48,7 +48,7 @@ export default function Login() {
       return
     }
     setOauthStarting('microsoft')
-    window.location.href = `${apiOrigin}/api/oauth/microsoft/authorize`
+    window.location.href = `${apiOrigin}/api/oauth/microsoft/authorize?from=login`
   }
   const startGitHub = () => {
     if (domainRestriction && !!allowedDomains?.length) {
@@ -56,7 +56,7 @@ export default function Login() {
       return
     }
     setOauthStarting('github')
-    window.location.href = `${apiOrigin}/api/oauth/github/authorize`
+    window.location.href = `${apiOrigin}/api/oauth/github/authorize?from=login`
   }
 
   const [ghToken] = useSearchParams()
@@ -223,7 +223,7 @@ export default function Login() {
           const provider = domainNotice
           setDomainNotice(null)
           setOauthStarting(provider)
-          window.location.href = `${apiOrigin}/api/oauth/${provider}/authorize`
+          window.location.href = `${apiOrigin}/api/oauth/${provider}/authorize?from=login`
         }}
       />
     </div>

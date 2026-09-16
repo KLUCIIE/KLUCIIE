@@ -39,6 +39,7 @@ export default function OAuthCallback() {
     const qs = new URLSearchParams(location.search)
     const token = qs.get('token')
     const err = qs.get('error')
+    const from = qs.get('from') === 'register' ? 'register' : 'login'
     const provider = (qs.get('provider') ?? '').toLowerCase() === 'github' ? 'github' : 'microsoft'
 
     if (err) {
@@ -88,7 +89,11 @@ export default function OAuthCallback() {
           if (data.email) params.set(`${provider}_email`, data.email)
           if (data.fullName) params.set(`${provider}_name`, data.fullName)
           setBusy(false)
-          setSignupTarget(`/register/user?${params.toString()}`)
+          if (from === 'register') {
+            navigate(`/register/user?${params.toString()}`, { replace: true })
+          } else {
+            setSignupTarget(`/register/user?${params.toString()}`)
+          }
           return
         }
 

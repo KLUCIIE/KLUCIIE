@@ -156,7 +156,7 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
       return
     }
     setOauthStarting('microsoft')
-    window.location.href = `${apiOrigin}/api/oauth/microsoft/authorize`
+    window.location.href = `${apiOrigin}/api/oauth/microsoft/authorize?from=register`
   }
   const startGitHub = () => {
     if (settings.signup_domain_restriction && !!settings.signup_allowed_domains?.length) {
@@ -164,7 +164,7 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
       return
     }
     setOauthStarting('github')
-    window.location.href = `${apiOrigin}/api/oauth/github/authorize`
+    window.location.href = `${apiOrigin}/api/oauth/github/authorize?from=register`
   }
 
   const sendOtp = async (toEmail: string) => {
@@ -678,7 +678,7 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
           const provider = domainNotice
           setDomainNotice(null)
           setOauthStarting(provider)
-          window.location.href = `${apiOrigin}/api/oauth/${provider}/authorize`
+          window.location.href = `${apiOrigin}/api/oauth/${provider}/authorize?from=register`
         }}
       />
     </div>
