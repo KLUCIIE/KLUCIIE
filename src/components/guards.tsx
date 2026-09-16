@@ -2,6 +2,8 @@ import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from '@/hooks/useAuth'
+import { useSettings } from '@/hooks/useSettings'
+import { missingCompletionFields } from '@/lib/profileCompletion'
 import { isAdminRole } from '@/lib/types'
 import { PageLoader } from '@/components/ui'
 
@@ -94,5 +96,26 @@ export function RequireFaculty({ children }: { children?: ReactNode }) {
   if (loading) return <PageLoader />
   if (!user) return <Navigate to="/login" state={{ from: location.pathname }} replace />
   if (!profile || profile.role !== 'faculty') return <Navigate to="/dashboard" replace />
+  return <>{children ?? <Outlet />}</>
+}
+
+/**
+ * Gates the member area for Microsoft-registered accounts until they have
+ * filled in every mandatory detail (Student ID 10 digits, phone, department,
+ * plus required admin fields). Admins and normally-registered members are
+ * never affected. Skips redirect the moment the profile is complete, so it
+ * re-checks on every navigation even if the user opened a new tab.
+ */
+export function RequireProfileComplete({ children }: { children?: ReactNode }) {
+  const { user, profile, loading } = useAuth()
+  const settings = useSettings()
+  const location = useLocation()
+  if (loading) return <PageLoader />
+  if (!user) return <Navigate to="/login" state={{ from: location.pathname }} replace />
+  const missing = missingCompletionFields(profile, settings.register_fields)
+  if (missing.length > 0) {
+    const from = location.pathname + location.search
+    return <Navigate to="/complete-profile" state={{ from }} replace />
+  }
   return <>{children ?? <Outlet />}</>
 }

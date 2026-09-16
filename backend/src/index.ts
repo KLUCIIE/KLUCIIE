@@ -13,6 +13,7 @@ import dbRoutes from './routes/db.routes.js'
 import rpcRoutes from './routes/rpc.routes.js'
 import storageRoutes from './routes/storage.routes.js'
 import functionsRoutes from './routes/functions.routes.js'
+import oauthRoutes from './routes/oauth.routes.js'
 import realtimeRoutes from './websocket/index.js'
 import { AppError } from './utils/errors.js'
 
@@ -99,6 +100,7 @@ await app.register(dbRoutes, { prefix: '/api/db' })
 await app.register(rpcRoutes, { prefix: '/api/rpc' })
 await app.register(storageRoutes)
 await app.register(functionsRoutes, { prefix: '/api/functions' })
+await app.register(oauthRoutes, { prefix: '/api/oauth' })
 await app.register(realtimeRoutes, { prefix: '/ws' })
 
 // ─── Start Server ───

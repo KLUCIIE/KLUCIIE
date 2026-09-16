@@ -1,10 +1,10 @@
 import { useEffect, useState, type FormEvent } from 'react'
-import { ImageUp, Save } from 'lucide-react'
+import { Save } from 'lucide-react'
 import { Avatar, Button, Field, SelectInput, TextArea, TextInput, Toggle } from '@/components/ui'
 import { useAuth } from '@/hooks/useAuth'
 import { supabase } from '@/lib/supabase'
 import type { PrivacySettings } from '@/lib/types'
-import { digitsOnly, errorMessage, isValidTenDigit } from '@/lib/utils'
+import { errorMessage, isValidTenDigit, normalizePhone } from '@/lib/utils'
 
 export default function ProfileEdit() {
   const { profile, refreshProfile } = useAuth()
@@ -28,7 +28,7 @@ export default function ProfileEdit() {
   })
   const [privacy, setPrivacy] = useState<PrivacySettings | null>(null)
   const [busy, setBusy] = useState(false)
-  const [uploading, setUploading] = useState(false)
+  const [avatarUrl, setAvatarUrl] = useState('')
   const [notice, setNotice] = useState('')
   const [error, setError] = useState('')
 
@@ -47,7 +47,7 @@ export default function ProfileEdit() {
       })
     setForm({
       full_name: profile.full_name ?? '',
-      phone: profile.phone ?? '',
+      phone: normalizePhone(profile.phone ?? ''),
       department: profile.department ?? '',
       year_of_study: profile.year_of_study ?? '',
       academic_year: profile.academic_year ?? '',
@@ -62,6 +62,7 @@ export default function ProfileEdit() {
       telegram: profile.social_links?.telegram ?? '',
       contact_email: profile.social_links?.email ?? '',
     })
+    setAvatarUrl(profile.avatar_url ?? '')
     return () => {
       active = false
     }
@@ -108,7 +109,7 @@ export default function ProfileEdit() {
       .from('profiles')
       .update({
         full_name: form.full_name,
-        phone: digitsOnly(form.phone),
+        phone: normalizePhone(form.phone),
         department: form.department || null,
         year_of_study: form.year_of_study || null,
         academic_year: form.academic_year || null,
@@ -116,6 +117,7 @@ export default function ProfileEdit() {
         domain: form.domain || null,
         bio: form.bio || null,
         skills,
+        avatar_url: avatarUrl.trim() || null,
         social_links: {
           linkedin: form.linkedin,
           github: form.github,
@@ -154,28 +156,6 @@ export default function ProfileEdit() {
     if (privacy) setPrivacy({ ...privacy, [key]: !privacy[key] })
   }
 
-  const uploadAvatar = async (file: File | undefined) => {
-    if (!profile || !file) return
-    setUploading(true)
-    setError('')
-    const path = `${profile.id}/avatar-${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '-')}`
-    const { error: upErr } = await supabase.storage.from('avatars').upload(path, file, { upsert: true })
-    if (upErr) {
-      setError(errorMessage(upErr))
-      setUploading(false)
-      return
-    }
-    const { data: pub } = supabase.storage.from('avatars').getPublicUrl(path)
-    const { error } = await supabase.from('profiles').update({ avatar_url: pub.publicUrl }).eq('id', profile.id)
-    setUploading(false)
-    if (error) {
-      setError(errorMessage(error))
-      return
-    }
-    await refreshProfile()
-    setNotice('Profile photo updated.')
-  }
-
   return (
     <div className="max-w-3xl">
       <h1 className="text-2xl font-extrabold text-slate-900">Edit Profile</h1>
@@ -184,15 +164,12 @@ export default function ProfileEdit() {
       <form onSubmit={save} className="mt-6 space-y-6">
         <section className="card space-y-4 p-6">
           <h2 className="text-base font-bold text-slate-900">Profile photo</h2>
-          <div className="flex items-center gap-4">
-            <Avatar name={profile.full_name} src={profile.avatar_url} className="h-20 w-20 text-2xl" />
-            <div className="space-y-2">
-              <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-slate-100 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-200">
-                <ImageUp size={15} />
-                {uploading ? 'Uploading…' : 'Upload photo'}
-                <input type="file" accept="image/*" className="hidden" onChange={(e) => void uploadAvatar(e.target.files?.[0])} />
-              </label>
-              <p className="text-xs text-slate-400">Shown in the CIIE members directory and your public profile.</p>
+          <div className="flex flex-wrap items-center gap-4">
+            <Avatar name={profile.full_name} src={avatarUrl || null} className="h-20 w-20 text-2xl" />
+            <div className="min-w-[260px] flex-1">
+              <Field label="Photo URL" hint="Paste an image link — shown in the CIIE members directory and your public profile.">
+                <TextInput value={avatarUrl} onChange={(e) => setAvatarUrl(e.target.value.trim())} placeholder="https://example.com/photo.jpg" />
+              </Field>
             </div>
           </div>
         </section>

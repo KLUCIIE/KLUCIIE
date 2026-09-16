@@ -25,9 +25,6 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
   const msToken = slug === 'user' ? (searchParams.get('ms_token') ?? null) : null
   const msEmail = slug === 'user' ? (searchParams.get('ms_email') ?? '') : ''
   const msName = slug === 'user' ? (searchParams.get('ms_name') ?? '') : ''
-  const ghToken = slug === 'user' ? (searchParams.get('gh_token') ?? null) : null
-  const ghEmail = slug === 'user' ? (searchParams.get('gh_email') ?? '') : ''
-  const ghName = slug === 'user' ? (searchParams.get('gh_name') ?? '') : ''
   const { signUp, refreshProfile } = useAuth()
   const settings = useSettings()
   const oauth = useOAuth()
@@ -36,9 +33,9 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
   const [info, setInfo] = useState<{ label: string; role: string; enabled: boolean; requires_keys: boolean; fields: CustomFieldDef[] } | null>(null)
   const [loading, setLoading] = useState(true)
 
-  const [fullName, setFullName] = useState(ghName || msName)
+  const [fullName, setFullName] = useState(msName)
   const [studentId, setStudentId] = useState('')
-  const [email, setEmail] = useState(ghEmail || msEmail)
+  const [email, setEmail] = useState(msEmail)
   const [password, setPassword] = useState('')
   const [confirm, setConfirm] = useState('')
   const [staticKey, setStaticKey] = useState('')
@@ -59,19 +56,6 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
   const [otpNotice, setOtpNotice] = useState('')
   const [otpBusy, setOtpBusy] = useState(false)
   const [resendBusy, setResendBusy] = useState(false)
-  const [oauthStarting, setOauthStarting] = useState<'microsoft' | 'github' | null>(null)
-
-  useEffect(() => {
-    const onShow = () => setOauthStarting(null)
-    window.addEventListener('pageshow', onShow)
-    return () => window.removeEventListener('pageshow', onShow)
-  }, [])
-
-  useEffect(() => {
-    if (!oauthStarting) return
-    const t = setTimeout(() => setOauthStarting(null), 5000)
-    return () => clearTimeout(t)
-  }, [oauthStarting])
 
   useEffect(() => {
     if (!slug) return
@@ -139,22 +123,11 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
   const fields: CustomFieldDef[] = [...BASE_FIELDS, ...extraFields]
   const purpose = `role:${slug}`
 
-  const msEnabled = slug === 'user' && oauth.enabled && oauth.configured && ['microsoft', 'both', 'microsoft-only', 'microsoft+github-only'].includes(oauth.mode)
-  const ghEnabled = slug === 'user' && oauth.enabled && oauth.configured && ['github', 'both', 'github-only', 'microsoft+github-only'].includes(oauth.mode)
-  const msOnly = oauth.mode === 'microsoft-only'
-  const ghOnly = oauth.mode === 'github-only'
-  const bothOnly = oauth.mode === 'microsoft+github-only'
-  const exclusive = msOnly || ghOnly || bothOnly
-
+  const msEnabled = slug === 'user' && oauth.enabled && oauth.configured && oauth.mode !== 'register'
+  const msOnly = msEnabled && oauth.mode === 'microsoft'
   const isMsSignup = msEnabled && !!msToken
-  const isGhSignup = ghEnabled && !!ghToken
   const startMicrosoft = () => {
-    setOauthStarting('microsoft')
     window.location.href = `${apiOrigin}/api/oauth/microsoft/authorize`
-  }
-  const startGitHub = () => {
-    setOauthStarting('github')
-    window.location.href = `${apiOrigin}/api/oauth/github/authorize`
   }
 
   const sendOtp = async (toEmail: string) => {
@@ -187,14 +160,14 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
       return
     }
 
-    if (isGhSignup) {
+    if (isMsSignup) {
       setBusy(true)
       try {
-        const res = await fetch(`${apiOrigin}/api/oauth/github/signup`, {
+        const res = await fetch(`${apiOrigin}/api/oauth/microsoft/signup`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            token: ghToken,
+            token: msToken,
             fullName: fullName.trim(),
             password,
           }),
@@ -458,59 +431,32 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
           </p>
         </div>
 
-{exclusive && (msEnabled || ghEnabled) && (
-          <div className="space-y-4">
-            {msEnabled && !msToken && (
-              <button
-                type="button"
-                onClick={startMicrosoft}
-                disabled={oauthStarting !== null}
-                className="flex w-full cursor-default items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 disabled:cursor-default disabled:opacity-80 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-slate-700"
-              >
-                {oauthStarting === 'microsoft' ? (
-                  <>
-                    <Spinner className="h-4 w-4" />
-                    <span className="animate-pulse">Redirecting to Microsoft…</span>
-                  </>
-                ) : (
-                  <>
-                    <svg viewBox="0 0 23 23" className="h-4 w-4" aria-hidden>
-                      <path fill="#f35325" d="M1 1h10v10H1z" />
-                      <path fill="#81bc06" d="M12 1h10v10H12z" />
-                      <path fill="#05a6f0" d="M1 12h10v10H1z" />
-                      <path fill="#ffba08" d="M12 12h10v10H12z" />
-                    </svg>
-                    Continue with Microsoft
-                  </>
-                )}
-              </button>
-            )}
-            {ghEnabled && !ghToken && (
-              <button
-                type="button"
-                onClick={startGitHub}
-                disabled={oauthStarting !== null}
-                className="flex w-full cursor-default items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 disabled:cursor-default disabled:opacity-80 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-slate-700"
-              >
-                {oauthStarting === 'github' ? (
-                  <>
-                    <Spinner className="h-4 w-4" />
-                    <span className="animate-pulse">Redirecting to GitHub…</span>
-                  </>
-                ) : (
-                  <>
-                    <svg viewBox="0 0 16 16" className="h-4 w-4" fill="currentColor" aria-hidden>
-                      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
-                    </svg>
-                    Continue with GitHub
-                  </>
-                )}
-              </button>
+        {msEnabled && !msToken && (
+          <div className="mb-6 space-y-4">
+            <button
+              type="button"
+              onClick={startMicrosoft}
+              className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-slate-700"
+            >
+              <svg viewBox="0 0 23 23" className="h-4 w-4" aria-hidden>
+                <path fill="#f35325" d="M1 1h10v10H1z" />
+                <path fill="#81bc06" d="M12 1h10v10H12z" />
+                <path fill="#05a6f0" d="M1 12h10v10H1z" />
+                <path fill="#ffba08" d="M12 12h10v10H12z" />
+              </svg>
+              Continue with Microsoft
+            </button>
+            {!msOnly && (
+              <div className="flex items-center gap-3 text-xs text-slate-400">
+                <span className="h-px flex-1 bg-slate-200 dark:bg-slate-700" />
+                OR
+                <span className="h-px flex-1 bg-slate-200 dark:bg-slate-700" />
+              </div>
             )}
           </div>
         )}
 
-        {(!exclusive || (msOnly && msToken) || (ghOnly && ghToken) || (bothOnly && (msToken || ghToken))) && (
+        {(!msOnly || msToken) && (
         <form onSubmit={submit} className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Full name *">
@@ -597,65 +543,6 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
             {busy ? <Spinner className="border-white/40 border-t-white" /> : isMsSignup ? 'Create my account' : settings.signup_email_otp ? <>Send verification code</> : <>Create my account</>}
           </Button>
         </form>
-        )}
-
-        {!exclusive && ((msEnabled && !msToken) || (ghEnabled && !ghToken)) && (
-          <div className="mt-6 space-y-3">
-            <div className="flex items-center gap-3 text-xs text-slate-400">
-              <span className="h-px flex-1 bg-slate-200 dark:bg-slate-700" />
-              or continue with
-              <span className="h-px flex-1 bg-slate-200 dark:bg-slate-700" />
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {msEnabled && !msToken && (
-                <button
-                  type="button"
-                  onClick={startMicrosoft}
-                  disabled={oauthStarting !== null}
-                  className="flex w-full cursor-default items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 disabled:cursor-default disabled:opacity-80 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-slate-700"
-                >
-                  {oauthStarting === 'microsoft' ? (
-                    <>
-                      <Spinner className="h-4 w-4" />
-                      <span className="animate-pulse">Redirecting to Microsoft…</span>
-                    </>
-                  ) : (
-                    <>
-                      <svg viewBox="0 0 23 23" className="h-4 w-4" aria-hidden>
-                        <path fill="#f35325" d="M1 1h10v10H1z" />
-                        <path fill="#81bc06" d="M12 1h10v10H12z" />
-                        <path fill="#05a6f0" d="M1 12h10v10H1z" />
-                        <path fill="#ffba08" d="M12 12h10v10H12z" />
-                      </svg>
-                      Continue with Microsoft
-                    </>
-                  )}
-                </button>
-              )}
-              {ghEnabled && !ghToken && (
-                <button
-                  type="button"
-                  onClick={startGitHub}
-                  disabled={oauthStarting !== null}
-                  className="flex w-full cursor-default items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 disabled:cursor-default disabled:opacity-80 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 hover:dark:bg-slate-700"
-                >
-                  {oauthStarting === 'github' ? (
-                    <>
-                      <Spinner className="h-4 w-4" />
-                      <span className="animate-pulse">Redirecting to GitHub…</span>
-                    </>
-                  ) : (
-                    <>
-                      <svg viewBox="0 0 16 16" className="h-4 w-4" fill="currentColor" aria-hidden>
-                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
-                      </svg>
-                      Continue with GitHub
-                    </>
-                  )}
-                </button>
-              )}
-            </div>
-          </div>
         )}
       </div>
     </div>

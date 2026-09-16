@@ -62,7 +62,7 @@ export default function AmtpsMemberForm({ initial, onSaved, submitLabel = 'Add m
     if (!file) return
     setUploading(true)
     setError('')
-    const path = `pending-${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '-')}`
+    const path = `pending-${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '-').replace(/\.{2,}/g, '.')}`
     const { error: upErr } = await supabase.storage.from('avatars').upload(path, file, { upsert: true })
     setUploading(false)
     if (upErr) {
@@ -132,6 +132,9 @@ export default function AmtpsMemberForm({ initial, onSaved, submitLabel = 'Add m
           <p className="mt-1 text-xs text-slate-400">Shown on the AMTPS square card.</p>
         </div>
       </div>
+      <Field label="Photo URL" hint="Optional — paste an image link instead of uploading">
+        <TextInput value={avatarUrl} onChange={(e) => setAvatarUrl(e.target.value.trim())} placeholder="https://example.com/photo.jpg" />
+      </Field>
 
       <div className="grid gap-3 sm:grid-cols-2">
         <Field label="Full name">

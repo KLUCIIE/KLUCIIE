@@ -4,8 +4,9 @@ import { config } from '../config/index.js'
 const isTls = config.REDIS_URL.startsWith('rediss://') || config.REDIS_URL.includes('upstash.io')
 
 export const redis = new Redis(config.REDIS_URL, {
-  maxRetriesPerRequest: 3,
+  maxRetriesPerRequest: 1,
   enableReadyCheck: true,
+  enableOfflineQueue: false,
   retryStrategy(times: number) {
     const delay = Math.min(times * 100, 3000)
     return delay

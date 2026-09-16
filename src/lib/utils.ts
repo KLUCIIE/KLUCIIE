@@ -120,6 +120,16 @@ export function digitsOnly(value: string | null | undefined): string {
   return (value ?? '').replace(/\D/g, '')
 }
 
+/**
+ * Normalizes a phone number to a plain 10-digit subscriber number with no
+ * country code: "+91 9123456789", "919123456789" and "9123456789" all become
+ * "9123456789". Used for both storage and display.
+ */
+export function normalizePhone(value: string | null | undefined): string {
+  const digits = digitsOnly(value)
+  return digits.length > 10 ? digits.slice(-10) : digits
+}
+
 /** Exactly 10 digits (no more, no less) after stripping separators. */
 export function isValidTenDigit(value: string | null | undefined): boolean {
   return /^\d{10}$/.test(digitsOnly(value))

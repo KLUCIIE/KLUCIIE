@@ -12,7 +12,13 @@ import {
 } from '../db/schema.js'
 import { eq, and, not, asc, desc, sql, isNull, inArray } from 'drizzle-orm'
 import { authenticate, authenticateOptional, type JwtPayload } from '../middleware/auth.js'
-import { createProfile, getPublicMember } from '../services/auth.service.js'
+import { createProfile, getProfile, getPublicMember, updateProfile } from '../services/auth.service.js'
+import {
+  isMsOauthProfile,
+  missingProfileFields,
+  requiredProfileFields,
+  type RegisterFieldLike,
+} from '../utils/profileCompletion.js'
 import { markAttendance, setAttendance } from '../services/attendance.service.js'
 import { logAdminEvent } from '../services/audit.service.js'
 import { getLeaderboard, getMemberRank, getPointsStats } from '../services/points.service.js'
@@ -20,6 +26,7 @@ import { useRecoveryCode, createRecoveryCodes, saveRecoveryCodes } from '../auth
 import { hashPassword } from '../auth/passwords.js'
 import { sendEmail } from '../services/email.service.js'
 import { generateRegistrationCode, generateOtp, sha256Hash } from '../utils/codes.js'
+import { registrationOtp, registrationToken } from '../utils/registration.js'
 import { BadRequestError, ForbiddenError, NotFoundError } from '../utils/errors.js'
 
 type Handler = (ctx: { request: FastifyRequest; user: JwtPayload; body: Record<string, any> }) => Promise<any>
@@ -59,36 +66,6 @@ async function promoteJoinApplication(app: typeof schema.joinApplications.$infer
       stage: 'gd',
     })
   }
-}
-
-const OTP_ALPHABET = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZ'
-const OTP_BASE = 34n
-const OTP_DIGITS = 6
-
-/** HMAC-SHA1 rotating code, mirrors frontend `rotatingCode()` / SQL `registration_otp_at()`. */
-function registrationOtp(secret: string, back = 0): string {
-  const counter = Math.floor(Date.now() / 1000 / 60) - back
-  const msg = Buffer.alloc(8)
-  msg.writeBigUInt64BE(BigInt(counter), 0)
-  const h = crypto.createHmac('sha1', secret).update(msg).digest()
-  const offset = h[h.length - 1] & 0x0f
-  const bin =
-    ((h[offset] & 0x7f) << 24) |
-    ((h[offset + 1] & 0xff) << 16) |
-    ((h[offset + 2] & 0xff) << 8) |
-    (h[offset + 3] & 0xff)
-  let value = BigInt(bin) % OTP_BASE ** BigInt(OTP_DIGITS)
-  let out = ''
-  for (let i = 0; i < OTP_DIGITS; i++) {
-    out = OTP_ALPHABET[Number(value % OTP_BASE)] + out
-    value = value / OTP_BASE
-  }
-  return out
-}
-
-/** Signed, window-tagged token proving validate_role_registration passed (migration 0008). */
-function registrationToken(slug: string, email: string, window: number, signingSecret: string): string {
-  return crypto.createHmac('sha256', signingSecret).update(`${slug}|${email.toLowerCase()}|${window}`).digest('hex')
 }
 
 function isSuperAdmin(role: string | undefined) {
@@ -338,6 +315,53 @@ handlers['reset_admin_mfa'] = async ({ user, body }) => {
   return { success: true }
 }
 
+// ─── PROFILE COMPLETION (Microsoft-registered users) ───
+handlers['get_profile_completion'] = async ({ user }) => {
+  const profile = await getProfile(user.sub)
+  if (!profile) throw new NotFoundError('Account not found')
+  const settings = await db.query.platformSettings.findFirst({ where: eq(platformSettings.id, 1) })
+  const required = requiredProfileFields((settings?.registerFields ?? []) as RegisterFieldLike[])
+  if (!isMsOauthProfile(profile)) return { complete: true, required, missing: [] }
+  const missing = missingProfileFields(profile, (settings?.registerFields ?? []) as RegisterFieldLike[])
+  return { complete: missing.length === 0, required, missing }
+}
+
+handlers['complete_my_profile'] = async ({ user, body }) => {
+  const profile = await getProfile(user.sub)
+  if (!profile) throw new NotFoundError('Account not found')
+  if (isAdmin(profile.role)) throw new BadRequestError('Admins do not need to complete this step')
+
+  const studentId = String(body.p_student_id ?? body.student_id ?? '').trim()
+  const phone = String(body.p_phone ?? body.phone ?? '').trim()
+  const department = String(body.p_department ?? body.department ?? '').trim()
+  const values = (body.p_custom_fields ?? body.custom_fields ?? {}) as Record<string, string>
+
+  if (!/^\d{10}$/.test(studentId)) throw new BadRequestError('Student ID must be exactly 10 digits.')
+  if (phone.replace(/[^0-9]/g, '').length < 10) throw new BadRequestError('A valid phone number is required.')
+  if (!department) throw new BadRequestError('Department / Branch is required.')
+
+  const settings = await db.query.platformSettings.findFirst({ where: eq(platformSettings.id, 1) })
+  const required = requiredProfileFields((settings?.registerFields ?? []) as RegisterFieldLike[])
+  for (const f of required) {
+    if (['full_name', 'student_id', 'phone', 'department'].includes(f.key)) continue
+    if (!String(values[f.key] ?? '').trim()) throw new BadRequestError(`"${f.label}" is required.`)
+  }
+
+  const customFields = {
+    ...((profile.customFields ?? {}) as Record<string, any>),
+    ms_oauth: true,
+    ...values,
+  }
+
+  const updated = await updateProfile(user.sub, {
+    studentId,
+    phone,
+    department,
+    customFields,
+  })
+  return { ok: true, profile: updated }
+}
+
 // ─── EVENTS / REGISTRATIONS ───
 handlers['get_event_counts'] = async () => {
   const res = await pgClient`
@@ -363,6 +387,20 @@ handlers['create_registration'] = async ({ request, body }) => {
   })
   if (existing) throw new BadRequestError('You are already registered for this event')
 
+  const member = body.p_email ? await db.query.profiles.findFirst({ where: eq(profiles.email, email) }) : null
+  if (member) {
+    const settings = await db.query.platformSettings.findFirst({ where: eq(platformSettings.id, 1) })
+    const missing = missingProfileFields(member, (settings?.registerFields ?? []) as RegisterFieldLike[])
+    const enforcedKeys = new Set(['full_name', 'student_id', 'phone', 'department'])
+    const enforcedMissing = missing.filter((f) => enforcedKeys.has(f.key))
+    if (isMsOauthProfile(member) && enforcedMissing.length > 0) {
+      const list = enforcedMissing.map((f) => f.label).join(', ')
+      throw new BadRequestError(
+        `Complete your profile before registering for events — still missing: ${list}.`,
+      )
+    }
+  }
+
   const [reg] = await db.insert(eventRegistrations).values({
     eventId: body.p_event_id,
     attendeeName: body.p_attendee_name ?? body.attendee_name ?? 'Attendee',
@@ -376,7 +414,6 @@ handlers['create_registration'] = async ({ request, body }) => {
     status: 'confirmed',
   }).returning()
 
-  const member = body.p_email ? await db.query.profiles.findFirst({ where: eq(profiles.email, email) }) : null
   if (member) {
     await db.update(eventRegistrations).set({ memberId: member.id }).where(eq(eventRegistrations.id, reg.id))
   }
@@ -660,7 +697,8 @@ handlers['email_send_status'] = async ({ body }) => {
 handlers['verify_email_otp'] = async ({ body }) => {
   const email = (body.p_email ?? '').toLowerCase()
   const code = body.p_code
-  const purpose = body.p_purpose ?? 'join_verification'
+  // Mirrors functions.routes.ts: role:purpose is stored as role_registration.
+  const purpose = (body.p_purpose as string | undefined)?.startsWith('role:') ? 'role_registration' : (body.p_purpose ?? 'join_verification')
   const otp = await db.query.emailOtpCodes.findFirst({
     where: and(
       eq(emailOtpCodes.email, email),
@@ -672,7 +710,7 @@ handlers['verify_email_otp'] = async ({ body }) => {
   if (!otp) throw new BadRequestError('Invalid verification code')
   if (otp.expiresAt < new Date()) throw new BadRequestError('Code has expired')
   await db.update(emailOtpCodes).set({ consumedAt: new Date() }).where(eq(emailOtpCodes.id, otp.id))
-  return { verified: true }
+  return { ok: true, verified: true }
 }
 
 handlers['apply_to_ciie'] = async ({ request, body }) => {

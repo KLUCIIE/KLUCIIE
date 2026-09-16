@@ -4,7 +4,7 @@ import { AuthProvider } from '@/hooks/useAuth'
 import { BrandingProvider } from '@/hooks/useBranding'
 import { SettingsProvider } from '@/hooks/useSettings'
 import { ThemeProvider } from '@/hooks/useTheme'
-import { RequireAdmin, RequireAuth, RequireCiiieMember, RequireFaculty, RequireSuperAdmin, MfaResetWatcher } from '@/components/guards'
+import { RequireAdmin, RequireAuth, RequireCiiieMember, RequireFaculty, RequireProfileComplete, RequireSuperAdmin, MfaResetWatcher } from '@/components/guards'
 import { AuthLayout, PublicLayout } from '@/components/Layouts'
 import OfflineIndicator from '@/components/OfflineIndicator'
 import RouteErrorBoundary from '@/components/RouteErrorBoundary'
@@ -19,6 +19,7 @@ const EventsList = lazyPage(() => import('@/pages/EventsList'))
 const Gallery = lazyPage(() => import('@/pages/Gallery'))
 const EventDetail = lazyPage(() => import('@/pages/EventDetail'))
 const EventRegister = lazyPage(() => import('@/pages/EventRegister'))
+const CompleteProfile = lazyPage(() => import('@/pages/CompleteProfile'))
 const RegisterSuccess = lazyPage(() => import('@/pages/RegisterSuccess'))
 const Leaderboard = lazyPage(() => import('@/pages/Leaderboard'))
 const MembersList = lazyPage(() => import('@/pages/MembersList'))
@@ -102,6 +103,9 @@ const FacultyFormsAdmin = lazyPage(() => import('@/pages/admin/faculty/FacultyFo
 const FacultyFormEdit = lazyPage(() => import('@/pages/admin/faculty/FacultyFormEdit'))
 const FacultyFormSubmissions = lazyPage(() => import('@/pages/admin/faculty/FacultyFormSubmissions'))
 
+const OAuthCallback = lazyPage(() => import('@/pages/oauth/Callback'))
+const OAuthAdmin = lazyPage(() => import('@/pages/admin/OAuth'))
+
 export default function App() {
   return (
     <BrandingProvider>
@@ -121,7 +125,7 @@ export default function App() {
               <Route path="/upcoming-events" element={<UpcomingEvents />} />
               <Route path="/events" element={<EventsList />} />
               <Route path="/events/:id" element={<EventDetail />} />
-              <Route path="/events/:id/register" element={<RequireAuth><EventRegister /></RequireAuth>} />
+              <Route path="/events/:id/register" element={<RequireAuth><RequireProfileComplete><EventRegister /></RequireProfileComplete></RequireAuth>} />
               <Route path="/register/success/:registrationId" element={<RegisterSuccess />} />
               <Route path="/members" element={<MembersList />} />
               <Route path="/members/:id" element={<MemberPublic />} />
@@ -133,7 +137,7 @@ export default function App() {
               <Route path="/startups" element={<StartupsPage />} />
 
               <Route element={<RequireAuth />}>
-                <Route path="/dashboard" element={<MemberLayout />}>
+                <Route path="/dashboard" element={<RequireProfileComplete><MemberLayout /></RequireProfileComplete>}>
                   <Route index element={<MemberDashboard />} />
                   <Route path="events" element={<MyEvents />} />
                   <Route path="points" element={<MyPoints />} />
@@ -156,6 +160,7 @@ export default function App() {
                   <Route path="qr" element={<MemberQrPage />} />
                   <Route path="profile" element={<ProfileEdit />} />
                 </Route>
+                <Route path="/complete-profile" element={<CompleteProfile />} />
               </Route>
             </Route>
 
@@ -168,6 +173,7 @@ export default function App() {
               <Route path="/register-faculty" element={<RoleRegister slug="faculty" hideStudentId />} />
               <Route path="/register/role/success" element={<RoleRegisterSuccess />} />
               <Route path="/verify-application" element={<VerifyApplication />} />
+              <Route path="/oauth/callback" element={<OAuthCallback />} />
             </Route>
 
             <Route path="/auth/mfa-setup" element={<MfaSetup />} />
@@ -213,6 +219,7 @@ export default function App() {
                 <Route path="branding" element={<BrandingAdmin />} />
                 <Route path="settings" element={<SettingsAdmin />} />
                 <Route path="registration-keys" element={<RegistrationKeysAdmin />} />
+                <Route path="oauth" element={<RequireSuperAdmin><OAuthAdmin /></RequireSuperAdmin>} />
                 <Route path="live-registrations" element={<LiveRegistrationsAdmin />} />
                 <Route path="recruit-forms" element={<RecruitFormsAdmin />} />
                 <Route path="reject-permissions" element={<RejectPermissionsAdmin />} />

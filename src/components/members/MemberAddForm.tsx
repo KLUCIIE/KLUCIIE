@@ -36,7 +36,7 @@ export default function MemberAddForm({ onCreated, submitLabel = 'Add member' }:
     if (!file) return
     setUploading(true)
     setError('')
-    const path = `pending-${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '-')}`
+    const path = `pending-${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '-').replace(/\.{2,}/g, '.')}`
     const { error: upErr } = await supabase.storage.from('avatars').upload(path, file, { upsert: true })
     setUploading(false)
     if (upErr) {
@@ -93,7 +93,7 @@ export default function MemberAddForm({ onCreated, submitLabel = 'Add member' }:
       {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600">{error}</p>}
 
       <div className="flex items-center gap-3">
-        <Avatar name={form.full_name || 'New'} src={avatarUrl} className="h-14 w-14 text-lg" />
+        <Avatar name={form.full_name || 'New'} src={avatarUrl || null} className="h-14 w-14 text-lg" />
         <div>
           <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-slate-100 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-200">
             <ImageUp size={15} /> {uploading ? 'Uploading…' : 'Upload photo'}
@@ -102,6 +102,9 @@ export default function MemberAddForm({ onCreated, submitLabel = 'Add member' }:
           <p className="mt-1 text-xs text-slate-400">Shown in the CIIE Members directory.</p>
         </div>
       </div>
+      <Field label="Photo URL" hint="Optional — paste an image link instead of uploading">
+        <TextInput value={avatarUrl} onChange={(e) => setAvatarUrl(e.target.value.trim())} placeholder="https://example.com/photo.jpg" />
+      </Field>
 
       <div className="grid gap-3 sm:grid-cols-2">
         <Field label="Full name">

@@ -233,10 +233,7 @@ async function http(
 export interface OAuthAdminSettings {
   id: number
   enabled: boolean
-  login_enabled: boolean
-  login_microsoft: boolean
-  login_github: boolean
-  mode: 'register' | 'github' | 'microsoft' | 'both' | 'microsoft-only' | 'github-only' | 'microsoft+github-only'
+  mode: 'register' | 'github' | 'microsoft' | 'both'
   ms_tenant_id: string
   ms_client_id: string
   ms_client_secret: string

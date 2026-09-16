@@ -33,6 +33,11 @@ const envSchema = z.object({
   GMAIL_FROM_NAME: z.string().default('KL CIIE'),
   STORAGE_ROOT: z.string().optional(),
   STORAGE_PUBLIC_URL: z.string().optional(),
+  // Microsoft OAuth redirect targets. FRONTEND_URL is where the SPA lives and
+  // where the browser is sent after the MS callback. OAUTH_REDIRECT_URI is the
+  // exact URL Microsoft must call back on — default derives from FRONTEND_URL.
+  FRONTEND_URL: z.string().default('http://localhost:5173'),
+  OAUTH_REDIRECT_URI: z.string().optional(),
 })
 
 export const config = envSchema.parse(process.env)

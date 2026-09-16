@@ -146,15 +146,12 @@ export interface SmtpSetting {
 }
 
 /** Which sign-in methods are shown on the login & user registration pages. */
-export type OAuthMode = 'register' | 'github' | 'microsoft' | 'both' | 'microsoft-only' | 'github-only' | 'microsoft+github-only'
+export type OAuthMode = 'register' | 'github' | 'microsoft' | 'both'
 
 /** OAuth provider settings managed by a Super Admin (secrets never public). */
 export interface OAuthSettings {
   id: number
   enabled: boolean
-  login_enabled: boolean
-  login_microsoft: boolean
-  login_github: boolean
   mode: OAuthMode
   ms_tenant_id: string | null
   ms_client_id: string | null
@@ -170,13 +167,10 @@ export interface OAuthSettings {
 /** Public subset of the OAuth settings (safe for logged-out pages). */
 export interface OAuthConfig {
   enabled: boolean
-  login_enabled: boolean
-  login_microsoft: boolean
-  login_github: boolean
   mode: OAuthMode
   configured: boolean
-  microsoft_configured: boolean
-  github_configured: boolean
+  configured_ms: boolean
+  configured_github: boolean
 }
 
 export interface PlatformSettings {

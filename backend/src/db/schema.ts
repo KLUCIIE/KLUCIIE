@@ -309,6 +309,23 @@ export const platformSettings = pgTable('platform_settings', {
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 })
 
+// ─── OAUTH / SIGN-IN METHOD SETTINGS (singleton) ───
+export const oauthSettings = pgTable('oauth_settings', {
+  id: integer('id').primaryKey().default(1),
+  enabled: boolean('enabled').notNull().default(false),
+  loginEnabled: boolean('login_enabled').notNull().default(false),
+  loginMicrosoft: boolean('login_microsoft').notNull().default(false),
+  loginGithub: boolean('login_github').notNull().default(false),
+  mode: text('mode').notNull().default('register'),
+  msTenantId: text('ms_tenant_id'),
+  msClientId: text('ms_client_id'),
+  msClientSecret: text('ms_client_secret'),
+  ghClientId: text('gh_client_id'),
+  ghClientSecret: text('gh_client_secret'),
+  updatedBy: uuid('updated_by').references(() => profiles.id, { onDelete: 'set null' }),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+})
+
 // ─── MEMBER QR CODES ───
 export const memberQrCodes = pgTable('member_qr_codes', {
   id: uuid('id').primaryKey().defaultRandom(),

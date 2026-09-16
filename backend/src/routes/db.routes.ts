@@ -25,7 +25,7 @@ const AUTH_READ = new Set([
 // Mirrors the original RLS which never exposed these to plain members.
 const ADMIN_READ = new Set([
   'registration_roles', 'admin_recovery_codes', 'smtp_settings',
-  'email_otp_codes', 'admin_audit_logs',
+  'email_otp_codes', 'admin_audit_logs', 'oauth_settings',
 ])
 
 // Tables where writes require an admin role (mirrors RLS UPDATE/DELETE policy)
@@ -45,7 +45,7 @@ const ADMIN_WRITE = new Set([
 ])
 
 const SUPER_ADMIN_WRITE = new Set([
-  'smtp_settings', 'registration_roles', 'admin_recovery_codes',
+  'smtp_settings', 'registration_roles', 'admin_recovery_codes', 'oauth_settings',
 ])
 
 function isAdminRole(role: string) {

@@ -28,8 +28,12 @@ function safeName(name: string): string {
 
 function resolvePath(bucket: string, name: string): string {
   const b = safeName(bucket)
+  // Drop any traversal segments instead of throwing (a thrown Error surfaces as HTTP 500).
   const n = safeName(name)
-  if (n.includes('..')) throw new Error('Invalid path')
+    .split('/')
+    .filter((seg) => seg !== '..')
+    .join('/')
+    .replace(/\/+/g, '/')
   return path.join(STORAGE_ROOT, b, n)
 }
 

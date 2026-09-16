@@ -13,8 +13,9 @@ import { logAdminEvent } from '../services/audit.service.js'
 import { sha256Hash, generateOtp } from '../utils/codes.js'
 import { cacheGet, cacheSet, cacheDel } from '../redis/index.js'
 import { db as drizzleDb } from '../db/index.js'
-import { emailOtpCodes, adminRecoveryCodes, recruitApplications } from '../db/schema.js'
+import { emailOtpCodes, adminRecoveryCodes, recruitApplications, registrationRoles } from '../db/schema.js'
 import { and, isNull, gt } from 'drizzle-orm'
+import { verifyRegistrationToken } from '../utils/registration.js'
 import { BadRequestError, UnauthorizedError, NotFoundError } from '../utils/errors.js'
 
 export default async function authRoutes(app: FastifyInstance) {
@@ -82,11 +83,25 @@ export default async function authRoutes(app: FastifyInstance) {
       phone: z.string().optional(),
       department: z.string().optional(),
       yearOfBirth: z.string().optional(),
+      roleSlug: z.string().optional(),
+      registrationToken: z.string().optional(),
     }).parse(request.body)
 
     const existing = await getProfileByEmail(body.email)
     if (existing) {
       return reply.status(409).send({ error: 'Email already registered' })
+    }
+
+    // Resolve the role from the registration page slug, but only if the token
+    // issued by validate_role_registration is valid. Otherwise fall back to 'member'.
+    let role = 'member'
+    if (body.roleSlug && body.registrationToken) {
+      const regRole = await db.query.registrationRoles.findFirst({
+        where: and(eq(registrationRoles.slug, body.roleSlug), eq(registrationRoles.enabled, true)),
+      })
+      if (regRole && verifyRegistrationToken(regRole.slug, body.email, body.registrationToken, regRole.signingSecret)) {
+        role = regRole.role
+      }
     }
 
     const passwordHash = await hashPassword(body.password)
@@ -95,6 +110,7 @@ export default async function authRoutes(app: FastifyInstance) {
       id: crypto.randomUUID(),
       email: body.email,
       fullName: body.fullName,
+      role,
       studentId: body.studentId,
       phone: body.phone,
       department: body.department,

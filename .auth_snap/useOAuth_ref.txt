@@ -1,0 +1,26 @@
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { OAuthConfig } from '@/lib/types'
+import { apiOrigin } from '@/lib/supabase'
+
+const DEFAULT: OAuthConfig = { enabled: false, mode: 'register', configured: false }
+
+export function useOAuth(): OAuthConfig {
+  const [cfg, setCfg] = useState<OAuthConfig>(DEFAULT)
+  useEffect(() => {
+    let active = true
+    fetch(`${apiOrigin}/api/oauth/config`)
+      .then((r) => r.json().catch(() => null))
+      .then((d) => {
+        if (!active) return
+        setCfg({
+          enabled: !!d?.enabled,
+          mode: d?.mode ?? 'register',
+          configured: !!d?.configured,
+        })
+      })
+      .catch(() => {})
+    return () => { active = false }
+  }, [])
+  return cfg
+}

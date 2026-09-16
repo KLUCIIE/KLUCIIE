@@ -3,61 +3,146 @@
 > vite
 
 
-  [32m[1mVITE[22m v5.4.21[39m  [2mready in [0m[1m3463[22m[2m[0m ms[22m
+  [32m[1mVITE[22m v6.4.3[39m  [2mready in [0m[1m3069[22m[2m[0m ms[22m
 
   [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
 [2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
-[2m7:36:57 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/config/index.ts[22m
-[2m7:44:25 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/index.ts[22m
-[2m7:44:30 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/index.ts[22m
-[2m7:45:13 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/middleware/auth.ts[22m
-[2m7:45:22 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/db.routes.ts[22m
-[2m7:45:26 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/db.routes.ts[22m
-[2m7:45:32 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
-[2m7:46:01 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
-[2m7:46:10 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
-[2m7:46:16 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/index.ts[22m
-[2m7:46:47 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
-[2m7:47:06 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
-[2m7:47:36 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
-[2m7:47:41 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/package.json[22m
-[2m7:48:06 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
-[2m7:54:42 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
-[2m7:56:38 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
-[2m7:56:54 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
-[2m7:58:47 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
-[2m8:00:12 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
-[2m8:02:28 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
-[2m8:04:09 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/auth.routes.ts[22m
-[2m8:04:17 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/auth.routes.ts[22m
-[2m8:11:59 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/index.ts[22m
-[2m8:12:06 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/index.ts[22m
-[2m8:12:18 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/auth.routes.ts[22m
-[2m8:12:25 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/auth.routes.ts[22m
-[2m8:12:34 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/auth.routes.ts[22m
-[2m8:12:43 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/auth.routes.ts[22m
-[2m8:13:03 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/auth.routes.ts[22m
-[2m8:14:42 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/auth/recovery.ts[22m
-[2m8:14:47 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
-[2m8:14:56 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
-[2m8:15:04 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
-[2m8:15:11 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/functions.routes.ts[22m
-[2m8:21:10 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
-[2m8:21:18 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
-[2m8:21:24 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
-[2m8:21:33 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/auth.routes.ts[22m
-[2m8:25:36 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/rpc.routes.ts[22m
-[2m8:25:53 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/functions.routes.ts[22m
-[2m8:40:38 am[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/index.css, /src/hooks/useBranding.tsx, /src/hooks/useSettings.tsx, /src/hooks/useAuth.tsx, /src/pages/Home.tsx, /src/pages/member/Dashboard.tsx, /src/pages/EventsList.tsx, /src/pages/member/MemberQr.tsx, /src/pages/member/ProfileEdit.tsx, /src/pages/member/MyEvents.tsx, /src/pages/RegisterSuccess.tsx, /src/pages/MembersList.tsx, /@fs/E:\KL_CIIE\src\components\amtps\AmtpsShowcase.tsx, /src/pages/Gallery.tsx, /@fs/E:\KL_CIIE\src\components\startups\StartupsShowcase.tsx[22m
-[2m8:43:29 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
-[2m8:43:34 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/services/data.service.ts[22m
-[2m8:43:40 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/db.routes.ts[22m
-[2m8:43:54 am[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mbackend/src/routes/db.routes.ts[22m
-[2m8:44:05 am[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/index.css, /src/hooks/useBranding.tsx, /src/hooks/useSettings.tsx, /src/hooks/useAuth.tsx, /src/pages/Home.tsx, /src/pages/member/Dashboard.tsx, /src/pages/EventsList.tsx, /src/pages/member/MemberQr.tsx, /src/pages/member/ProfileEdit.tsx, /src/pages/member/MyEvents.tsx, /src/pages/RegisterSuccess.tsx, /src/pages/MembersList.tsx, /@fs/E:\KL_CIIE\src\components\amtps\AmtpsShowcase.tsx, /src/pages/Gallery.tsx, /@fs/E:\KL_CIIE\src\components\startups\StartupsShowcase.tsx[22m
-[2m8:44:14 am[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/index.css, /src/hooks/useBranding.tsx, /src/hooks/useSettings.tsx, /src/hooks/useAuth.tsx, /src/pages/Home.tsx, /src/pages/member/Dashboard.tsx, /src/pages/EventsList.tsx, /src/pages/member/MemberQr.tsx, /src/pages/member/ProfileEdit.tsx, /src/pages/member/MyEvents.tsx, /src/pages/RegisterSuccess.tsx, /src/pages/MembersList.tsx, /@fs/E:\KL_CIIE\src\components\amtps\AmtpsShowcase.tsx, /src/pages/Gallery.tsx, /@fs/E:\KL_CIIE\src\components\startups\StartupsShowcase.tsx[22m
-[2m8:44:21 am[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/index.css, /src/hooks/useBranding.tsx, /src/hooks/useSettings.tsx, /src/hooks/useAuth.tsx, /src/pages/Home.tsx, /src/pages/member/Dashboard.tsx, /src/pages/EventsList.tsx, /src/pages/member/MemberQr.tsx, /src/pages/member/ProfileEdit.tsx, /src/pages/member/MyEvents.tsx, /src/pages/RegisterSuccess.tsx, /src/pages/MembersList.tsx, /@fs/E:\KL_CIIE\src\components\amtps\AmtpsShowcase.tsx, /src/pages/Gallery.tsx, /@fs/E:\KL_CIIE\src\components\startups\StartupsShowcase.tsx[22m
-[2m8:44:27 am[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/index.css, /src/hooks/useBranding.tsx, /src/hooks/useSettings.tsx, /src/hooks/useAuth.tsx, /src/pages/Home.tsx, /src/pages/member/Dashboard.tsx, /src/pages/EventsList.tsx, /src/pages/member/MemberQr.tsx, /src/pages/member/ProfileEdit.tsx, /src/pages/member/MyEvents.tsx, /src/pages/RegisterSuccess.tsx, /src/pages/MembersList.tsx, /@fs/E:\KL_CIIE\src\components\amtps\AmtpsShowcase.tsx, /src/pages/Gallery.tsx, /@fs/E:\KL_CIIE\src\components\startups\StartupsShowcase.tsx[22m
-[2m8:44:32 am[22m [36m[1m[vite][22m[39m [32mvite.config.ts changed, restarting server...[39m
-[2m8:44:33 am[22m [36m[1m[vite][22m[39m server restarted.
-[2m11:50:12 am[22m [36m[1m[vite][22m[39m [32mvite.config.ts changed, restarting server...[39m
-[2m11:50:13 am[22m [36m[1m[vite][22m[39m server restarted.
+[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+[2m8:24:10 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m8:24:19 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m8:24:37 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m8:25:12 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m8:25:23 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m8:28:38 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/routes/oauth.routes.ts[22m
+[2m8:28:46 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/routes/oauth.routes.ts[22m
+[2m8:28:57 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/routes/oauth.routes.ts[22m
+[2m8:29:02 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/guards.tsx, /src/hooks/useAuth.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/SendMail.tsx[22m
+[2m8:29:05 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/components/guards.tsx[22m Could not Fast Refresh ("useMfaRedirect" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m8:29:05 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m8:29:05 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useAuth.tsx[22m Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m8:29:05 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /src/components/guards.tsx, /@fs/E:\KL_CIIE\src\components\Navbar.tsx, /src/pages/Home.tsx, /src/pages/Login.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/Dashboard.tsx, /src/pages/admin/OAuth.tsx, /src/pages/RoleRegister.tsx, /src/pages/member/MemberLayout.tsx, /src/pages/member/Dashboard.tsx[22m
+[2m8:29:05 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/components/guards.tsx[22m Could not Fast Refresh ("useMfaRedirect" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m8:29:05 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m8:29:18 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m8:29:27 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m8:29:32 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m8:30:02 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m8:30:07 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m8:30:29 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/Login.tsx, /src/index.css[22m
+[2m8:32:33 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m8:36:52 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m9:15:09 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m2:07:04 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/Login.tsx, /src/index.css[22m
+[2m2:07:26 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/Login.tsx, /src/index.css[22m
+[2m2:07:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m2:15:15 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/AdminLayout.tsx, /src/index.css[22m
+[2m2:15:22 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m2:15:34 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m2:15:45 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m2:15:59 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m2:16:11 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m2:22:55 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/db/schema.ts[22m
+[2m2:23:00 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/routes/oauth.routes.ts[22m
+[2m2:23:04 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/routes/oauth.routes.ts[22m
+[2m2:23:56 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/routes/oauth.routes.ts[22m
+[2m2:24:19 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/routes/oauth.routes.ts[22m
+[2m2:24:22 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/routes/oauth.routes.ts[22m
+[2m2:24:34 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/guards.tsx, /src/hooks/useAuth.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/SendMail.tsx[22m
+[2m2:24:36 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/components/guards.tsx[22m Could not Fast Refresh ("useMfaRedirect" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:24:36 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m2:24:37 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useAuth.tsx[22m Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:24:37 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /src/components/guards.tsx, /@fs/E:\KL_CIIE\src\components\Navbar.tsx, /src/pages/Home.tsx, /src/pages/Login.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/Dashboard.tsx, /src/pages/admin/OAuth.tsx, /src/pages/RoleRegister.tsx, /src/pages/member/MemberLayout.tsx, /src/pages/member/Dashboard.tsx[22m
+[2m2:24:37 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/components/guards.tsx[22m Could not Fast Refresh ("useMfaRedirect" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:24:37 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m2:24:39 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/guards.tsx, /src/hooks/useAuth.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/SendMail.tsx[22m
+[2m2:24:42 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/components/guards.tsx[22m Could not Fast Refresh ("useMfaRedirect" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:24:42 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m2:24:42 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useAuth.tsx[22m Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:24:42 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /src/components/guards.tsx, /@fs/E:\KL_CIIE\src\components\Navbar.tsx, /src/pages/Home.tsx, /src/pages/Login.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/Dashboard.tsx, /src/pages/admin/OAuth.tsx, /src/pages/RoleRegister.tsx, /src/pages/member/MemberLayout.tsx, /src/pages/member/Dashboard.tsx[22m
+[2m2:24:42 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/components/guards.tsx[22m Could not Fast Refresh ("useMfaRedirect" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:24:42 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m2:25:07 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/hooks/useBranding.tsx, /src/hooks/useSettings.tsx, /src/hooks/useAuth.tsx, /src/pages/Home.tsx, /src/pages/admin/Dashboard.tsx, /src/pages/admin/SendMail.tsx, /src/pages/member/Dashboard.tsx, /src/pages/Login.tsx, /src/pages/RoleRegister.tsx, /src/pages/admin/OAuth.tsx, /src/pages/Signup.tsx[22m
+[2m2:25:09 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useBranding.tsx[22m Could not Fast Refresh ("useBranding" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:25:09 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /@fs/E:\KL_CIIE\src\components\Footer.tsx, /@fs/E:\KL_CIIE\src\components\Logo.tsx, /src/pages/Home.tsx[22m
+[2m2:25:09 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useSettings.tsx[22m Could not Fast Refresh ("interviewDateFor" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:25:09 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /src/components/guards.tsx, /@fs/E:\KL_CIIE\src\components\Footer.tsx, /@fs/E:\KL_CIIE\src\components\Navbar.tsx, /src/pages/Home.tsx, /src/pages/Login.tsx, /src/pages/Register.tsx, /src/pages/RoleRegister.tsx, /src/pages/member/Dashboard.tsx, /src/pages/Signup.tsx[22m
+[2m2:25:09 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useAuth.tsx[22m Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:25:09 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /src/components/guards.tsx, /@fs/E:\KL_CIIE\src\components\Navbar.tsx, /src/pages/Home.tsx, /src/pages/Login.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/Dashboard.tsx, /src/pages/admin/OAuth.tsx, /src/pages/RoleRegister.tsx, /src/pages/member/MemberLayout.tsx, /src/pages/member/Dashboard.tsx[22m
+[2m2:25:11 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/Login.tsx, /src/pages/RoleRegister.tsx[22m
+[2m2:28:19 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m2:28:50 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/Login.tsx, /src/index.css[22m
+[2m2:29:58 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/Login.tsx, /src/index.css[22m
+[2m2:39:33 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/guards.tsx, /src/hooks/useAuth.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/SendMail.tsx[22m
+[2m2:39:36 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/components/guards.tsx[22m Could not Fast Refresh ("useMfaRedirect" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:39:36 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m2:39:36 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useAuth.tsx[22m Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:39:36 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /src/components/guards.tsx, /@fs/E:\KL_CIIE\src\components\Navbar.tsx, /src/pages/Home.tsx, /src/pages/Login.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/Dashboard.tsx, /src/pages/admin/OAuth.tsx, /src/pages/RoleRegister.tsx, /src/pages/member/MemberLayout.tsx, /src/pages/member/Dashboard.tsx[22m
+[2m2:39:36 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/components/guards.tsx[22m Could not Fast Refresh ("useMfaRedirect" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:39:36 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m2:39:52 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/routes/oauth.routes.ts[22m
+[2m2:40:40 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/routes/oauth.routes.ts[22m
+[2m2:41:21 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m2:41:31 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m2:41:40 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m2:41:58 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m2:42:10 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m2:42:59 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m2:43:44 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/routes/oauth.routes.ts[22m
+[2m2:44:37 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/hooks/useBranding.tsx, /src/hooks/useSettings.tsx, /src/hooks/useAuth.tsx, /src/pages/Home.tsx, /src/pages/admin/Dashboard.tsx, /src/pages/admin/SendMail.tsx, /src/pages/member/Dashboard.tsx, /src/pages/Login.tsx, /src/pages/RoleRegister.tsx, /src/pages/admin/OAuth.tsx, /src/pages/Signup.tsx[22m
+[2m2:44:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useBranding.tsx[22m Could not Fast Refresh ("useBranding" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:44:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /@fs/E:\KL_CIIE\src\components\Footer.tsx, /@fs/E:\KL_CIIE\src\components\Logo.tsx, /src/pages/Home.tsx[22m
+[2m2:44:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useSettings.tsx[22m Could not Fast Refresh ("interviewDateFor" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:44:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /src/components/guards.tsx, /@fs/E:\KL_CIIE\src\components\Footer.tsx, /@fs/E:\KL_CIIE\src\components\Navbar.tsx, /src/pages/Home.tsx, /src/pages/Login.tsx, /src/pages/Register.tsx, /src/pages/RoleRegister.tsx, /src/pages/member/Dashboard.tsx, /src/pages/Signup.tsx[22m
+[2m2:44:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useAuth.tsx[22m Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:44:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /src/components/guards.tsx, /@fs/E:\KL_CIIE\src\components\Navbar.tsx, /src/pages/Home.tsx, /src/pages/Login.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/Dashboard.tsx, /src/pages/admin/OAuth.tsx, /src/pages/RoleRegister.tsx, /src/pages/member/MemberLayout.tsx, /src/pages/member/Dashboard.tsx[22m
+[2m2:45:20 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/routes/oauth.routes.ts[22m
+[2m2:47:21 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/db/schema.ts[22m
+[2m2:47:32 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/routes/oauth.routes.ts[22m
+[2m2:47:44 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/routes/oauth.routes.ts[22m
+[2m2:47:54 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mbackend/src/routes/oauth.routes.ts[22m
+[2m2:48:03 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/guards.tsx, /src/hooks/useAuth.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/SendMail.tsx[22m
+[2m2:48:08 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/components/guards.tsx[22m Could not Fast Refresh ("useMfaRedirect" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:48:08 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m2:48:08 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useAuth.tsx[22m Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:48:08 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /src/components/guards.tsx, /@fs/E:\KL_CIIE\src\components\Navbar.tsx, /src/pages/Home.tsx, /src/pages/Login.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/Dashboard.tsx, /src/pages/admin/OAuth.tsx, /src/pages/RoleRegister.tsx, /src/pages/member/MemberLayout.tsx, /src/pages/member/Dashboard.tsx[22m
+[2m2:48:08 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/components/guards.tsx[22m Could not Fast Refresh ("useMfaRedirect" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:48:09 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m2:48:18 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/guards.tsx, /src/hooks/useAuth.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/SendMail.tsx[22m
+[2m2:48:22 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/components/guards.tsx[22m Could not Fast Refresh ("useMfaRedirect" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:48:22 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m2:48:22 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useAuth.tsx[22m Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:48:22 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /src/components/guards.tsx, /@fs/E:\KL_CIIE\src\components\Navbar.tsx, /src/pages/Home.tsx, /src/pages/Login.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/Dashboard.tsx, /src/pages/admin/OAuth.tsx, /src/pages/RoleRegister.tsx, /src/pages/member/MemberLayout.tsx, /src/pages/member/Dashboard.tsx[22m
+[2m2:48:22 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/components/guards.tsx[22m Could not Fast Refresh ("useMfaRedirect" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:48:22 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m2:48:25 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/hooks/useBranding.tsx, /src/hooks/useSettings.tsx, /src/hooks/useAuth.tsx, /src/pages/Home.tsx, /src/pages/admin/Dashboard.tsx, /src/pages/admin/SendMail.tsx, /src/pages/member/Dashboard.tsx, /src/pages/Login.tsx, /src/pages/RoleRegister.tsx, /src/pages/admin/OAuth.tsx, /src/pages/Signup.tsx[22m
+[2m2:48:29 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useBranding.tsx[22m Could not Fast Refresh ("useBranding" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:48:29 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /@fs/E:\KL_CIIE\src\components\Footer.tsx, /@fs/E:\KL_CIIE\src\components\Logo.tsx, /src/pages/Home.tsx[22m
+[2m2:48:29 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useSettings.tsx[22m Could not Fast Refresh ("interviewDateFor" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:48:29 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /src/components/guards.tsx, /@fs/E:\KL_CIIE\src\components\Footer.tsx, /@fs/E:\KL_CIIE\src\components\Navbar.tsx, /src/pages/Home.tsx, /src/pages/Login.tsx, /src/pages/Register.tsx, /src/pages/RoleRegister.tsx, /src/pages/member/Dashboard.tsx, /src/pages/Signup.tsx[22m
+[2m2:48:29 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useAuth.tsx[22m Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:48:29 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /src/components/guards.tsx, /@fs/E:\KL_CIIE\src\components\Navbar.tsx, /src/pages/Home.tsx, /src/pages/Login.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/Dashboard.tsx, /src/pages/admin/OAuth.tsx, /src/pages/RoleRegister.tsx, /src/pages/member/MemberLayout.tsx, /src/pages/member/Dashboard.tsx[22m
+[2m2:48:32 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/Login.tsx, /src/pages/RoleRegister.tsx[22m
+[2m2:48:47 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m2:48:53 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m2:49:07 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m2:49:29 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/admin/OAuth.tsx, /src/index.css[22m
+[2m2:49:37 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/Login.tsx, /src/index.css[22m
+[2m2:55:32 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/components/guards.tsx, /src/hooks/useAuth.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/SendMail.tsx[22m
+[2m2:55:35 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/components/guards.tsx[22m Could not Fast Refresh ("useMfaRedirect" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:55:35 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m2:55:35 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/hooks/useAuth.tsx[22m Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:55:35 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css, /src/components/guards.tsx, /@fs/E:\KL_CIIE\src\components\Navbar.tsx, /src/pages/Home.tsx, /src/pages/Login.tsx, /src/pages/admin/AdminLayout.tsx, /src/pages/admin/Dashboard.tsx, /src/pages/admin/OAuth.tsx, /src/pages/RoleRegister.tsx, /src/pages/member/MemberLayout.tsx, /src/pages/member/Dashboard.tsx[22m
+[2m2:55:35 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/components/guards.tsx[22m Could not Fast Refresh ("useMfaRedirect" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m2:55:35 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/index.css[22m
+[2m2:55:37 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css, /src/pages/Login.tsx, /src/pages/RoleRegister.tsx[22m
+[2m2:55:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/Login.tsx, /src/index.css[22m
+[2m2:57:52 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/Login.tsx, /src/index.css[22m
+[2m2:57:59 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/Login.tsx, /src/index.css[22m
+[2m2:58:23 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/Login.tsx, /src/index.css[22m
+[2m2:58:39 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m2:58:58 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m2:59:24 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m3:02:45 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m3:02:50 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m3:06:21 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/RoleRegister.tsx, /src/index.css[22m
+[2m3:06:53 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/Login.tsx, /src/index.css[22m

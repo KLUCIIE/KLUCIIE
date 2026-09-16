@@ -1,0 +1,1463 @@
+[2m8:24:39 am[22m [31m[1m[vite][22m[39m [31mInternal server error: E:\KL_CIIE\src\pages\RoleRegister.tsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (568:8)
+
+[0m [90m 566 |[31m             {busy [33m?[31m [33m<[31m[33mSpinner[31m className[33m=[31m[32m"border-white/40 border-t-white"[31m [35m/> : isMsSignup ? 'Create my account' : settings.signup_email_otp ? <>Send verification code</[31m[33m>[31m [33m:[31m [33m<[31m[33m>[31m[33mCreate[31m my account[33m<[31m[33m/[31m[33m>[31m}
+ [90m 567 |[31m           [33m<[31m[33m/[31m[33mButton[31m[33m>[31m
+[31m[1m>[22m[31m[90m 568 |[31m         [33m<[31m[33m/[31m[33mform[31m[33m>[31m
+ [90m     |[31m         [31m[1m^[22m[31m
+ [90m 569 |[31m         )}
+ [90m 570 |[31m       [33m<[31m[33m/[31m[33mdiv[31m[33m>[31m
+ [90m 571 |[31m     [33m<[31m[33m/[31m[33mdiv[31m[33m>[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mE:/KL_CIIE/src/pages/RoleRegister.tsx[39m:568:8
+[33m  566|              {busy ? <Spinner className="border-white/40 border-t-white" /> : isMsSignup ? 'Create my account' : settings.signup_email_otp ? <>Send verification code</> : <>Create my account</>}
+  567|            </Button>
+  568|          </form>
+     |          ^
+  569|          )}
+  570|        </div>[39m
+      at constructor (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:369:19)
+      at TypeScriptParserMixin.raise (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6620:19)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4758:18)
+      at TypeScriptParserMixin.jsxParseElement (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4765:17)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4778:19)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:39
+      at TypeScriptParserMixin.tryParse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6928:20)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:18)
+      at TypeScriptParserMixin.parseExpressionBase (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10805:23)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12450:16)
+      at TypeScriptParserMixin.parseExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:17)
+      at TypeScriptParserMixin.parseStatementContent (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12924:23)
+      at TypeScriptParserMixin.parseStatementContent (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9529:18)
+      at TypeScriptParserMixin.parseStatementLike (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12796:17)
+      at TypeScriptParserMixin.parseModuleItem (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12773:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:13345:36)
+      at TypeScriptParserMixin.parseBlockBody (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:13338:10)
+      at TypeScriptParserMixin.parseProgram (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12651:10)
+      at TypeScriptParserMixin.parseTopLevel (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12641:25)
+      at TypeScriptParserMixin.parse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:14517:25)
+      at TypeScriptParserMixin.parse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10147:18)
+      at parse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:14551:38)
+      at parser (E:\KL_CIIE\node_modules\@babel\core\lib\parser\index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (E:\KL_CIIE\node_modules\@babel\core\lib\transformation\normalize-file.js:51:37)
+      at normalizeFile.next (<anonymous>)
+      at run (E:\KL_CIIE\node_modules\@babel\core\lib\transformation\index.js:22:50)
+      at run.next (<anonymous>)
+      at transform (E:\KL_CIIE\node_modules\@babel\core\lib\transform.js:22:33)
+      at transform.next (<anonymous>)
+      at step (E:\KL_CIIE\node_modules\gensync\index.js:261:32)
+      at E:\KL_CIIE\node_modules\gensync\index.js:273:13
+      at async.call.result.err.err (E:\KL_CIIE\node_modules\gensync\index.js:223:11)
+      at E:\KL_CIIE\node_modules\gensync\index.js:189:28
+      at E:\KL_CIIE\node_modules\@babel\core\lib\gensync-utils\async.js:67:7
+      at E:\KL_CIIE\node_modules\gensync\index.js:113:33
+      at step (E:\KL_CIIE\node_modules\gensync\index.js:287:14)
+      at E:\KL_CIIE\node_modules\gensync\index.js:273:13
+      at async.call.result.err.err (E:\KL_CIIE\node_modules\gensync\index.js:223:11)
+[2m8:25:14 am[22m [31m[1m[vite][22m[39m [31mInternal server error: Transform failed with 1 error:
+E:/KL_CIIE/src/pages/RoleRegister.tsx:547:9: ERROR: The character "}" is not valid inside a JSX element[39m
+  Plugin: [35mvite:esbuild[39m
+  File: [36mE:/KL_CIIE/src/pages/RoleRegister.tsx[39m:528:0
+[33m  
+  [33mThe character "}" is not valid inside a JSX element[33m
+  545|            </Button>
+  546|          </form>
+  547|          )}
+     |           ^
+  548|        </div>
+  549|      </div>);
+  [39m
+      at failureErrorWithLog (E:\KL_CIIE\node_modules\esbuild\lib\main.js:1467:15)
+      at E:\KL_CIIE\node_modules\esbuild\lib\main.js:736:50
+      at responseCallbacks.<computed> (E:\KL_CIIE\node_modules\esbuild\lib\main.js:603:9)
+      at handleIncomingPacket (E:\KL_CIIE\node_modules\esbuild\lib\main.js:658:12)
+      at Socket.readFromStdout (E:\KL_CIIE\node_modules\esbuild\lib\main.js:581:7)
+      at Socket.emit (node:events:509:28)
+      at addChunk (node:internal/streams/readable:563:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)
+      at Readable.push (node:internal/streams/readable:394:5)
+      at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_registration_role[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_registration_role[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/auth/mfa/factors[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/auth/mfa/factors[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/auth/mfa/factors[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_event_counts[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_event_counts[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_member_rank[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_member_rank[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:41 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/auth/mfa/factors[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/auth/mfa/factors[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_registration_role[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_registration_role[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/auth/mfa/factors[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_member_rank[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_member_rank[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_event_counts[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_event_counts[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:28:49 am[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m8:30:02 am[22m [31m[1m[vite][22m[39m [31mInternal server error: E:\KL_CIIE\src\pages\RoleRegister.tsx: Unexpected token, expected "," (565:8)
+
+[0m [90m 563 |[31m         [33m<[31m[33m/[31m[33mform[31m[33m>[31m
+ [90m 564 |[31m
+[31m[1m>[22m[31m[90m 565 |[31m         {((msEnabled [33m&&[31m [33m![31mmsToken) [33m||[31m (ghEnabled [33m&&[31m [33m![31mghToken)) [33m&&[31m (
+ [90m     |[31m         [31m[1m^[22m[31m
+ [90m 566 |[31m           [33m<[31m[33mdiv[31m className[33m=[31m[32m"mt-6 space-y-3"[31m[33m>[31m
+ [90m 567 |[31m             [33m<[31m[33mdiv[31m className[33m=[31m[32m"flex items-center gap-3 text-xs text-slate-400"[31m[33m>[31m
+ [90m 568 |[31m               [33m<[31m[33mspan[31m className[33m=[31m[32m"h-px flex-1 bg-slate-200 dark:bg-slate-700"[31m [33m/[31m[33m>[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mE:/KL_CIIE/src/pages/RoleRegister.tsx[39m:565:8
+[33m  563|          </form>
+  564|  
+  565|          {((msEnabled && !msToken) || (ghEnabled && !ghToken)) && (
+     |          ^
+  566|            <div className="mt-6 space-y-3">
+  567|              <div className="flex items-center gap-3 text-xs text-slate-400">[39m
+      at constructor (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:369:19)
+      at TypeScriptParserMixin.raise (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6620:19)
+      at TypeScriptParserMixin.unexpected (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6640:16)
+      at TypeScriptParserMixin.expect (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6920:12)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11687:14)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11007:34)
+      at TypeScriptParserMixin.parseExprOpRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11002:21)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10968:27)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9327:18)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10929:17)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9807:20)
+      at TypeScriptParserMixin.parseExpressionBase (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10805:23)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:17)
+      at TypeScriptParserMixin.jsxParseExpressionContainer (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4648:31)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4727:36)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4714:32)
+      at TypeScriptParserMixin.jsxParseElement (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4765:17)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4775:19)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:39
+      at TypeScriptParserMixin.tryParse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6928:20)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:18)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12522:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11701:28)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+[2m8:30:09 am[22m [31m[1m[vite][22m[39m [31mInternal server error: E:\KL_CIIE\src\pages\RoleRegister.tsx: Unexpected token, expected "," (565:8)
+
+[0m [90m 563 |[31m         [33m<[31m[33m/[31m[33mform[31m[33m>[31m
+ [90m 564 |[31m
+[31m[1m>[22m[31m[90m 565 |[31m         {((msEnabled [33m&&[31m [33m![31mmsToken) [33m||[31m (ghEnabled [33m&&[31m [33m![31mghToken)) [33m&&[31m (
+ [90m     |[31m         [31m[1m^[22m[31m
+ [90m 566 |[31m           [33m<[31m[33mdiv[31m className[33m=[31m[32m"mt-6 space-y-3"[31m[33m>[31m
+ [90m 567 |[31m             [33m<[31m[33mdiv[31m className[33m=[31m[32m"flex items-center gap-3 text-xs text-slate-400"[31m[33m>[31m
+ [90m 568 |[31m               [33m<[31m[33mspan[31m className[33m=[31m[32m"h-px flex-1 bg-slate-200 dark:bg-slate-700"[31m [33m/[31m[33m>[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mE:/KL_CIIE/src/pages/RoleRegister.tsx[39m:565:8
+[33m  563|          </form>
+  564|  
+  565|          {((msEnabled && !msToken) || (ghEnabled && !ghToken)) && (
+     |          ^
+  566|            <div className="mt-6 space-y-3">
+  567|              <div className="flex items-center gap-3 text-xs text-slate-400">[39m
+      at constructor (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:369:19)
+      at TypeScriptParserMixin.raise (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6620:19)
+      at TypeScriptParserMixin.unexpected (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6640:16)
+      at TypeScriptParserMixin.expect (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6920:12)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11687:14)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11007:34)
+      at TypeScriptParserMixin.parseExprOpRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11002:21)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10968:27)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9327:18)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10929:17)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9807:20)
+      at TypeScriptParserMixin.parseExpressionBase (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10805:23)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:17)
+      at TypeScriptParserMixin.jsxParseExpressionContainer (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4648:31)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4727:36)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4714:32)
+      at TypeScriptParserMixin.jsxParseElement (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4765:17)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4775:19)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:39
+      at TypeScriptParserMixin.tryParse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6928:20)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:18)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12522:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11701:28)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+[2m8:31:58 am[22m [31m[1m[vite][22m[39m [31mInternal server error: E:\KL_CIIE\src\pages\RoleRegister.tsx: Unexpected token, expected "," (565:8)
+
+[0m [90m 563 |[31m         [33m<[31m[33m/[31m[33mform[31m[33m>[31m
+ [90m 564 |[31m
+[31m[1m>[22m[31m[90m 565 |[31m         {((msEnabled [33m&&[31m [33m![31mmsToken) [33m||[31m (ghEnabled [33m&&[31m [33m![31mghToken)) [33m&&[31m (
+ [90m     |[31m         [31m[1m^[22m[31m
+ [90m 566 |[31m           [33m<[31m[33mdiv[31m className[33m=[31m[32m"mt-6 space-y-3"[31m[33m>[31m
+ [90m 567 |[31m             [33m<[31m[33mdiv[31m className[33m=[31m[32m"flex items-center gap-3 text-xs text-slate-400"[31m[33m>[31m
+ [90m 568 |[31m               [33m<[31m[33mspan[31m className[33m=[31m[32m"h-px flex-1 bg-slate-200 dark:bg-slate-700"[31m [33m/[31m[33m>[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mE:/KL_CIIE/src/pages/RoleRegister.tsx[39m:565:8
+[33m  563|          </form>
+  564|  
+  565|          {((msEnabled && !msToken) || (ghEnabled && !ghToken)) && (
+     |          ^
+  566|            <div className="mt-6 space-y-3">
+  567|              <div className="flex items-center gap-3 text-xs text-slate-400">[39m
+      at constructor (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:369:19)
+      at TypeScriptParserMixin.raise (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6620:19)
+      at TypeScriptParserMixin.unexpected (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6640:16)
+      at TypeScriptParserMixin.expect (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6920:12)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11687:14)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11007:34)
+      at TypeScriptParserMixin.parseExprOpRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11002:21)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10968:27)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9327:18)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10929:17)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9807:20)
+      at TypeScriptParserMixin.parseExpressionBase (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10805:23)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:17)
+      at TypeScriptParserMixin.jsxParseExpressionContainer (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4648:31)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4727:36)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4714:32)
+      at TypeScriptParserMixin.jsxParseElement (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4765:17)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4775:19)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:39
+      at TypeScriptParserMixin.tryParse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6928:20)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:18)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12522:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11701:28)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+[2m8:32:36 am[22m [31m[1m[vite][22m[39m [31mInternal server error: E:\KL_CIIE\src\pages\RoleRegister.tsx: Unexpected token, expected "," (565:8)
+
+[0m [90m 563 |[31m         [33m<[31m[33m/[31m[33mform[31m[33m>[31m
+ [90m 564 |[31m
+[31m[1m>[22m[31m[90m 565 |[31m         {((msEnabled [33m&&[31m [33m![31mmsToken) [33m||[31m (ghEnabled [33m&&[31m [33m![31mghToken)) [33m&&[31m (
+ [90m     |[31m         [31m[1m^[22m[31m
+ [90m 566 |[31m           [33m<[31m[33mdiv[31m className[33m=[31m[32m"mt-6 space-y-3"[31m[33m>[31m
+ [90m 567 |[31m             {[33m![31mexclusive [33m&&[31m (
+ [90m 568 |[31m               [33m<[31m[33mdiv[31m className[33m=[31m[32m"flex items-center gap-3 text-xs text-slate-400"[31m[33m>[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mE:/KL_CIIE/src/pages/RoleRegister.tsx[39m:565:8
+[33m  563|          </form>
+  564|  
+  565|          {((msEnabled && !msToken) || (ghEnabled && !ghToken)) && (
+     |          ^
+  566|            <div className="mt-6 space-y-3">
+  567|              {!exclusive && ([39m
+      at constructor (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:369:19)
+      at TypeScriptParserMixin.raise (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6620:19)
+      at TypeScriptParserMixin.unexpected (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6640:16)
+      at TypeScriptParserMixin.expect (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6920:12)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11687:14)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11007:34)
+      at TypeScriptParserMixin.parseExprOpRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11002:21)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10968:27)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9327:18)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10929:17)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9807:20)
+      at TypeScriptParserMixin.parseExpressionBase (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10805:23)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:17)
+      at TypeScriptParserMixin.jsxParseExpressionContainer (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4648:31)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4727:36)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4714:32)
+      at TypeScriptParserMixin.jsxParseElement (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4765:17)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4775:19)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:39
+      at TypeScriptParserMixin.tryParse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6928:20)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:18)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12522:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11701:28)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+[2m8:32:56 am[22m [31m[1m[vite][22m[39m [31mInternal server error: E:\KL_CIIE\src\pages\RoleRegister.tsx: Unexpected token, expected "," (565:8)
+
+[0m [90m 563 |[31m         [33m<[31m[33m/[31m[33mform[31m[33m>[31m
+ [90m 564 |[31m
+[31m[1m>[22m[31m[90m 565 |[31m         {((msEnabled [33m&&[31m [33m![31mmsToken) [33m||[31m (ghEnabled [33m&&[31m [33m![31mghToken)) [33m&&[31m (
+ [90m     |[31m         [31m[1m^[22m[31m
+ [90m 566 |[31m           [33m<[31m[33mdiv[31m className[33m=[31m[32m"mt-6 space-y-3"[31m[33m>[31m
+ [90m 567 |[31m             {[33m![31mexclusive [33m&&[31m (
+ [90m 568 |[31m               [33m<[31m[33mdiv[31m className[33m=[31m[32m"flex items-center gap-3 text-xs text-slate-400"[31m[33m>[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mE:/KL_CIIE/src/pages/RoleRegister.tsx[39m:565:8
+[33m  563|          </form>
+  564|  
+  565|          {((msEnabled && !msToken) || (ghEnabled && !ghToken)) && (
+     |          ^
+  566|            <div className="mt-6 space-y-3">
+  567|              {!exclusive && ([39m
+      at constructor (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:369:19)
+      at TypeScriptParserMixin.raise (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6620:19)
+      at TypeScriptParserMixin.unexpected (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6640:16)
+      at TypeScriptParserMixin.expect (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6920:12)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11687:14)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11007:34)
+      at TypeScriptParserMixin.parseExprOpRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11002:21)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10968:27)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9327:18)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10929:17)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9807:20)
+      at TypeScriptParserMixin.parseExpressionBase (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10805:23)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:17)
+      at TypeScriptParserMixin.jsxParseExpressionContainer (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4648:31)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4727:36)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4714:32)
+      at TypeScriptParserMixin.jsxParseElement (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4765:17)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4775:19)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:39
+      at TypeScriptParserMixin.tryParse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6928:20)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:18)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12522:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11701:28)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+[2m8:36:55 am[22m [31m[1m[vite][22m[39m [31mInternal server error: E:\KL_CIIE\src\pages\RoleRegister.tsx: Unexpected token, expected "," (565:8)
+
+[0m [90m 563 |[31m         [33m<[31m[33m/[31m[33mform[31m[33m>[31m
+ [90m 564 |[31m
+[31m[1m>[22m[31m[90m 565 |[31m         {((msEnabled [33m&&[31m [33m![31mmsToken) [33m||[31m (ghEnabled [33m&&[31m [33m![31mghToken)) [33m&&[31m (
+ [90m     |[31m         [31m[1m^[22m[31m
+ [90m 566 |[31m           [33m<[31m[33mdiv[31m className[33m=[31m[32m"mt-6 space-y-3"[31m[33m>[31m
+ [90m 567 |[31m             {[33m![31mexclusive [33m&&[31m (
+ [90m 568 |[31m               [33m<[31m[33mdiv[31m className[33m=[31m[32m"flex items-center gap-3 text-xs text-slate-400"[31m[33m>[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mE:/KL_CIIE/src/pages/RoleRegister.tsx[39m:565:8
+[33m  563|          </form>
+  564|  
+  565|          {((msEnabled && !msToken) || (ghEnabled && !ghToken)) && (
+     |          ^
+  566|            <div className="mt-6 space-y-3">
+  567|              {!exclusive && ([39m
+      at constructor (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:369:19)
+      at TypeScriptParserMixin.raise (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6620:19)
+      at TypeScriptParserMixin.unexpected (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6640:16)
+      at TypeScriptParserMixin.expect (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6920:12)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11687:14)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11007:34)
+      at TypeScriptParserMixin.parseExprOpRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11002:21)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10968:27)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9327:18)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10929:17)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9807:20)
+      at TypeScriptParserMixin.parseExpressionBase (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10805:23)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:17)
+      at TypeScriptParserMixin.jsxParseExpressionContainer (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4648:31)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4727:36)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4714:32)
+      at TypeScriptParserMixin.jsxParseElement (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4765:17)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4775:19)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:39
+      at TypeScriptParserMixin.tryParse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6928:20)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:18)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12522:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11701:28)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+[2m8:59:30 am[22m [31m[1m[vite][22m[39m [31mInternal server error: E:\KL_CIIE\src\pages\RoleRegister.tsx: Unexpected token, expected "," (565:8)
+
+[0m [90m 563 |[31m         [33m<[31m[33m/[31m[33mform[31m[33m>[31m
+ [90m 564 |[31m
+[31m[1m>[22m[31m[90m 565 |[31m         {((msEnabled [33m&&[31m [33m![31mmsToken) [33m||[31m (ghEnabled [33m&&[31m [33m![31mghToken)) [33m&&[31m (
+ [90m     |[31m         [31m[1m^[22m[31m
+ [90m 566 |[31m           [33m<[31m[33mdiv[31m className[33m=[31m[32m"mt-6 space-y-3"[31m[33m>[31m
+ [90m 567 |[31m             {[33m![31mexclusive [33m&&[31m (
+ [90m 568 |[31m               [33m<[31m[33mdiv[31m className[33m=[31m[32m"flex items-center gap-3 text-xs text-slate-400"[31m[33m>[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mE:/KL_CIIE/src/pages/RoleRegister.tsx[39m:565:8
+[33m  563|          </form>
+  564|  
+  565|          {((msEnabled && !msToken) || (ghEnabled && !ghToken)) && (
+     |          ^
+  566|            <div className="mt-6 space-y-3">
+  567|              {!exclusive && ([39m
+      at constructor (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:369:19)
+      at TypeScriptParserMixin.raise (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6620:19)
+      at TypeScriptParserMixin.unexpected (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6640:16)
+      at TypeScriptParserMixin.expect (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6920:12)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11687:14)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11007:34)
+      at TypeScriptParserMixin.parseExprOpRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11002:21)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10968:27)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9327:18)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10929:17)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9807:20)
+      at TypeScriptParserMixin.parseExpressionBase (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10805:23)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:17)
+      at TypeScriptParserMixin.jsxParseExpressionContainer (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4648:31)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4727:36)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4714:32)
+      at TypeScriptParserMixin.jsxParseElement (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4765:17)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4775:19)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:39
+      at TypeScriptParserMixin.tryParse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6928:20)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:18)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12522:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11701:28)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+[2m8:59:56 am[22m [31m[1m[vite][22m[39m [31mInternal server error: E:\KL_CIIE\src\pages\RoleRegister.tsx: Unexpected token, expected "," (565:8)
+
+[0m [90m 563 |[31m         [33m<[31m[33m/[31m[33mform[31m[33m>[31m
+ [90m 564 |[31m
+[31m[1m>[22m[31m[90m 565 |[31m         {((msEnabled [33m&&[31m [33m![31mmsToken) [33m||[31m (ghEnabled [33m&&[31m [33m![31mghToken)) [33m&&[31m (
+ [90m     |[31m         [31m[1m^[22m[31m
+ [90m 566 |[31m           [33m<[31m[33mdiv[31m className[33m=[31m[32m"mt-6 space-y-3"[31m[33m>[31m
+ [90m 567 |[31m             {[33m![31mexclusive [33m&&[31m (
+ [90m 568 |[31m               [33m<[31m[33mdiv[31m className[33m=[31m[32m"flex items-center gap-3 text-xs text-slate-400"[31m[33m>[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mE:/KL_CIIE/src/pages/RoleRegister.tsx[39m:565:8
+[33m  563|          </form>
+  564|  
+  565|          {((msEnabled && !msToken) || (ghEnabled && !ghToken)) && (
+     |          ^
+  566|            <div className="mt-6 space-y-3">
+  567|              {!exclusive && ([39m
+      at constructor (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:369:19)
+      at TypeScriptParserMixin.raise (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6620:19)
+      at TypeScriptParserMixin.unexpected (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6640:16)
+      at TypeScriptParserMixin.expect (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6920:12)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11687:14)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11007:34)
+      at TypeScriptParserMixin.parseExprOpRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11002:21)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10968:27)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9327:18)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10929:17)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9807:20)
+      at TypeScriptParserMixin.parseExpressionBase (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10805:23)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:17)
+      at TypeScriptParserMixin.jsxParseExpressionContainer (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4648:31)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4727:36)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4714:32)
+      at TypeScriptParserMixin.jsxParseElement (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4765:17)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4775:19)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:39
+      at TypeScriptParserMixin.tryParse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6928:20)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:18)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12522:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11701:28)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+[2m9:00:45 am[22m [31m[1m[vite][22m[39m [31mInternal server error: E:\KL_CIIE\src\pages\RoleRegister.tsx: Unexpected token, expected "," (565:8)
+
+[0m [90m 563 |[31m         [33m<[31m[33m/[31m[33mform[31m[33m>[31m
+ [90m 564 |[31m
+[31m[1m>[22m[31m[90m 565 |[31m         {((msEnabled [33m&&[31m [33m![31mmsToken) [33m||[31m (ghEnabled [33m&&[31m [33m![31mghToken)) [33m&&[31m (
+ [90m     |[31m         [31m[1m^[22m[31m
+ [90m 566 |[31m           [33m<[31m[33mdiv[31m className[33m=[31m[32m"mt-6 space-y-3"[31m[33m>[31m
+ [90m 567 |[31m             {[33m![31mexclusive [33m&&[31m (
+ [90m 568 |[31m               [33m<[31m[33mdiv[31m className[33m=[31m[32m"flex items-center gap-3 text-xs text-slate-400"[31m[33m>[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mE:/KL_CIIE/src/pages/RoleRegister.tsx[39m:565:8
+[33m  563|          </form>
+  564|  
+  565|          {((msEnabled && !msToken) || (ghEnabled && !ghToken)) && (
+     |          ^
+  566|            <div className="mt-6 space-y-3">
+  567|              {!exclusive && ([39m
+      at constructor (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:369:19)
+      at TypeScriptParserMixin.raise (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6620:19)
+      at TypeScriptParserMixin.unexpected (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6640:16)
+      at TypeScriptParserMixin.expect (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6920:12)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11687:14)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11007:34)
+      at TypeScriptParserMixin.parseExprOpRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11002:21)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10968:27)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9327:18)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10929:17)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9807:20)
+      at TypeScriptParserMixin.parseExpressionBase (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10805:23)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:17)
+      at TypeScriptParserMixin.jsxParseExpressionContainer (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4648:31)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4727:36)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4714:32)
+      at TypeScriptParserMixin.jsxParseElement (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4765:17)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4775:19)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:39
+      at TypeScriptParserMixin.tryParse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6928:20)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:18)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12522:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11701:28)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+[2m9:04:19 am[22m [31m[1m[vite][22m[39m [31mInternal server error: E:\KL_CIIE\src\pages\RoleRegister.tsx: Unexpected token, expected "," (565:8)
+
+[0m [90m 563 |[31m         [33m<[31m[33m/[31m[33mform[31m[33m>[31m
+ [90m 564 |[31m
+[31m[1m>[22m[31m[90m 565 |[31m         {((msEnabled [33m&&[31m [33m![31mmsToken) [33m||[31m (ghEnabled [33m&&[31m [33m![31mghToken)) [33m&&[31m (
+ [90m     |[31m         [31m[1m^[22m[31m
+ [90m 566 |[31m           [33m<[31m[33mdiv[31m className[33m=[31m[32m"mt-6 space-y-3"[31m[33m>[31m
+ [90m 567 |[31m             {[33m![31mexclusive [33m&&[31m (
+ [90m 568 |[31m               [33m<[31m[33mdiv[31m className[33m=[31m[32m"flex items-center gap-3 text-xs text-slate-400"[31m[33m>[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mE:/KL_CIIE/src/pages/RoleRegister.tsx[39m:565:8
+[33m  563|          </form>
+  564|  
+  565|          {((msEnabled && !msToken) || (ghEnabled && !ghToken)) && (
+     |          ^
+  566|            <div className="mt-6 space-y-3">
+  567|              {!exclusive && ([39m
+      at constructor (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:369:19)
+      at TypeScriptParserMixin.raise (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6620:19)
+      at TypeScriptParserMixin.unexpected (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6640:16)
+      at TypeScriptParserMixin.expect (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6920:12)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11687:14)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOpBaseRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11007:34)
+      at TypeScriptParserMixin.parseExprOpRightExpr (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11002:21)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10968:27)
+      at TypeScriptParserMixin.parseExprOp (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9327:18)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10929:17)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9807:20)
+      at TypeScriptParserMixin.parseExpressionBase (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10805:23)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10801:17)
+      at TypeScriptParserMixin.jsxParseExpressionContainer (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4648:31)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4727:36)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4714:32)
+      at TypeScriptParserMixin.jsxParseElement (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4765:17)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4775:19)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9858:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10920:61)
+      at TypeScriptParserMixin.parseExprOps (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10925:23)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10902:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10852:21)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:39
+      at TypeScriptParserMixin.tryParse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6928:20)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9796:18)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:39
+      at TypeScriptParserMixin.allowInAnd (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12455:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10821:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12522:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11701:28)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11357:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4780:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11102:23)
+      at TypeScriptParserMixin.parseUpdate (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11087:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:11067:23)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/auth/refresh[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_registration_role[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/auth/refresh[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_registration_role[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/auth/refresh[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_registration_role[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_registration_role[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/auth/mfa/factors[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/auth/mfa/factors[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/auth/mfa/factors[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:00 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_registration_role[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_registration_role[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_registration_role[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_registration_role[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:23:04 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:24:21 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:24:21 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:24:21 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:24:21 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:24:21 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:24:21 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:24:21 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:24:21 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:24:21 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:24:21 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:24:21 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:24:21 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:24:21 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:24:21 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1193:18)
+    at afterConnectMultiple (node:net:1783:7)
+[2m2:24:25 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:24:25 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_registration_role[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:24:25 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_registration_role[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:24:25 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:24:25 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:24:25 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/db/select[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:24:25 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_registration_role[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:24:25 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/rpc/get_registration_role[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:24:25 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/config[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:47:49 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/settings[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m2:47:58 pm[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/oauth/settings[39m
+Error: read ECONNRESET
+    at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+[2m3:02:48 pm[22m [31m[1m[vite][22m[39m [31mInternal server error: E:\KL_CIIE\src\pages\RoleRegister.tsx: Identifier 'oauthStarting' has already been declared. (139:9)
+
+[0m [90m 137 |[31m   [36mconst[31m isMsSignup [33m=[31m msEnabled [33m&&[31m [33m![31m[33m![31mmsToken
+ [90m 138 |[31m   [36mconst[31m isGhSignup [33m=[31m ghEnabled [33m&&[31m [33m![31m[33m![31mghToken
+[31m[1m>[22m[31m[90m 139 |[31m   [36mconst[31m [oauthStarting[33m,[31m setOauthStarting] [33m=[31m useState[33m<[31m[32m'microsoft'[31m [33m|[31m [32m'github'[31m [33m|[31m [36mnull[31m[33m>[31m([36mnull[31m)
+ [90m     |[31m          [31m[1m^[22m[31m
+ [90m 140 |[31m   [36mconst[31m startMicrosoft [33m=[31m () [33m=>[31m {
+ [90m 141 |[31m     setOauthStarting([32m'microsoft'[31m)
+ [90m 142 |[31m     window[33m.[31mlocation[33m.[31mhref [33m=[31m [32m`${apiOrigin}/api/oauth/microsoft/authorize`[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mE:/KL_CIIE/src/pages/RoleRegister.tsx[39m:139:9
+[33m  137|    const isMsSignup = msEnabled && !!msToken
+  138|    const isGhSignup = ghEnabled && !!ghToken
+  139|    const [oauthStarting, setOauthStarting] = useState<'microsoft' | 'github' | null>(null)
+     |           ^
+  140|    const startMicrosoft = () => {
+  141|      setOauthStarting('microsoft')[39m
+      at constructor (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:369:19)
+      at TypeScriptParserMixin.raise (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:6620:19)
+      at TypeScriptScopeHandler.checkRedeclarationInScope (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:1623:19)
+      at TypeScriptScopeHandler.declareName (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:1589:12)
+      at TypeScriptScopeHandler.declareName (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:4896:11)
+      at TypeScriptParserMixin.declareNameFromIdentifier (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:7588:16)
+      at TypeScriptParserMixin.checkIdentifier (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:7584:12)
+      at TypeScriptParserMixin.checkLVal (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:7521:12)
+      at TypeScriptParserMixin.checkLVal (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:7561:16)
+      at TypeScriptParserMixin.parseVarId (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:13441:10)
+      at TypeScriptParserMixin.parseVarId (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9773:11)
+      at TypeScriptParserMixin.parseVar (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:13412:12)
+      at TypeScriptParserMixin.parseVarStatement (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:13259:10)
+      at TypeScriptParserMixin.parseVarStatement (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9429:31)
+      at TypeScriptParserMixin.parseStatementContent (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12880:23)
+      at TypeScriptParserMixin.parseStatementContent (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9529:18)
+      at TypeScriptParserMixin.parseStatementLike (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12796:17)
+      at TypeScriptParserMixin.parseStatementListItem (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12776:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:13345:61)
+      at TypeScriptParserMixin.parseBlockBody (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:13338:10)
+      at TypeScriptParserMixin.parseBlock (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:13326:10)
+      at TypeScriptParserMixin.parseFunctionBody (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12129:24)
+      at TypeScriptParserMixin.parseFunctionBodyAndFinish (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12115:10)
+      at TypeScriptParserMixin.parseFunctionBodyAndFinish (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9193:18)
+      at E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:13474:12
+      at TypeScriptParserMixin.withSmartMixTopicForbiddingContext (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12432:14)
+      at TypeScriptParserMixin.parseFunction (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:13473:10)
+      at TypeScriptParserMixin.parseExportDefaultExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:13936:19)
+      at TypeScriptParserMixin.parseExportDefaultExpression (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9423:18)
+      at TypeScriptParserMixin.parseExport (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:13857:25)
+      at TypeScriptParserMixin.parseExport (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9406:20)
+      at TypeScriptParserMixin.parseStatementContent (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12907:27)
+      at TypeScriptParserMixin.parseStatementContent (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:9529:18)
+      at TypeScriptParserMixin.parseStatementLike (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12796:17)
+      at TypeScriptParserMixin.parseModuleItem (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12773:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:13345:36)
+      at TypeScriptParserMixin.parseBlockBody (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:13338:10)
+      at TypeScriptParserMixin.parseProgram (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12651:10)
+      at TypeScriptParserMixin.parseTopLevel (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:12641:25)
+      at TypeScriptParserMixin.parse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:14517:25)
+      at TypeScriptParserMixin.parse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:10147:18)
+      at parse (E:\KL_CIIE\node_modules\@babel\parser\lib\index.js:14551:38)
+      at parser (E:\KL_CIIE\node_modules\@babel\core\lib\parser\index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (E:\KL_CIIE\node_modules\@babel\core\lib\transformation\normalize-file.js:51:37)
+      at normalizeFile.next (<anonymous>)
+      at run (E:\KL_CIIE\node_modules\@babel\core\lib\transformation\index.js:22:50)
+      at run.next (<anonymous>)
+      at transform (E:\KL_CIIE\node_modules\@babel\core\lib\transform.js:22:33)
+      at transform.next (<anonymous>)
