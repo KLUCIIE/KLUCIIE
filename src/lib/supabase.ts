@@ -808,10 +808,14 @@ export const supabase = {
         }
       },
 
-      async challengeAndVerify({ code }: { factorId?: string; code: string }): Promise<Result<any>> {
+      async challengeAndVerify({ code, purpose }: { factorId?: string; code: string; purpose?: 'enroll' | 'login' }): Promise<Result<any>> {
         const session = loadSession()
-        const isLoginChallenge = !!session?.user?.mfaEnabled
-        const { data, error } = await http(isLoginChallenge ? '/auth/mfa/verify-login' : '/auth/mfa/verify', {
+        // Enrollment verifies against the freshly-generated pending secret; login
+        // verifies against the persisted secret. Inferred from the session when
+        // not explicit, but re-enrolling while mfaEnabled is already true would
+        // otherwise wrongly hit the login endpoint with the old secret.
+        const usePendingEnrollment = purpose === 'enroll' || (!purpose && !session?.user?.mfaEnabled)
+        const { data, error } = await http(usePendingEnrollment ? '/auth/mfa/verify' : '/auth/mfa/verify-login', {
           method: 'POST',
           body: { code },
         })

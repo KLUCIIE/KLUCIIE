@@ -87,6 +87,7 @@ const AttendanceSubmittedAdmin = lazyPage(() => import('@/pages/admin/Attendance
 const BrandingAdmin = lazyPage(() => import('@/pages/admin/Branding'))
 const AuditLogsAdmin = lazyPage(() => import('@/pages/admin/AuditLogs'))
 const AdminsAdmin = lazyPage(() => import('@/pages/admin/Admins'))
+const RegisterMfaAdmin = lazyPage(() => import('@/pages/admin/RegisterMfa'))
 const UserRolesAdmin = lazyPage(() => import('@/pages/admin/UserRoles'))
 const RecruitsAdmin = lazyPage(() => import('@/pages/admin/Recruits'))
 const SettingsAdmin = lazyPage(() => import('@/pages/admin/Settings'))
@@ -228,6 +229,7 @@ export default function App() {
                 <Route path="audit-logs" element={<AuditLogsAdmin />} />
                 <Route path="startups" element={<StartupsAdmin />} />
                 <Route path="admins" element={<AdminsAdmin />} />
+                <Route path="register-mfa" element={<RequireSuperAdmin><RegisterMfaAdmin /></RequireSuperAdmin>} />
                 <Route path="user-roles" element={<RequireSuperAdmin><UserRolesAdmin /></RequireSuperAdmin>} />
               </Route>
             </Route>

@@ -1,5 +1,6 @@
 import { pgClient } from '../db/index.js'
 import * as schema from '../db/schema.js'
+import { cacheDel } from '../redis/index.js'
 import { BadRequestError } from '../utils/errors.js'
 
 // ─── Table registry built from the Drizzle schema ───
@@ -525,7 +526,14 @@ export async function runUpdate(input: DataWriteInput): Promise<any[]> {
   const where = whereSql ? ` WHERE ${whereSql}` : ''
   const sql = `UPDATE ${quoteIdent(dbName)} AS t0 SET ${sets.join(', ')}${where} RETURNING *`
   const res = await pgClient.unsafe(sql, ctx.values as any[])
-  return Array.isArray(res) ? (res as any[]) : []
+  const rows = Array.isArray(res) ? (res as any[]) : []
+  // getProfile() memoizes rows under `profile:<id>`; drop those entries so the
+  // next read sees the fresh values (role, mfa flags, custom fields, …).
+  if (tableDef.key === 'profiles') {
+    const ids = rows.map((r) => r?.id).filter((id): id is string => !!id)
+    if (ids.length > 0) await cacheDel(...ids.map((id) => `profile:${id}`))
+  }
+  return rows
 }
 
 export async function runDelete(input: { table: string; filters?: DataFilter[] }): Promise<any[]> {
@@ -536,5 +544,10 @@ export async function runDelete(input: { table: string; filters?: DataFilter[] }
   const where = whereSql ? ` WHERE ${whereSql}` : ''
   const sql = `DELETE FROM ${quoteIdent(dbName)} AS ${quoteIdent(dbName)}${where} RETURNING *`
   const res = await pgClient.unsafe(sql, ctx.values as any[])
-  return Array.isArray(res) ? (res as any[]) : []
+  const rows = Array.isArray(res) ? (res as any[]) : []
+  if (tableDef.key === 'profiles') {
+    const ids = rows.map((r) => r?.id).filter((id): id is string => !!id)
+    if (ids.length > 0) await cacheDel(...ids.map((id) => `profile:${id}`))
+  }
+  return rows
 }

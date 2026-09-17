@@ -8,26 +8,34 @@ import { isAdminRole } from '@/lib/types'
 import { PageLoader } from '@/components/ui'
 
 /**
+ * The in-console page where a super admin sets up their own MFA
+ * (see src/pages/admin/RegisterMfa.tsx). Visiting it must not trigger an
+ * MFA redirect, otherwise super admins without MFA would hit a loop.
+ */
+export const SELF_MFA_PAGE = '/admin/register-mfa'
+
+/**
  * Returns the MFA route a super admin must visit before the Admin Console,
- * or null when they are clear to proceed. MFA is only enforced for super
- * admin accounts that actually have MFA configured (mfa_enabled or a
- * verified factor); accounts without MFA sign in with just email + password.
- *
- * A super admin must re-verify MFA each time they enter the Admin Console
- * (`adminMfaVerified` is reset when they navigate away), not just once
- * per session.
+ * or null when they are clear to proceed. MFA is enforced for every super
+ * admin: accounts without MFA are sent to the in-console Register MFA page
+ * so they can enroll, accounts with a pending setup flag go through the
+ * full-screen setup flow, and configured accounts must re-verify each time
+ * they enter the Admin Console (`adminMfaVerified` is reset when they
+ * navigate away), not just once per session.
  */
 export function useMfaRedirect(): string | null {
   const { profile, mfa, adminMfaVerified } = useAuth()
   if (!profile || profile.role !== 'super_admin') return null
-  const mfaConfigured = profile.mfa_enabled || !!mfa?.hasVerifiedFactor
-  if (!mfaConfigured) return null
   if (profile.mfa_setup_required && !mfa?.hasVerifiedFactor) return '/auth/mfa-setup'
   if (!mfa) return null
-  if (!mfa.hasVerifiedFactor) return '/auth/mfa-setup'
+  if (!mfa.hasVerifiedFactor) return SELF_MFA_PAGE
   if (mfa.aal !== 'aal2') return '/auth/mfa-verify'
   if (!adminMfaVerified) return '/auth/mfa-verify'
   return null
+}
+
+function isOnSelfMfaPage(pathname: string): boolean {
+  return pathname === SELF_MFA_PAGE
 }
 
 /**
@@ -66,7 +74,7 @@ export function RequireAdmin({ children }: { children?: ReactNode }) {
   if (loading) return <PageLoader />
   if (!user) return <Navigate to="/login" state={{ from: location.pathname }} replace />
   if (!profile || !isAdminRole(profile.role)) return <Navigate to="/dashboard" replace />
-  if (mfaPath) return <Navigate to={mfaPath} replace />
+  if (mfaPath && !isOnSelfMfaPage(location.pathname)) return <Navigate to={mfaPath} replace />
   return <>{children ?? <Outlet />}</>
 }
 
@@ -77,7 +85,7 @@ export function RequireSuperAdmin({ children }: { children?: ReactNode }) {
   if (loading) return <PageLoader />
   if (!user) return <Navigate to="/login" state={{ from: location.pathname }} replace />
   if (!profile || (profile.role !== 'super_admin' && profile.role !== 'main_admin')) return <Navigate to="/dashboard" replace />
-  if (mfaPath) return <Navigate to={mfaPath} replace />
+  if (mfaPath && !isOnSelfMfaPage(location.pathname)) return <Navigate to={mfaPath} replace />
   return <>{children ?? <Outlet />}</>
 }
 

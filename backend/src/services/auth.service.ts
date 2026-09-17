@@ -28,6 +28,17 @@ export async function getProfileByEmail(email: string) {
   })
 }
 
+/**
+ * Reads the profile straight from the database, bypassing the in-memory
+ * `profile:<id>` cache. Security-sensitive flows (MFA secret checks) must use
+ * this so a stale cache entry can never validate/reject against an old secret.
+ */
+export async function getProfileFresh(userId: string) {
+  return db.query.profiles.findFirst({
+    where: eq(profiles.id, userId),
+  })
+}
+
 export async function createProfile(data: {
   id: string
   email: string

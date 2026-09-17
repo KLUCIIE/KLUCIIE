@@ -141,9 +141,9 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
 
   const msEnabled = slug === 'user' && oauth.enabled && oauth.configured && ['microsoft', 'both', 'microsoft-only', 'microsoft+github-only'].includes(oauth.mode)
   const ghEnabled = slug === 'user' && oauth.enabled && oauth.configured && ['github', 'both', 'github-only', 'microsoft+github-only'].includes(oauth.mode)
-  const msOnly = oauth.mode === 'microsoft-only'
-  const ghOnly = oauth.mode === 'github-only'
-  const bothOnly = oauth.mode === 'microsoft+github-only'
+  const msOnly = msEnabled && oauth.mode === 'microsoft-only'
+  const ghOnly = ghEnabled && oauth.mode === 'github-only'
+  const bothOnly = msEnabled && ghEnabled && oauth.mode === 'microsoft+github-only'
   const exclusive = msOnly || ghOnly || bothOnly
 
   const isMsSignup = msEnabled && !!msToken

@@ -8,7 +8,7 @@ import { authRateLimit } from '../middleware/rateLimit.js'
 import { hashPassword, verifyPassword } from '../auth/passwords.js'
 import { generateTotpSecret, verifyTotp } from '../auth/mfa.js'
 import { createRecoveryCodes, useRecoveryCode } from '../auth/recovery.js'
-import { getProfile, getProfileByEmail, createProfile, recordLogin } from '../services/auth.service.js'
+import { getProfile, getProfileFresh, getProfileByEmail, createProfile, recordLogin } from '../services/auth.service.js'
 import { logAdminEvent } from '../services/audit.service.js'
 import { sha256Hash, generateOtp } from '../utils/codes.js'
 import { cacheGet, cacheSet, cacheDel } from '../redis/index.js'
@@ -163,7 +163,7 @@ export default async function authRoutes(app: FastifyInstance) {
   // ─── MFA: ENROLL ───
   app.post('/mfa/enroll', { preHandler: [authenticate] }, async (request, reply) => {
     const user = request.user as JwtPayload
-    const profile = await getProfile(user.sub)
+    const profile = await getProfileFresh(user.sub)
     if (!profile) throw new NotFoundError('Profile')
 
     const { uri, secret } = generateTotpSecret(profile.email || 'user@klciie.com')
@@ -181,7 +181,7 @@ export default async function authRoutes(app: FastifyInstance) {
   // ─── MFA: LIST FACTORS (derived from persisted enrollment) ───
   app.get('/mfa/factors', { preHandler: [authenticate] }, async (request, reply) => {
     const user = request.user as JwtPayload
-    const profile = await getProfile(user.sub)
+    const profile = await getProfileFresh(user.sub)
     const pendingSecret = await cacheGet<string>(`mfa:pending:${user.sub}`)
     const storedSecret = ((profile?.customFields ?? {}) as Record<string, any>)?.totp_secret as string | undefined
 
@@ -218,7 +218,7 @@ export default async function authRoutes(app: FastifyInstance) {
       return reply.status(400).send({ error: 'Invalid MFA code' })
     }
 
-    const profile = await getProfile(user.sub)
+    const profile = await getProfileFresh(user.sub)
     const customFields = ((profile?.customFields ?? {}) as Record<string, any>) ?? {}
     await db.update(profiles).set({
       mfaEnabled: true,
@@ -226,6 +226,7 @@ export default async function authRoutes(app: FastifyInstance) {
       customFields: { ...customFields, totp_secret: secret },
       updatedAt: new Date(),
     }).where(eq(profiles.id, user.sub))
+    await cacheDel(`profile:${user.sub}`)
 
     const recoveryCodes = await createRecoveryCodes(user.sub)
     await cacheDel(`mfa:pending:${user.sub}`)
@@ -243,7 +244,7 @@ export default async function authRoutes(app: FastifyInstance) {
     const body = z.object({ code: z.string() }).parse(request.body)
     const user = request.user as JwtPayload
 
-    const profile = await getProfile(user.sub)
+    const profile = await getProfileFresh(user.sub)
     if (!profile) throw new NotFoundError('Profile')
 
     // TOTP persisted at enrollment
@@ -269,6 +270,29 @@ export default async function authRoutes(app: FastifyInstance) {
       }
     }
 
+    // In-progress (re)enrollment: accept and persist the freshly generated
+    // secret. Handles the case where MFA was already enabled when setup began,
+    // so the client may have hit this login endpoint with the new pending code.
+    const enrollmentSecret = await cacheGet<string>(`mfa:pending:${user.sub}`)
+    if (enrollmentSecret && verifyTotp(enrollmentSecret, body.code)) {
+      const customFields = ((profile.customFields ?? {}) as Record<string, any>) ?? {}
+      await db.update(profiles).set({
+        mfaEnabled: true,
+        mfaSetupRequired: false,
+        customFields: { ...customFields, totp_secret: enrollmentSecret },
+        updatedAt: new Date(),
+      }).where(eq(profiles.id, user.sub))
+      await cacheDel(`profile:${user.sub}`)
+      await createRecoveryCodes(user.sub)
+      await cacheDel(`mfa:pending:${user.sub}`)
+
+      const newToken = app.jwt.sign(
+        { sub: user.sub, role: user.role, aal: 'aal2' },
+        { expiresIn: config.JWT_ACCESS_EXPIRY }
+      )
+      return reply.send({ verified: true, accessToken: newToken })
+    }
+
     // Try recovery code
     const used = await useRecoveryCode(user.sub, body.code, request.ip)
     if (used) {
@@ -285,7 +309,7 @@ export default async function authRoutes(app: FastifyInstance) {
   // ─── MFA: UNENROLL (self) ───
   app.post('/mfa/unenroll', { preHandler: [authenticate] }, async (request, reply) => {
     const user = request.user as JwtPayload
-    const profile = await getProfile(user.sub)
+    const profile = await getProfileFresh(user.sub)
     if (!profile) throw new NotFoundError('Profile')
 
     const customFields = ((profile.customFields ?? {}) as Record<string, any>) ?? {}
@@ -296,6 +320,7 @@ export default async function authRoutes(app: FastifyInstance) {
       customFields,
       updatedAt: new Date(),
     }).where(eq(profiles.id, user.sub))
+    await cacheDel(`profile:${user.sub}`)
     await db.delete(adminRecoveryCodes).where(eq(adminRecoveryCodes.adminId, user.sub))
     await cacheDel(`mfa:pending:${user.sub}`)
     await cacheDel(`mfa:secret:${user.sub}`)

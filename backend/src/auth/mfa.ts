@@ -27,6 +27,8 @@ export function verifyTotp(secret: string, token: string): boolean {
     digits: 6,
     period: 30,
   })
-  const delta = totp.validate({ token, window: 1 })
+  // Accept a wider drift (±90s) than the RFC default (±30s) so small client
+  // clock skew and slow manual entry don't lock admins out.
+  const delta = totp.validate({ token, window: 3 })
   return delta !== null
 }

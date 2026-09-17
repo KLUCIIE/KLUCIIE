@@ -33,7 +33,7 @@ export default function MfaVerify() {
       setBusy(false)
       return
     }
-    const { error: err } = await supabase.auth.mfa.challengeAndVerify({ factorId: totp.id, code: code.trim() })
+    const { error: err } = await supabase.auth.mfa.challengeAndVerify({ factorId: totp.id, code: code.trim(), purpose: 'login' })
     if (err) {
       setError('Invalid verification code.')
       await supabase.rpc('log_admin_event', {

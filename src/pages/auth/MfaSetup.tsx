@@ -73,9 +73,9 @@ export default function MfaSetup() {
     }
     setBusy(true)
     setError('')
-    const { data, error: err } = await supabase.auth.mfa.challengeAndVerify({ factorId, code: code.trim() })
+    const { data, error: err } = await supabase.auth.mfa.challengeAndVerify({ factorId, code: code.trim(), purpose: 'enroll' })
     if (err || !data) {
-      setError('Invalid verification code. Check your authenticator app and try again.')
+      setError(`Verification failed: ${errorMessage(err)}`)
       await supabase.rpc('log_admin_event', {
         p_action: 'MFA Failure',
         p_entity_type: 'admin',
