@@ -146,9 +146,10 @@ export default function OAuthCallback() {
             }
           }
 
-          const params = new URLSearchParams({ [`${provider}_token`]: token })
-          if (data.email) params.set(`${provider}_email`, data.email)
-          if (data.fullName) params.set(`${provider}_name`, data.fullName)
+          const prefix = provider === 'github' ? 'gh' : 'ms'
+          const params = new URLSearchParams({ [`${prefix}_token`]: token })
+          if (data.email) params.set(`${prefix}_email`, data.email)
+          if (data.fullName) params.set(`${prefix}_name`, data.fullName)
           setBusy(false)
           if (from === 'register') {
             navigate(`/register/user?${params.toString()}`, { replace: true })
@@ -208,7 +209,7 @@ export default function OAuthCallback() {
             <h1 className="text-lg font-bold text-slate-900 dark:text-slate-100">Completing sign-in…</h1>
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Just a moment.</p>
           </>
-        ) : (
+        ) : error ? (
           <>
             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-600">
               <AlertTriangle size={24} />
@@ -218,6 +219,14 @@ export default function OAuthCallback() {
             <Link to="/login" className="btn-primary mt-6 inline-block">
               Back to login
             </Link>
+          </>
+        ) : (
+          <>
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-100 text-primary-600">
+              <UserPlus size={24} />
+            </div>
+            <h1 className="text-lg font-bold text-slate-900 dark:text-slate-100">Follow the instructions above</h1>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">To finish, complete the dialog that just appeared.</p>
           </>
         )}
       </div>
