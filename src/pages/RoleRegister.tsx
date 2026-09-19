@@ -197,6 +197,9 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
             token: ghToken,
             fullName: fullName.trim(),
             password,
+            studentId: studentId.trim(),
+            phone: (values['phone'] ?? '').trim(),
+            department: (values['department'] ?? '').trim(),
           }),
         })
         const data = (await res.json().catch(() => null)) as {
@@ -446,7 +449,7 @@ export default function RoleRegister({ slug: slugProp, hideStudentId = false }: 
           </div>
           <h1 className="text-xl font-bold text-slate-900">Register as {info.label}</h1>
           <p className="mt-1 text-sm text-slate-500">
-            {isMsSignup
+            {isMsSignup || isGhSignup
               ? 'Almost done — set a password (optional extra login method). We will then take you to complete the rest of your profile.'
               : info.requires_keys
                 ? settings.signup_email_otp

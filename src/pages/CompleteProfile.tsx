@@ -124,8 +124,8 @@ export default function CompleteProfile() {
           </div>
           <h1 className="text-xl font-bold text-slate-900">Complete your profile</h1>
           <p className="mx-auto mt-1 max-w-md text-sm text-slate-500">
-            Because you signed in with Microsoft, add the details below before you can use the dashboard or register for
-            events. Everything is mandatory.
+            Because you signed in with an external account (Microsoft or GitHub), add the details below before you can
+            use the dashboard or register for events. Everything is mandatory.
           </p>
         </div>
 
