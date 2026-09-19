@@ -106,6 +106,7 @@ export default function OAuthCallback() {
               user?: Record<string, unknown>
               email?: string
               fullName?: string
+              provider?: string
             }
           | null
           | undefined
@@ -146,7 +147,8 @@ export default function OAuthCallback() {
             }
           }
 
-          const prefix = provider === 'github' ? 'gh' : 'ms'
+          const routeProvider = data?.provider === 'github' ? 'github' : provider
+          const prefix = routeProvider === 'github' ? 'gh' : 'ms'
           const params = new URLSearchParams({ [`${prefix}_token`]: token })
           if (data.email) params.set(`${prefix}_email`, data.email)
           if (data.fullName) params.set(`${prefix}_name`, data.fullName)
